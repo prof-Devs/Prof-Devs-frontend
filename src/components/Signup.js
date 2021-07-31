@@ -16,7 +16,7 @@ export class signup extends Component {
       password: '',
       gender: '',
       age: '',
-
+      showForm: true
     }
   }
 
@@ -39,6 +39,7 @@ export class signup extends Component {
 
     const newStudent = await axios.post('http://localhost:3001/signup', payload);
     alert(newStudent.data);
+    this.setState({ showForm: false })
 
     //     socket.emit('signup', payload);
     //     console.log(payload);
@@ -49,47 +50,47 @@ export class signup extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.studentSignup}>
-          <Form.Group className="mb-3">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" name="studentEmail" onChange={this.handleChange} />
-          </Form.Group>
+        {this.state.showForm &&
+          <Form onSubmit={this.studentSignup}>
+            <Form.Group className="mb-3">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" name="studentEmail" onChange={this.handleChange} required='true'/>
+            </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter First Name" name="firstName" onChange={this.handleChange} />
-          </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter First Name" name="firstName" onChange={this.handleChange} required='true'/>
+            </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Last Name" name="lastName" onChange={this.handleChange} />
-          </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter Last Name" name="lastName" onChange={this.handleChange} required='true' />
+            </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} />
-          </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} required='true'/>
+            </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Gender</Form.Label>
-            <Form.Select aria-label="Default select example" name="gender" onChange={this.handleChange}>
-              <option>Gender</option>
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-            </Form.Select>
-          </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Gender</Form.Label>
+              <Form.Select aria-label="Default select example" name="gender" onChange={this.handleChange}>
+                <option>Gender</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </Form.Select>
+            </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Age</Form.Label>
-            <Form.Control type="number" placeholder="Age" min="10" max="30" name="age" onChange={this.handleChange} />
-          </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Age</Form.Label>
+              <Form.Control type="number" placeholder="Age" min="10" max="35" name="age" onChange={this.handleChange} required='true'/>
+            </Form.Group>
 
-
-          <Button variant="primary" type="submit" onSubmit={this.studentSignup}>
-            Sign Up
-          </Button>
-        </Form>
-
+            <Button variant="primary" type="submit" onSubmit={this.studentSignup}>
+              Sign Up
+            </Button>
+          </Form>
+        }
       </div>
     )
   }

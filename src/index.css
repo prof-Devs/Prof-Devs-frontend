@@ -7,7 +7,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.my-footer-color {
+  background-color: #254288;  ;
+  padding: 1px 1px .1px 1px;
+  color: white;
+   }
+  .text-footer {
+     font-size: 18px  ;
+     font-weight: bolder;
+   }
+   .my-footer {
+    width: 400px;
+    
+  }
+  .text-footer {
+    font-size: 18px  ;
+    font-weight: bolder;
+  }
+
+ .my-footer {
+   width:100%;
+   
+ }  
+#scroll > div > section{
+  height: 80px;
 }

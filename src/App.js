@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 import Signup from './components/Signup';
 import Signin from './components/Signin';
+import Home from './components/Home';
+import AboutUs from './components/AboutUs';
 
 export class App extends Component {
   render() {
@@ -16,16 +18,17 @@ export class App extends Component {
       <Router>
         <Header />
         <Switch>
-          <Route path="/">
-            <Signup />
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/signin">
             <Signin />
           </Route>
-          <Route path="/signin">
-
+          <Route exact path="/signup">
+            <Signup />
           </Route>
-          <Route path="/signup">
-          </Route>
-          <Route path="/AboutUs">
+          <Route exact path="/AboutUs">
+            <AboutUs/>
           </Route>
         </Switch>
         <Footer />
