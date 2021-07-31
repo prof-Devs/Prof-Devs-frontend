@@ -6,9 +6,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Signup from './components/Signup';
+import Signin from './components/Signin';
 
 export class App extends Component {
   render() {
@@ -17,9 +17,11 @@ export class App extends Component {
         <Header />
         <Switch>
           <Route path="/">
-          <Signup />
+            <Signup />
+            <Signin />
           </Route>
           <Route path="/signin">
+
           </Route>
           <Route path="/signup">
           </Route>
