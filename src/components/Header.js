@@ -11,7 +11,7 @@ export class Header extends Component {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/signin">Sign In</Nav.Link>
-            <Nav.Link href="/signup">Sign Up</Nav.Link>
+            {/* <Nav.Link href="/signup">Sign Up</Nav.Link> */}
             <Nav.Link href="/AboutUs">About Us</Nav.Link>
           </Nav>
         </Navbar>

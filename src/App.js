@@ -26,9 +26,9 @@ export class App extends Component {
           <Route exact path="/signin">
             <Signin />
           </Route>
-          <Route exact path="/signup">
+          {/* <Route exact path="/signup">
             <Signup />
-          </Route>
+          </Route> */}
           <Route exact path="/AboutUs">
             <AboutUs/>
           </Route>

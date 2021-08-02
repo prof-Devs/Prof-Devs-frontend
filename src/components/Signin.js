@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import axios from 'axios';
-import base64 from 'base-64';
+// import axios from 'axios';
+// import base64 from 'base-64';
 // import { Redirect } from 'react-router-dom';
-import MyCourses from './MyCourses';
-import AllCourses from './AllCourses';
+// import MyCourses from './MyCourses';
+// import AllCourses from './AllCourses';
 import Chat from './Chat';
 
 export class Signin extends Component {
