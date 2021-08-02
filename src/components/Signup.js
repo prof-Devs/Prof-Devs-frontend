@@ -37,7 +37,7 @@ export class signup extends Component {
     }
     console.log(payload);
 
-    const newStudent = await axios.post('http://localhost:3001/signup', payload);
+    const newStudent = await axios.post('https://profdev-academy.herokuapp.com/signup', payload);
     alert(newStudent.data);
     this.setState({ showForm: false })
 
