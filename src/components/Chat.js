@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField"
 import { useEffect, useRef, useState } from "react"
 import io from "socket.io-client"
 import './chat.css'
-const HEROKU = process.env.HEROKU;
+const heroku = process.env.HEROKU;
 // const socket = io('https://localhost:3001',{transports :['websocket']})
 function Chat(props) {
     console.log('Chat Props',props.NickName);
@@ -14,7 +14,7 @@ function Chat(props) {
 
 	useEffect(
 		() => {
-			socketRef.current = io.connect(HEROKU,{transports :['websocket']})
+			socketRef.current = io.connect("https://profdev-academy.herokuapp.com",{transports :['websocket']})
 			socketRef.current.on("message", ({ name, message }) => {
 				setChat([ ...chat, { name, message } ])
 			})
