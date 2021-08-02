@@ -11,6 +11,8 @@ import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Home from './components/Home';
 import AboutUs from './components/AboutUs';
+import Chat from './components/Chat';
+
 
 export class App extends Component {
   render() {
