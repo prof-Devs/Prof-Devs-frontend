@@ -14,7 +14,7 @@ function Chat(props) {
 
 	useEffect(
 		() => {
-			socketRef.current = io.connect("http://localhost:3001",{transports :['websocket']})
+			socketRef.current = io.connect("http://localhost:3002",{transports :['websocket']})
 			socketRef.current.on("message", ({ name, message }) => {
 				setChat([ ...chat, { name, message } ])
 			})

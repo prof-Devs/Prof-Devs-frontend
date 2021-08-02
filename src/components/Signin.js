@@ -30,6 +30,7 @@ export class Signin extends Component {
     e.preventDefault();
     this.setState({
       showChat : true,
+      showForm:false
     })
   }
 
