@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 import React, { Component } from 'react';
 import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -92,3 +94,4 @@ export class App extends Component {
 }
 
 export default App;
+>>>>>>> ad356151188ac57ce8c3936a527746f412003bc5

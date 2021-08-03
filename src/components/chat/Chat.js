@@ -3,24 +3,30 @@ import TextField from "@material-ui/core/TextField"
 import { useEffect, useRef, useState } from "react"
 import io from "socket.io-client"
 import './chat.css'
+<<<<<<< HEAD:src/components/chat/Chat.js
+import { Redirect } from 'react-router-dom';
+import Board from '../Board/Board';
+
+=======
 const heroku = process.env.HEROKU;
+>>>>>>> ad356151188ac57ce8c3936a527746f412003bc5:src/components/Chat.js
 // const socket = io('https://localhost:3001',{transports :['websocket']})
 function Chat(props) {
-    console.log('Chat Props',props.NickName);
-	const [ state, setState ] = useState({ message: "", name:props.NickName })
-	const [ chat, setChat ] = useState([])
+	console.log('Chat Props', props.NickName);
+	const [state, setState] = useState({ message: "", name: props.NickName })
+	const [chat, setChat] = useState([])
 
 	const socketRef = useRef()
 
 	useEffect(
 		() => {
-			socketRef.current = io.connect("https://profdev-academy.herokuapp.com",{transports :['websocket']})
+			socketRef.current = io.connect("https://profdev-academy.herokuapp.com", { transports: ['websocket'] })
 			socketRef.current.on("message", ({ name, message }) => {
-				setChat([ ...chat, { name, message } ])
+				setChat([...chat, { name, message }])
 			})
 			return () => socketRef.current.disconnect()
 		},
-		[ chat ]
+		[chat]
 	)
 
 	const onTextChange = (e) => {
@@ -45,29 +51,32 @@ function Chat(props) {
 	}
 
 	return (
-		<div className="card">
-			<form onSubmit={onMessageSubmit}>
-				<h1>Messenger</h1>
-				{/* <div className="name-field">
+		<>
+			<div className="card">
+				<form onSubmit={onMessageSubmit}>
+					<h1>Messenger</h1>
+					{/* <div className="name-field">
 					<TextField name="name" onChange={(e) => onTextChange(e)} value={state.name} label="Name" />
 				</div> */}
-				<div>
-					<TextField
-						name="message"
-						onChange={(e) => onTextChange(e)}
-						value={state.message}
-						id="outlined-multiline-static"
-						variant="outlined"
-						label="Message"
-					/>
+					<div>
+						<TextField
+							name="message"
+							onChange={(e) => onTextChange(e)}
+							value={state.message}
+							id="outlined-multiline-static"
+							variant="outlined"
+							label="Message"
+						/>
+					</div>
+					<button>Send Message</button>
+				</form>
+				<div className="render-chat">
+					<h1>Chat Log</h1>
+					{renderChat()}
 				</div>
-				<button>Send Message</button>
-			</form>
-			<div className="render-chat">
-				<h1>Chat Log</h1>
-				{renderChat()}
 			</div>
-		</div>
+			<button type="button" id='buttonCss' onClick={props.showWhitboard}>Go to Whiteboard!</button>
+		</>
 	)
 }
 
