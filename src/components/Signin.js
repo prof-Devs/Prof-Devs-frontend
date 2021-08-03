@@ -88,16 +88,16 @@ export class Signin extends Component {
           <Form onSubmit={this.props.studentSignIn}>
             <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" name="email" onChange={this.handleChange} />
+              <Form.Control type="email" placeholder="Enter email" name="email" onChange={this.props.handleChange} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Nick Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter NickName" name="NickName" onChange={this.handleChange} />
+              <Form.Control type="text" placeholder="Enter NickName" name="NickName" onChange={this.props.handleChange} />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} />
+              <Form.Control type="password" placeholder="Password" name="password" onChange={this.props.handleChange} />
             </Form.Group>
 
             <Button variant="primary" type="submit">
