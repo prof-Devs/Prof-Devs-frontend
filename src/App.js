@@ -23,6 +23,10 @@ export class App extends Component {
       showForm: true,
       showChat: false,
       showWhitboard: false,
+      showWhitboard: false,
+      email: '',
+      password: '',
+      NickName:'',
     }
   }
 
@@ -32,7 +36,7 @@ export class App extends Component {
       showChat: true,
       showForm: false,
       showCourse: true,
-      courseTesting: true
+      courseTesting: true,
     })
   }
   showWhitboard = () => {
@@ -40,7 +44,9 @@ export class App extends Component {
       showWhitboard: true
     })
   }
-
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   render() {
     console.log(this.state.showForm);
     return (
@@ -54,6 +60,7 @@ export class App extends Component {
             {this.state.showForm &&
               <Signin
                 studentSignIn={this.studentSignIn}
+                handleChange={this.handleChange}
                 showCourse={this.state.showCourse}
                 showForm={this.state.showForm}
                 showChat={this.state.showChat}
@@ -71,6 +78,7 @@ export class App extends Component {
           <Route exact path="/course">
             <Chat
               showWhitboard={this.showWhitboard}
+              NickName={this.state.NickName}
             />
             {this.state.showWhitboard &&
               <Redirect to={
