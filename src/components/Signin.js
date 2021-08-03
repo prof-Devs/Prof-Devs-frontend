@@ -5,20 +5,19 @@ import { Form, Button } from 'react-bootstrap';
 // import { Redirect } from 'react-router-dom';
 // import MyCourses from './MyCourses';
 // import AllCourses from './AllCourses';
-import Chat from './Chat';
+import Chat from './chat/Chat';
 
 export class Signin extends Component {
-
+  
   constructor(props) {
     super(props);
+    
     this.state = {
       email: '',
       password: '',
       NickName:'',
       // showStudent: false,
       // showTeacher: false,
-      showForm: true,
-      showChat:false,
     }
   }
 
@@ -26,13 +25,8 @@ export class Signin extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  studentSignIn = (e) => {
-    e.preventDefault();
-    this.setState({
-      showChat : true,
-      showForm:false
-    })
-  }
+
+
 
   // studentSignIn = async (e) => {
   //   e.preventDefault();
@@ -82,10 +76,6 @@ export class Signin extends Component {
   //   //     console.log(payload);
   // };
 
-
-
-
-
   render() {
 
     return (
@@ -93,9 +83,9 @@ export class Signin extends Component {
         {/* {this.state.showTeacher && <MyCourses />} */}
         {/* {this.state.showTeacher && <Chat />} */}
         {/* {this.state.showStudent && <AllCourses />} */}
-        {this.state.showChat && <Chat NickName={this.state.NickName}/>}
-        {this.state.showForm &&
-          <Form onSubmit={this.studentSignIn}>
+        {this.props.showChat && <Chat NickName={this.state.NickName}/>}
+        {this.props.showForm &&
+          <Form onSubmit={this.props.studentSignIn}>
             <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
               <Form.Control type="email" placeholder="Enter email" name="email" onChange={this.handleChange} />
