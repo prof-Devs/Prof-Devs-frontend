@@ -3,9 +3,13 @@ import TextField from "@material-ui/core/TextField"
 import { useEffect, useRef, useState } from "react"
 import io from "socket.io-client"
 import './chat.css'
+<<<<<<< HEAD:src/components/chat/Chat.js
 import { Redirect } from 'react-router-dom';
 import Board from '../Board/Board';
 
+=======
+const heroku = process.env.HEROKU;
+>>>>>>> ad356151188ac57ce8c3936a527746f412003bc5:src/components/Chat.js
 // const socket = io('https://localhost:3001',{transports :['websocket']})
 function Chat(props) {
 	console.log('Chat Props', props.NickName);
