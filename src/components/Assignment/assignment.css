@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+
+.courses-container_Assignment{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.course_Assignment {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	max-width: 100%;
+	margin: 20px;
+	overflow: hidden;
+	width: 700px;
+    font-family: 'Muli', sans-serif;
+
+}
+
+.course_Assignment h6 {
+	opacity: 0.6;
+	margin: 0;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.course_Assignment h2 {
+	letter-spacing: 1px;
+	margin: 10px 0;
+}
+
+.course-preview_Assignment {
+	background-color: #1a9274;
+	color: #fff;
+	padding: 30px;
+	max-width: 250px;
+}
+
+.course-preview_Assignment button {
+    background-color: #1a9274;
+    border: 0px;
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	opacity: 0.6;
+	margin-top: 30px;
+	text-decoration: none;
+}
+
+.course-info_Assignment {
+	padding: 30px;
+	position: relative;
+	width: 100%;
+}
+
+.progress-container_Assignment {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	text-align: right;
+	width: 150px;
+}
+
+.progress_Assignment {
+	background-color: #ddd;
+	border-radius: 3px;
+	height: 5px;
+	width: 100%;
+}
+
+.progress_Assignment::after {
+	border-radius: 3px;
+	background-color: #1a9274;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 5px;
+	width: 66%;
+}
+
+.progress-text_Assignment {
+	font-size: 10px;
+	opacity: 0.6;
+	letter-spacing: 1px;
+}
+
+.btn_Assignment {
+	background-color: #1a9274;
+    cursor: pointer;
+	border: 0;
+	border-radius: 50px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	font-size: 16px;
+	padding: 7px 25px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	letter-spacing: 1px;
+}
+
+
+
+/* Table  */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+
+
+.table-container {
+  padding: 0 5%;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+ display: flex;
+justify-content: center;
+  color: #1a9274;
+}
+
+
+
+h2 {
+  text-align: right;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  line-height: 1.375;
+  margin: 0;
+  letter-spacing: 1px
+}
+.table-1{
+    display: flex;
+    justify-content: center;
+}
+.AssignmentTable {
+
+  min-width: 300px;
+  margin-bottom: 2.4rem;
+  background-color: #ffffff;
+  color: #168569;
+  overflow: hidden;
+
+}
+
+.AssignmentTable tr:nth-child(even) {
+  background-color: #1a9274;
+  color: white;
+}
+
+.AssignmentTable th,
+.AssignmentTable td:before {
+  color: rgb(0, 0, 0);
+}
+
+/* table th {
+  display: none;
+} */
+
+.AssignmentTable th,
+.AssignmentTable td {
+  margin: .5rem 2rem;
+  text-align: left;
+}
+
+.AssignmentTable td {
+  display: block;
+  font-size: 90%;
+}
+
+.AssignmentTable td:first-child {
+  padding-top: 1rem;
+}
+
+.AssignmentTable td:last-child {
+  padding-bottom: 1rem;
+}
+
+.AssignmentTable td:before {
+  content: attr(data-th) ':\00a0';
+  font-weight: bold;
+  min-width: 8rem;
+  display: inline-block;
+}
+
+
+@media (min-width: 600px) {
+  .AssignmentTable td:before {
+    display: none;
+  }
+  .AssignmentTable th,
+  .AssignmentTable td {
+    display: table-cell;
+  }
+  .AssignmentTable th,
+  .AssignmentTable td,
+  .AssignmentTable td:first-child,
+  .AssignmentTable td:last-child {
+    padding: 1.5rem 2rem;
+  }
+ 
+}
+.marks-btn{
+   padding: 15px 25px;
+   border-radius: 7px;
+   background-color: #1a9274;
+   color: white;
+   border: 1px solid black;
+   transition: all 0.2s ease-in-out;
+}
+
+.marks-btn:hover{
+background-color: #000000f5;
+}
+
+.btn-assignment-container{
+    display: flex;
+    justify-content: center;
+}
+
+
+
