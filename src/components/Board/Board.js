@@ -126,7 +126,8 @@ const Board = () => {
       drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
     }
 
-    socketRef.current = io.connect('http://localhost:3002',{transports :['websocket']});
+
+    socketRef.current = io.connect('https://profdev-academy.herokuapp.com',{transports :['websocket']});
     socketRef.current.on('drawing', onDrawingEvent);
   }, []);
 
@@ -151,5 +152,6 @@ const Board = () => {
     </div>
   );
 };
+
 
 export default Board;
