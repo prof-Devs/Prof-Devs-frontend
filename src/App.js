@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import CoursePage from './components/CoursePage/CoursePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,7 +14,7 @@ import {
 } from "react-router-dom";
 // import Signup from './components/Signup';
 import Signin from './components/Signin';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import AboutUs from './components/AboutUs';
 // import Chat from './components/Chat';
 import Board from './components/Board/Board';
@@ -26,7 +31,7 @@ export class App extends Component {
       showWhitboard: false,
       email: '',
       password: '',
-      NickName:'',
+      NickName: '',
     }
   }
 
@@ -52,11 +57,15 @@ export class App extends Component {
     return (
       <Router>
         <Header />
+      
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/signin">
+          <Route exact path="/new">
+            <CoursePage />
+          </Route>
+          {/* <Route exact path="/signin">
             {this.state.showForm &&
               <Signin
                 studentSignIn={this.studentSignIn}
@@ -74,8 +83,8 @@ export class App extends Component {
               }
               />
             }
-          </Route>
-          <Route exact path="/course">
+          </Route> */}
+          {/* <Route exact path="/course">
             <Chat
               showWhitboard={this.showWhitboard}
               NickName={this.state.NickName}
@@ -88,12 +97,12 @@ export class App extends Component {
               }
               />
             }
-          </Route>
-
-          <Route exact path="/board">
-            <Board />
-          </Route>
+          </Route> */}
+          {/* <Route exact path="/board"> */}
+            {/* <Board /> */}
+          {/* </Route> */}
         </Switch>
+        {/* <Footer/> */}
       </Router>
     );
   }

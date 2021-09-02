@@ -1,0 +1,78 @@
+#containerFooter{
+  display: flex;
+ flex-direction: column;
+  background-color: #33B292;
+  width: 100%;
+  }
+
+  #containerFooter #firstRow{
+    display: flex;
+justify-content:space-between;
+    flex-grow: 1;
+ width: 100%;
+border-bottom: 3px solid white;
+padding-top: 22px;
+padding-bottom: 10px;
+padding-left: 50px;
+
+  }
+  #containerFooter .ulStyle{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+ align-items: flex-start;
+ padding: 0px 0px;
+   
+  }
+  #containerFooter .ulStyle a {
+ padding-left: 15px;
+ padding-bottom: 3px;
+ padding-top: 3px;
+  }
+
+  #containerFooter .ulStyle a li {
+      color: #175747;
+      font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+      font-size: 17px;
+     }
+
+     #containerFooter #firstDiv{
+   flex-grow: 1;
+ }
+ #containerFooter #secondDiv{
+  flex-grow: 1;
+}
+#containerFooter #thirdDiv{
+  flex-grow: 1;
+}
+#containerFooter .h1Style{
+  color: antiquewhite;
+  padding-bottom: 10px;
+}
+#containerFooter .iconsUl{
+  list-style: none;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+#containerFooter .paraghStyle{
+  color: #175747;
+  font-size: 20px;
+}
+#logo{
+  display: flex;
+  align-items: center;
+}
+#secondDiv{
+  padding-left: 165px;
+}
+#logo  img{
+  margin-left: 0px;
+  margin-right: 20px;
+}
+#thirdDiv  ul  li{
+  color: #175747;
+padding: 5px 5px;
+}

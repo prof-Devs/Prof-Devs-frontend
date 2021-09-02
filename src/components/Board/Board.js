@@ -133,9 +133,9 @@ const Board = () => {
   // ------------- The Canvas and color elements --------------------------
 
   return (
-    <div>
-      <canvas ref={canvasRef} className="whiteboard" />
-
+    <>
+    <div id="stylingBoard">
+    <canvas ref={canvasRef} className="whiteboard" />
       <div ref={colorsRef} className="colors">
         <div className="color black" />
         <div className="color red" />
@@ -148,7 +148,10 @@ const Board = () => {
         <div className="color cyan" />
         <div className="color purple" />
       </div>
+
     </div>
+     
+      </>
   );
 };
 
