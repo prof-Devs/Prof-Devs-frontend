@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-
+// import MyCourse from '../src/components/my_course/MyCourse';
+// import Assignment from './components/Assignment/Assignment';
+// import Assignments from './components/droplist/Assignments'
+// import Marks from "./components/droplist/Marks";
+// import Quizes from "./components/droplist/Quizes";
+// import Quiz from './components/Quiz/Quiz';
 
 
 // import Header from './components/Header';
@@ -48,7 +53,7 @@ export class App extends Component {
   // }
 
 
-   
+
   render() {
     // console.log(this.state.showForm);
     return (
@@ -77,6 +82,8 @@ export class App extends Component {
       //       }
       //     </Route>
       //     <Route exact path="/course">
+
+
       //       <Chat
       //         showWhitboard={this.showWhitboard}
       //       />
@@ -88,6 +95,7 @@ export class App extends Component {
       //         }
       //         />
       //       }
+
       //     </Route>
 
       //     <Route exact path="/board">
@@ -96,8 +104,14 @@ export class App extends Component {
       //   </Switch>
       // </Router>
       <>
+        {/* <MyCourse /> */}
+        {/* <Assignment/> */}
+        {/* <Quiz/> */}
+        {/* <Assignments/>
+        <Quizes/>
+        <Marks/> */}
       </>
-    
+
     );
   }
 }
