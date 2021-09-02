@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import CoursePage from './components/CoursePage/CoursePage';
+import Assignments from './components/droplist/Assignments';
+import Marks from './components/droplist/Marks';
+import Quizes from './components/droplist/Quizes';
+import Assignment from './components/Assignment/Assignment';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
@@ -14,7 +19,7 @@ import {
 // import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Home from './components/Home/Home';
-// import AboutUs from './components/AboutUs';
+import AboutUs from './components/aboutus/AboutUs';
 // import Chat from './components/Chat';
 import Board from './components/Board/Board';
 import Chat from './components/chat/Chat';
@@ -46,14 +51,14 @@ export default class App extends React.Component {
   // constructor(props) {
   //   super(props);
   //   this.state = {
-    // showCourse: false,
-    // showForm: true,
-    // showChat: false,
-    // showWhitboard: false,
-    // showWhitboard: false,
-    // email: '',
-    // password: '',
-    // NickName: '',
+  // showCourse: false,
+  // showForm: true,
+  // showChat: false,
+  // showWhitboard: false,
+  // showWhitboard: false,
+  // email: '',
+  // password: '',
+  // NickName: '',
   //     showCourse: false,
   //     showForm: true,
   //     showChat: false,
@@ -82,13 +87,20 @@ export default class App extends React.Component {
 
       <Router>
         <Header />
-      
+
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
           <Route exact path="/new">
             <CoursePage />
+          </Route>
+          <Route exact path="/aboutUs">
+            <AboutUs />
+            {/* <Assignments />
+            <Marks />
+            <Quizes />
+            <Assignment /> */}
           </Route>
           {/* <Route exact path="/signin">
             {this.state.showForm &&
@@ -124,21 +136,21 @@ export default class App extends React.Component {
             }
           </Route> */}
           {/* <Route exact path="/board"> */}
-            {/* <Board /> */}
+          {/* <Board /> */}
           {/* </Route> */}
         </Switch>
-        <Footer/>
+        <Footer />
 
 
-     
-    
-       {/* <MyCourse />
+
+
+        {/* <MyCourse />
        <Assignment/>
      <Quiz/> 
       <Assignments/>
         <Quizes/>
         <Marks/>  */}
-    </Router>
+      </Router>
 
     );
   }
