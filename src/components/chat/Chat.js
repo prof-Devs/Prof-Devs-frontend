@@ -46,30 +46,35 @@ function Chat(props) {
 
 	return (
 		<>
-			<div className="card">
-				<form onSubmit={onMessageSubmit}>
-					<h1>Messenger</h1>
-					{/* <div className="name-field">
+			<div >
+				{/* <div id="chatWrapper"> */}
+
+					<form onSubmit={onMessageSubmit}>
+						<h1 id="h1Chat">Messenger</h1>
+						{/* <div className="name-field">
 					<TextField name="name" onChange={(e) => onTextChange(e)} value={state.name} label="Name" />
 				</div> */}
-					<div>
-						<TextField
-							name="message"
-							onChange={(e) => onTextChange(e)}
-							value={state.message}
-							id="outlined-multiline-static"
-							variant="outlined"
-							label="Message"
-						/>
+						<div>
+							<textarea
+								name="message"
+								onChange={(e) => onTextChange(e)}
+								value={state.message}
+								id="outlined-multiline-static "
+								class="textField"
+								placeholder='message....'
+							
+								
+							/>
+						</div>
+						<button id='buttonCss'>Send Message</button>
+					</form>
+					<div className="render-chat">
+						{/* <h1>Chat Log</h1> */}
+						{renderChat()}
 					</div>
-					<button>Send Message</button>
-				</form>
-				<div className="render-chat">
-					<h1>Chat Log</h1>
-					{renderChat()}
-				</div>
+				{/* </div> */}
 			</div>
-			<button type="button" id='buttonCss' onClick={props.showWhitboard}>Go to Whiteboard!</button>
+			{/* <button type="button" id='buttonCss' onClick={props.showWhitboard}>Go to Whiteboard!</button> */}
 		</>
 	)
 }
