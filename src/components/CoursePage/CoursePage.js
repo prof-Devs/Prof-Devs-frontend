@@ -1,14 +1,43 @@
-import React from 'react'
-import Board from '../Board/Board';
+import React, { useContext, useEffect } from 'react'
 import Chat from '../chat/Chat';
 import { MdAssignment } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
 import './CoursePage.css'
+import { CourseContextProv } from '../../context/CourseContext';
+import { useParams, useHistory } from 'react-router-dom';
+
+//<button onclick="location.href='page'">
 
 function CoursePage() {
+    let { courseId } = useParams();
+
+    console.log('aaaaaaaaaaaaaaaaaaaa', courseId);
+
+    const CourseObject= useContext(CourseContextProv);
+
+    const history = useHistory();
+    let boardHandleClick;
+    let assignmentHandleClick;
+    let quizHandleClick;
+
+    // if (courseId) {
+         boardHandleClick = () => history.push(`/board/${courseId}`);
+         assignmentHandleClick = () => history.push(`/assignment/${courseId}`);
+         quizHandleClick = () => history.push(`/quiz/${courseId}`);
+    // }
+
+    function showHandler() {
+        CourseObject.setShowWhiteBoard(true);
+        CourseObject.setShowAssignment(true);
+        CourseObject.setShowQuiz(true);
+    }
+
+    useEffect(() => {
+        showHandler();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return (
-
-
         <div id="CourseContainer">
             <div id="leftSection">
                 <div id="mainCourse">
@@ -21,8 +50,8 @@ function CoursePage() {
                     <div id="leftRight">
 
                         <div id="buttonsStyle">
-                            <button title="Create new assignment"><MdAssignment size="50" /></button>
-                            <button title="Create new quiz"><IoIosCreate size="50" /></button>
+                            <button title="Create new assignment"><MdAssignment size="50" onClick={assignmentHandleClick}/></button>
+                            <button title="Create new quiz"><IoIosCreate size="50" onClick={quizHandleClick} /></button>
                         </div>
 
                         <div id="dropList">
@@ -37,7 +66,7 @@ function CoursePage() {
                     </div>
                     <div id='buttonCsswrapper'>
 
-                        <button type="button" id='buttonCss'>Go to Whiteboard!</button>
+                        <button type="button" id='buttonCss' onClick={boardHandleClick} >Go to Whiteboard!</button>
                     </div>
                 </div>
 

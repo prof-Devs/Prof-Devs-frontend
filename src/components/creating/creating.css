@@ -1,0 +1,83 @@
+/* assignemnt */
+.ass-title{
+background-color: rgba(214, 211, 211, 0.274);
+margin-bottom: 1rem;
+margin-top: 1rem;
+
+}
+.ass-text{
+    background-color: rgba(214, 211, 211, 0.274);
+    height: 6rem;
+    margin-bottom: 1rem;
+}
+.ass-date{
+width: 16rem;
+}
+.ass-button{
+    width: 10rem;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    background-color: #33B292;
+    border: hidden;
+    margin-top: 2rem;
+}
+.ass-button:hover{
+    background-color: whitesmoke;
+    color: #33B292;
+}
+.row-ass{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+
+/* quiz */
+.q-text{
+    background-color: rgba(214, 211, 211, 0.274);
+    height: 4rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+.options{
+    background-color: rgba(214, 211, 211, 0.274);
+    margin-bottom: 0.5rem;
+}
+.add-button{
+    width: 100%;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    background-color: #33B292;
+    border: hidden;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+.add-button:hover{
+    background-color: whitesmoke;
+    color: #33B292;
+}
+
+.counter{
+    font-size: 1rem;
+}
+.q-date{
+    margin-top: 0.5rem;
+    width: 16rem;
+}
+
+/* course */
+.c-button{
+    width: 51%;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    background-color: #33B292;
+    border: hidden;
+    margin-top: 2rem;
+    margin-bottom: 0.4rem;
+    margin-left: 14rem;
+}
+.c-button:hover{
+    background-color: whitesmoke;
+    color: #33B292;
+}
