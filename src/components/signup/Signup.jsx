@@ -9,9 +9,9 @@ import { TiSocialFacebook,TiSocialLinkedin,TiSocialGooglePlus} from 'react-icons
 
 export default function SignUp() {
   return (
-    <div className='container'>
+    <div className='signUpcontainer'>
       <Card className='parent'>
-        <div>
+        <div id='secondDiv'>
           <h2 className='title'>Create Account</h2>
           <div className='icons'>
           <TiSocialFacebook className='icon'/>

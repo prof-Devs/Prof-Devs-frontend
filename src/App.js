@@ -16,11 +16,10 @@ import CoursePage from './components/CoursePage/CoursePage';
 import Home from "./components/Home/Home";
 import Assignment from "./components/Assignment/Assignment";
 import Board from "./components/Board/Board";
+import AboutUs from './components/aboutus/AboutUs';
 import Quiz from "./components/Quiz/Quiz";
-
 import { CourseContextProv } from './context/CourseContext';
 // import CourseContext from './context/CourseContext';
-
 
 export default function App() {
   const CourseObject = useContext(CourseContextProv)
@@ -44,6 +43,10 @@ export default function App() {
           <Signup />
         </Route>
         {/* <CourseContext> */}
+
+        <Route exact path="/aboutUs">
+          <AboutUs />
+        </Route>
 
           <Route exact path="/mycourses">
             <MyCourse />
@@ -70,9 +73,7 @@ export default function App() {
               <Quiz />
             </Route>
           }
-
         {/* </CourseContext> */}
-
       </Switch>
       <Footer />
 

@@ -1,27 +1,21 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { Modal, Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import CourseObject from '../../context/CourseContext';
+import { CourseContextProv } from '../../context/CourseContext';
 import './creating.css'
 
 export default function Quiz() {
-    const [showForm, setShowForm] = useState(false);
 
-    function handleShow() {
-        setShowForm(true);
-    }
-
-    function handleClose() {
-        setShowForm(false);
-    }
-
+    const CourseObject = useContext(CourseContextProv);
     return (
         <div className="ass-container">
-            <Button variant="primary" onClick={handleShow}>
-                Create Quiz
-            </Button>
-            <Modal show={showForm} onHide={handleClose} animation={false}>
+ 
+            <Modal size="lg" centered="true" show={CourseObject.showForm} onHide={CourseObject.handleClose} animation={false}>
                 <Modal.Body>
+                <Modal.Title id="contained-modal-title-vcenter">
+                        <h1>* Create quiz *</h1>
+                    </Modal.Title>
                     <Form>
                         <Form.Group>
                             <Form.Control className="ass-title" type="email" placeholder="Quiz Title" />
@@ -38,7 +32,7 @@ export default function Quiz() {
                             <Form.Control className="options" type="text" placeholder="Option-1" />
                             <Form.Control className="options" type="text" placeholder="Option-2" />
                             <Form.Control className="options" type="text" placeholder="Option-3" />
-                            <Button className="add-button">Add Question</Button>
+                            <Button id="add-button">Add Question</Button>
                         </Form.Group>
 
 
@@ -50,7 +44,7 @@ export default function Quiz() {
                                 </Form.Group>
                             </div>
                             <div>
-                                <Button className="ass-button" onClick={handleClose}>
+                                <Button id="ass-button" onClick={CourseObject.handleClose}>
                                     Create Quiz
                                 </Button>
                             </div>
