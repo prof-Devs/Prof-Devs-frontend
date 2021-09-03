@@ -5,10 +5,11 @@ import { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FaRegEdit } from 'react-icons/fa';
 import FormRange from 'react-bootstrap/esm/FormRange';
-
+import CourseObject from '../../context/CourseContext';
+import { CourseContextProv } from '../../context/CourseContext';
 
 export default function Assignments() {
-    const [showTable, setShowTable] = useState(false);
+    const [showTable, setShowTable] = useState(true);
     const [showForm, setShowForm] = useState(false);
 
 
@@ -29,17 +30,16 @@ export default function Assignments() {
     function handleClose1() {
         setShowForm(false);
         setShowTable(true);
-
     }
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Quizes
-            </Button>
 
-            <Modal show={showTable} onHide={handleClose} animation={false}>
+            <Modal size="lg" centered="true" show={showTable} onHide={handleClose} animation={false}>
                 <Modal.Body>
+                <Modal.Title id="contained-modal-title-vcenter">
+                        <h1>* See quizes *</h1>
+                    </Modal.Title>
                     <Table responsive>
                         <thead>
                             <tr>
@@ -73,9 +73,9 @@ export default function Assignments() {
                     </Table>
                 </Modal.Body>
 
-                <Button variant="secondary" onClick={handleClose}>
+                {/* <Button variant="secondary" onClick={handleClose}>
                     Close
-                </Button>
+                </Button> */}
             </Modal>
             <Modal show={showForm} onHide={handleClose1} animation={false}>
                 <Form>

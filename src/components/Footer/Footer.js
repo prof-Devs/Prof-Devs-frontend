@@ -20,8 +20,8 @@ function Footer() {
                 <div id="secondDiv">
                     <h1 class="h1Style">Explore</h1>
                     <ul class="ulStyle">
-                        <a><li>Sign Up</li></a>
-                        <a> <li>Sign In</li></a>
+                        <a href="/signup"><li>Sign Up</li></a>
+                        <a href="/signin"> <li>Sign In</li></a>
                         <a><li>About Us</li></a>
                     </ul>
                 </div>

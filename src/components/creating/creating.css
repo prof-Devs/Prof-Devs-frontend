@@ -13,15 +13,15 @@ margin-top: 1rem;
 .ass-date{
 width: 16rem;
 }
-.ass-button{
-    width: 10rem;
+#ass-button{
+    width: 14rem;
     padding: 0.4rem;
     border-radius: 0.4rem;
     background-color: #33B292;
     border: hidden;
     margin-top: 2rem;
 }
-.ass-button:hover{
+#ass-button:hover{
     background-color: whitesmoke;
     color: #33B292;
 }
@@ -44,7 +44,7 @@ width: 16rem;
     background-color: rgba(214, 211, 211, 0.274);
     margin-bottom: 0.5rem;
 }
-.add-button{
+#add-button{
     width: 100%;
     padding: 0.4rem;
     border-radius: 0.4rem;
@@ -53,7 +53,7 @@ width: 16rem;
     margin-top: 0.5rem;
     margin-bottom: 2rem;
 }
-.add-button:hover{
+#add-button:hover{
     background-color: whitesmoke;
     color: #33B292;
 }

@@ -1,27 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Modal, Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import CourseObject from '../../context/CourseContext';
+import { CourseContextProv } from '../../context/CourseContext';
 import './creating.css'
 
 export default function Assignment() {
-    const [showForm, setShowForm] = useState(false);
 
-    function handleShow() {
-        setShowForm(true);
-    }
-
-    function handleClose() {
-        setShowForm(false);
-    }
-
+    const CourseObject = useContext(CourseContextProv);
     return (
+
         <div className="ass-container">
-            <Button variant="primary" onClick={handleShow}>
-                Create Assignment
-            </Button>
-            <Modal show={showForm} onHide={handleClose} animation={false}>
+            <Modal size="lg" centered="true" show={CourseObject.showAssignmentForm} onHide={CourseObject.handleAssignmentClose} animation={false}>
                 <Modal.Body>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        <h1>* Create assignment *</h1>
+                    </Modal.Title>
                     <Form>
                         <Form.Group>
                             <Form.Control className="ass-title" type="email" placeholder="Assignment Title" />
@@ -38,7 +32,7 @@ export default function Assignment() {
                                 </Form.Group>
                             </div>
                             <div>
-                                <Button className="ass-button" onClick={handleClose}>
+                                <Button id="ass-button" onClick={CourseObject.handleAssignmentClose}>
                                     Create Assignment
                                 </Button>
                             </div>
@@ -51,6 +45,9 @@ export default function Assignment() {
 
 
 
+
+
         </div>
+
     )
 }

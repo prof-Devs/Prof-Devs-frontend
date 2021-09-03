@@ -14,8 +14,8 @@ export class Header extends Component {
           <ul >
             <a href='/'><li>Home</li></a>
             <a href='/aboutUs'><li>About Us</li></a>
-            <a href='#'> <li>Sign up</li></a>
-            <a href='/new' id='signIn'> <li>Sign in</li></a>
+            <a href='/signup'> <li>Sign up</li></a>
+            <a href='/signin' id='signIn'> <li>Sign in</li></a>
           </ul>
         </div>
 
