@@ -25,7 +25,6 @@ import Chat from './components/chat/Chat';
 // import Quizes from "./components/droplist/Quizes";
 // import Quiz from './components/Quiz/Quiz';
 
-
 // import Header from './components/Header';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import {
