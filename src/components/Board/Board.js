@@ -126,16 +126,17 @@ const Board = () => {
       drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
     }
 
-    socketRef.current = io.connect('http://localhost:3002',{transports :['websocket']});
+
+    socketRef.current = io.connect('https://profdev-academy.herokuapp.com',{transports :['websocket']});
     socketRef.current.on('drawing', onDrawingEvent);
   }, []);
 
   // ------------- The Canvas and color elements --------------------------
 
   return (
-    <div>
-      <canvas ref={canvasRef} className="whiteboard" />
-
+    <>
+    <div id="stylingBoard">
+    <canvas ref={canvasRef} className="whiteboard" />
       <div ref={colorsRef} className="colors">
         <div className="color black" />
         <div className="color red" />
@@ -148,8 +149,12 @@ const Board = () => {
         <div className="color cyan" />
         <div className="color purple" />
       </div>
+
     </div>
+     
+      </>
   );
 };
+
 
 export default Board;
