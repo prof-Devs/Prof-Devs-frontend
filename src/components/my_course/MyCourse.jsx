@@ -2,6 +2,7 @@ import React from "react";
 import './MyCourse.scss';
 
 function MyCourse() {
+  
   return (
     <section class="page-contain">
       <a href="/" class="data-card">
