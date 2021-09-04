@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-
-
-
 // import Header from './components/Header';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import {
@@ -97,7 +94,6 @@ export class App extends Component {
       // </Router>
       <>
       </>
-    
     );
   }
 }
