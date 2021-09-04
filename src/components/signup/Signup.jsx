@@ -48,7 +48,7 @@ export default function SignUp() {
     <div className="signUpcontainer">
       <If condition={authContext.loggedIn}>
         <Then>
-          <Button className="button" onClick={authContext.signOut}> Sign Out </Button>
+          {/* <Button className="button" onClick={authContext.signOut}> Sign Out </Button> */}
         </Then>
         <Else>
           <Card className="parent">

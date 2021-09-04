@@ -4,7 +4,8 @@ import { If, Else, Then } from "react-if";
 import { Form, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './signin.css'
+import './signin.css';
+import Home from '../Home/Home'
 // import { AiOutlineMail } from 'react-icons/ai';
 // import { FormControl } from "@material-ui/core";
 import { TiSocialFacebook,TiSocialLinkedin,TiSocialGooglePlus} from 'react-icons/ti';
@@ -35,8 +36,10 @@ export default function SignIn() {
     return (
         <div className='container-in'>
             <If condition={authContext.loggedIn}>
+
         <Then>
-          <Button className="button-in" onClick={authContext.signOut}> Sign Out </Button>
+          {/* <Button className="button-in" onClick={authContext.signOut}> Sign Out </Button> */}
+          <Home/>
         </Then>
         <Else>
             <Card className='parent-in'>
