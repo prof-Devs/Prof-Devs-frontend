@@ -1,44 +1,50 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Modal, Button, Table, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FaRegEdit } from 'react-icons/fa';
+import { CourseContextProv } from '../../context/CourseContext';
 
 
 export default function Assignments() {
     const [showTable, setShowTable] = useState(false);
     const [showForm, setShowForm] = useState(false);
 
+    const CourseObject = useContext(CourseContextProv);
 
-    function handleShow() {
-        setShowTable(true);
-    }
+    // setshowTableDropMarks,showTableDropMarks
+
+    // function handleShow() {
+    //     setShowTable(true);
+    // }
 
     function handleClose() {
-        setShowTable(false);
+        CourseObject.setshowTableDropMarks(false);
     }
 
     function handleForm() {
         setShowForm(true);
-        setShowTable(false);
+        CourseObject.setshowTableDropMarks(false);
     }
 
     function handleClose1() {
         setShowForm(false);
-        setShowTable(true);
+        CourseObject.setshowTableDropMarks(true);
 
     }
-
+    
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Marks
-            </Button>
+            </Button> */}
 
-            <Modal show={showTable} onHide={handleClose} animation={false}>
+            <Modal size="lg" centered="true" show={CourseObject.showTableDropMarks} onHide={handleClose} animation={false}>
                 <Modal.Body>
+                <Modal.Title id="contained-modal-title-vcenter">
+                        <h1>* See marks *</h1>
+                    </Modal.Title>
                     <Table responsive>
                         <thead>
                             <tr>
@@ -69,9 +75,9 @@ export default function Assignments() {
                     </Table>
                 </Modal.Body>
 
-                <Button variant="secondary" onClick={handleClose}>
+                {/* <Button variant="secondary" onClick={handleClose}>
                     Close
-                </Button>
+                </Button> */}
             </Modal>
             <Modal show={showForm} onHide={handleClose1} animation={false}>
                 <Form>

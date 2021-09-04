@@ -1,101 +1,93 @@
-import React, { Component } from 'react';
-// import Header from './components/Header';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Redirect
-// } from "react-router-dom";
-// // import Signup from './components/Signup';
-// import Signin from './components/Signin';
-// import Home from './components/Home';
-// import AboutUs from './components/AboutUs';
-// // import Chat from './components/Chat';
-// import Board from './components/Board/Board';
-// import Chat from './components/chat/Chat';
+import React, { useContext } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Signin from './components/signin/Signin';
+import Signup from "./components/signup/Signup";
+import MyCourse from './components/my_course/MyCourse';
+import CoursePage from './components/CoursePage/CoursePage';
+import Home from "./components/Home/Home";
+import Assignment from "./components/Assignment/Assignment";
+import Board from "./components/Board/Board";
+import AboutUs from './components/aboutus/AboutUs';
+import Quiz from "./components/Quiz/Quiz";
+import { CourseContextProv } from './context/CourseContext';
+// import CourseContext from './context/CourseContext';
 
+export default function App() {
+  const CourseObject = useContext(CourseContextProv)
+  console.log('log ll show',CourseObject.showWhiteBoard); 
 
+  return (
 
-export class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     showCourse: false,
-  //     showForm: true,
-  //     showChat: false,
-  //     showWhitboard: false,
-  //   }
-  // }
+    <Router>
+      <Header />
 
-  // studentSignIn = (e) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     showChat: true,
-  //     showForm: false,
-  //     showCourse: true,
-  //     courseTesting: true
-  //   })
-  // }
-  // showWhitboard = () => {
-  //   this.setState({
-  //     showWhitboard: true
-  //   })
-  // }
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
 
+        <Route exact path="/signin">
+          <Signin />
+        </Route>
 
-   
-  render() {
-    // console.log(this.state.showForm);
-    return (
-      // <Router>
-      //   <Header />
-      //   <Switch>
-      //     <Route exact path="/">
-      //       <Home />
-      //     </Route>
-      //     <Route exact path="/signin">
-      //       {this.state.showForm &&
-      //         <Signin
-      //           studentSignIn={this.studentSignIn}
-      //           showCourse={this.state.showCourse}
-      //           showForm={this.state.showForm}
-      //           showChat={this.state.showChat}
-      //         />
-      //       }
-      //       {!this.state.showForm &&
-      //         <Redirect to={
-      //           {
-      //             pathname: "/course",
-      //           }
-      //         }
-      //         />
-      //       }
-      //     </Route>
-      //     <Route exact path="/course">
-      //       <Chat
-      //         showWhitboard={this.showWhitboard}
-      //       />
-      //       {this.state.showWhitboard &&
-      //         <Redirect to={
-      //           {
-      //             pathname: "/board",
-      //           }
-      //         }
-      //         />
-      //       }
-      //     </Route>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+        {/* <CourseContext> */}
 
-      //     <Route exact path="/board">
-      //       <Board />
-      //     </Route>
-      //   </Switch>
-      // </Router>
-      <>
-      </>
-    );
-  }
+        <Route exact path="/aboutUs">
+          <AboutUs />
+        </Route>
+
+          <Route exact path="/mycourses">
+            <MyCourse />
+          </Route>
+
+          <Route exact path="/coursepage">
+            <CoursePage />
+          </Route>
+          {/* {CourseObject.showAssignment && */}
+            <Route exact path="/assignment/:courseId">
+              <Assignment />
+            </Route>
+          {/* } */}
+          
+          {CourseObject.showWhiteBoard &&
+            <Route exact path='/board/:courseId'>
+              <Board />
+            </Route>
+          }
+        
+           {CourseObject.showQuiz &&
+            <Route exact path="/quiz/:courseId">
+          
+              <Quiz />
+            </Route>
+          }
+        {/* </CourseContext> */}
+      </Switch>
+      <Footer />
+
+    </Router>
+  )
 }
 
-export default App;
+
+
+    //  <Quiz/> 
+    //   <Assignments/>
+    //     <Quizes/>
+    //     <Marks/>
+
+
+
+

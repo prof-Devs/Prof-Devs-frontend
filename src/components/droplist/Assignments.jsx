@@ -1,44 +1,26 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Modal, Button, Table, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import CourseObject from '../../context/CourseContext';
+import { CourseContextProv } from '../../context/CourseContext';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FaRegEdit } from 'react-icons/fa';
 
 
 export default function Assignments() {
-    const [showTable, setShowTable] = useState(false);
-    const [showForm, setShowForm] = useState(false);
-
-
-    function handleShow() {
-        setShowTable(true);
-    }
-
-    function handleClose() {
-        setShowTable(false);
-    }
-
-    function handleForm() {
-        setShowForm(true);
-        setShowTable(false);
-    }
-
-    function handleClose1() {
-        setShowForm(false);
-        setShowTable(true);
-
-    }
-
-
+    const CourseObject = useContext(CourseContextProv);
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Assignments
-            </Button>
-
-            <Modal show={showTable} onHide={handleClose} animation={false}>
+            </Button> */}
+           
+            {/* showTableDropAss,handleCloseDropAss,handleFormDropAss,handleClose1DropAss */}
+            <Modal size="lg" centered="true" show={CourseObject.showTableDropAss} onHide={CourseObject.handleCloseDropAss} animation={false}>
                 <Modal.Body>
+                <Modal.Title id="contained-modal-title-vcenter">
+                        <h1>* See assignments *</h1>
+                    </Modal.Title>
                     <Table responsive>
                         <thead>
                             <tr>
@@ -55,7 +37,7 @@ export default function Assignments() {
                                 <td>2</td>
                                 <td>3</td>
                                 <td><RiDeleteBin6Line /></td>
-                                <td onClick={handleForm}><FaRegEdit /></td>
+                                <td onClick={CourseObject.handleFormDropAss}><FaRegEdit /></td>
 
                             </tr>
                             <tr>
@@ -63,33 +45,33 @@ export default function Assignments() {
                                 <td>2</td>
                                 <td>3</td>
                                 <td><RiDeleteBin6Line /></td>
-                                <td onClick={handleForm}><FaRegEdit /></td>
+                                <td onClick={CourseObject.handleFormDropAss}><FaRegEdit /></td>
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>2</td>
                                 <td>3</td>
                                 <td><RiDeleteBin6Line /></td>
-                                <td onClick={handleForm}><FaRegEdit /></td>
+                                <td onClick={CourseObject.handleFormDropAss}><FaRegEdit /></td>
                             </tr>
                         </tbody>
                     </Table>
                 </Modal.Body>
 
-                <Button variant="secondary" onClick={handleClose}>
+                {/* <Button variant="secondary" onClick={CourseObject.handleCloseDropAss}>
                     Close
-                </Button>
+                </Button> */}
             </Modal>
-            <Modal show={showForm} onHide={handleClose1} animation={false}>
+            {/* <Modal show={CourseObject.showFormDropAss} onHide={CourseObject.handleClose1DropAss} animation={false}>
                 <Form>
                     <Form.Label>
                         helloo
                     </Form.Label>
                     <Form.Control>
                     </Form.Control>
-                    <Button onClick={handleClose1}>Save Changes</Button>
+                    <Button onClick={CourseObject.handleClose1DropAss}>Save Changes</Button>
                 </Form>
-            </Modal>
+            </Modal> */}
         </>
     )
 }

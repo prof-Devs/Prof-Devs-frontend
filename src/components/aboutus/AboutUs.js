@@ -3,7 +3,7 @@ import { Carousel } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ibrahim from '../../images/ibrahim.jpg';
 import dina from '../../images/dina.jpg';
-import sukina from '../../images/sukina.jpg';
+// import sukina from '../../images/sukina.jpg';
 import haneen from '../../images/haneen.jpeg';
 import './aboutus.css';
 
@@ -48,11 +48,11 @@ export default function AboutUs() {
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
-                    <img
+                    {/* <img
                         className="us"
                         src={sukina}
                         alt="Third slide"
-                    />
+                    /> */}
 
                     <Carousel.Caption>
                         <h3>Sukina Abu Hammad</h3>

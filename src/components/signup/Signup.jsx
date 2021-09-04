@@ -45,14 +45,14 @@ export default function SignUp() {
   }
 
   return (
-    <div className="container">
+    <div className="signUpcontainer">
       <If condition={authContext.loggedIn}>
         <Then>
           <Button className="button" onClick={authContext.signOut}> Sign Out </Button>
         </Then>
         <Else>
           <Card className="parent">
-            <div>
+            <div id="secondDiv">
               <h2 className="title">Create Account</h2>
               <div className="icons">
                 <TiSocialFacebook className="icon" />
