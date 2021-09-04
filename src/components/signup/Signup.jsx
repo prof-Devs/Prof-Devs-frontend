@@ -40,7 +40,7 @@ export default function SignUp() {
               <Form.Control
                 className='input'
                 type="email"
-                placeholder="✉ Email"
+                placeholder="Email"
                 name="email"
               />
             </Form.Group>
@@ -55,7 +55,7 @@ export default function SignUp() {
 
             <div className="names">
               <Form.Group>
-                <Form.Control type="number" placeholder="Age" name="age" className='input' />
+                <Form.Control type="number" placeholder="Age" name="age" className='input' min='10'  />
               </Form.Group>
               <Form.Group>
                 <Form.Select className='input'>
