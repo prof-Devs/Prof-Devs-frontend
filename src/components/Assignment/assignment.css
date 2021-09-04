@@ -9,6 +9,7 @@
 display: flex;
 justify-content: center;
 align-items: center;
+margin: 100px 0;
 }
 
 .course_Assignment {
@@ -211,12 +212,15 @@ justify-content: center;
    border-radius: 7px;
    background-color: #1a9274;
    color: white;
-   border: 1px solid black;
+   border: none;
    transition: all 0.2s ease-in-out;
+   margin-bottom: 100px;
 }
 
 .marks-btn:hover{
-background-color: #000000f5;
+background-color: #fffffff5;
+color: #168569;
+border: 1px solid #168569 ;
 }
 
 .btn-assignment-container{

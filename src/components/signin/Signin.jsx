@@ -1,18 +1,18 @@
 import React, { useContext, useState }  from "react";
 import { AuthContext } from "../../context/authContext";
-import { If, Else, Then } from "react-if";
 import { Form, Button } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+
 import Card from "react-bootstrap/Card";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './signin.css';
-import Home from '../Home/Home'
 // import { AiOutlineMail } from 'react-icons/ai';
 // import { FormControl } from "@material-ui/core";
 import { TiSocialFacebook,TiSocialLinkedin,TiSocialGooglePlus} from 'react-icons/ti';
 
 
 
-export default function SignIn() {
+export default function SignIn(props) {
     const authContext = useContext(AuthContext);
     const [userInfo, setUserInfo] = useState({
         email:'',
@@ -33,15 +33,12 @@ export default function SignIn() {
         event.preventDefault();
         authContext.signIn (userInfo.email,userInfo.password);
     }
+    console.log(props.logged,'aaaaaasdsa;ldksa;ldkas;lkd');
+
+    if (!props.logged) {
     return (
         <div className='container-in'>
-            <If condition={authContext.loggedIn}>
-
-        <Then>
-          {/* <Button className="button-in" onClick={authContext.signOut}> Sign Out </Button> */}
-          <Home/>
-        </Then>
-        <Else>
+           
             <Card className='parent-in'>
                 <div>
                     <img className='image-in' src='https://color-hex.org/colors/33b292.png' alt ='' />
@@ -80,8 +77,9 @@ export default function SignIn() {
                     </Form>
                 </div>
             </Card>
-            </Else>
-            </If>
         </div>
     );
+    }
+    return  <Redirect to="/" />
+
 }
