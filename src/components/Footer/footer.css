@@ -1,78 +1,77 @@
-#containerFooter{
+#containerFooter {
   display: flex;
- flex-direction: column;
-  background-color: #33B292;
+  flex-direction: column;
+  background-color: #33b292;
   width: 100%;
-  }
+  font-family: 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
 
-  #containerFooter #firstRow{
-    display: flex;
-justify-content:space-between;
-    flex-grow: 1;
- width: 100%;
-border-bottom: 3px solid white;
-padding-top: 22px;
-padding-bottom: 10px;
-padding-left: 50px;
+#containerFooter #firstRow {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 100%;
+  border-bottom: 3px solid white;
+  padding-top: 22px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+}
+#containerFooter .ulStyle {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  align-items: flex-start;
+  padding: 0px 0px;
+}
+#containerFooter .ulStyle a {
+  padding-left: 15px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+}
 
-  }
-  #containerFooter .ulStyle{
-    display: flex;
-    flex-direction: column;
-    list-style: none;
- align-items: flex-start;
- padding: 0px 0px;
-   
-  }
-  #containerFooter .ulStyle a {
- padding-left: 15px;
- padding-bottom: 3px;
- padding-top: 3px;
-  }
+#containerFooter .ulStyle  li {
+  color: #175747;
+  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 13px;
+}
 
-  #containerFooter .ulStyle a li {
-      color: #175747;
-      font-family: 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-      font-size: 17px;
-     }
-
-     #containerFooter #firstDiv{
-   flex-grow: 1;
- }
- #containerFooter #secondDiv{
+#containerFooter #firstDiv {
   flex-grow: 1;
 }
-#containerFooter #thirdDiv{
+#containerFooter #secondDiv {
   flex-grow: 1;
 }
-#containerFooter .h1Style{
+#containerFooter #thirdDiv {
+  flex-grow: 1;
+}
+#containerFooter .h1Style {
   color: antiquewhite;
   padding-bottom: 10px;
 }
-#containerFooter .iconsUl{
+#containerFooter .iconsUl {
   list-style: none;
-display: flex;
-justify-content: center;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#containerFooter .paraghStyle{
+#containerFooter .paraghStyle {
   color: #175747;
-  font-size: 20px;
+  font-size: 15px;
 }
-#logo{
+#logo {
   display: flex;
   align-items: center;
 }
-#secondDiv{
+#secondDiv {
   padding-left: 165px;
 }
-#logo  img{
+#logo img {
   margin-left: 0px;
-  margin-right: 20px;
+  margin-right: 1px;
 }
-#thirdDiv  ul  li{
+#thirdDiv ul li {
   color: #175747;
-padding: 5px 5px;
+  padding: 5px 5px;
 }

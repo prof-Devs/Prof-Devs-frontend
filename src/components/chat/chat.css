@@ -1,8 +1,7 @@
-
-.textField{
-height: 100px;
-margin-bottom: 35px;
-}
 #h1Chat{
   padding-left: 0px;
+}
+#buttonCss:hover{
+background-color: #ffffffa8;
+color: #32ad8e;
 }
