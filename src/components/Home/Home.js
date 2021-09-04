@@ -14,15 +14,15 @@ export class Home extends Component {
                     <div class='firstWrapper'>
                         <div class='paragraph'>
                             <div id='icon'>
-                                <img src='https://icon-library.com/images/icon-education/icon-education-0.jpg' width='50' height='50' />
+                                <img src='https://icon-library.com/images/icon-education/icon-education-0.jpg' width='40' height='40' />
                                 <h1>Prof Academy</h1>
                             </div>
                             <p>Educational process is taking a critical path and become online according to current circumentences (COVID-19),So it was a good idea to create an online academic website that facilitates the educational process,serves students with multiple courses,provides private rooms for chatting between students and teacher and recognizes a seperated access for each teacher and student.</p>
-                            <h4>For more information about us ... </h4>
+                            <h5>For more information about us ... </h5>
                             <button class='btn'>About Us ..</button>
                         </div>
                         <div>
-                            <img src='https://cdni.iconscout.com/illustration/premium/thumb/distance-education-2710073-2265251.png' />
+                            <img id='firstImage' src='https://cdni.iconscout.com/illustration/premium/thumb/distance-education-2710073-2265251.png' />
                         </div>
                     </div>
 
@@ -39,15 +39,15 @@ export class Home extends Component {
                 <div class='mainContainer'>
                     <div class='firstWrapper'>
                     <div>
-                            <img src='https://thumbs.dreamstime.com/b/education-ladder-leading-to-future-life-success-education-ladder-leading-to-future-life-success-young-male-students-studying-218097882.jpg' />
+                            <img id='secondImage' src='https://thumbs.dreamstime.com/b/education-ladder-leading-to-future-life-success-education-ladder-leading-to-future-life-success-young-male-students-studying-218097882.jpg' />
                         </div>
                         <div class='paragraphLast'>
                             <div id='icon'>
-                                <img src='https://cdn2.iconfinder.com/data/icons/ui-kit/100/icon_checked-512.png' width='65' height='65' />
+                                <img src='https://cdn2.iconfinder.com/data/icons/ui-kit/100/icon_checked-512.png' width='45' height='45' />
                                 <h1>Your choice to be successful !</h1>
                             </div>
                             <p>Successful students know how to focus on their studies when it matters while also taking breaks when they need them. They can manage their time wisely, stick to meaningful study schedules, and make the most of their time in the classroom. In the process, successful students also know how to have a good time, and love gaining knowledge as much as they enjoy getting stellar grades.</p>
-                            <h4>Let's start you succsess journey ... </h4>
+                            <h5>Let's start you succsess journey ... </h5>
                         </div>
                        
                     </div>

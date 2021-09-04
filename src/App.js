@@ -55,11 +55,11 @@ export default function App() {
           <Route exact path="/coursepage">
             <CoursePage />
           </Route>
-          {CourseObject.showAssignment &&
+          {/* {CourseObject.showAssignment && */}
             <Route exact path="/assignment/:courseId">
               <Assignment />
             </Route>
-          }
+          {/* } */}
           
           {CourseObject.showWhiteBoard &&
             <Route exact path='/board/:courseId'>

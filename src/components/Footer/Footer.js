@@ -10,9 +10,9 @@ function Footer() {
         <div id='containerFooter'>
             <div id="firstRow">
                 <div id="logo">
-                    <img src='https://cdn2.iconfinder.com/data/icons/ui-kit/100/icon_checked-512.png' width="80" height="80" />
+                    <img src='https://cdn2.iconfinder.com/data/icons/ui-kit/100/icon_checked-512.png' width="60" height="60" />
                     <div id="firstDiv">
-                        <h1 class="h1Style">Pro Academy</h1>
+                        <h1 class="h1Style">Prof Academy</h1>
                         <p class='paraghStyle'>An online academic website that facilitates the educational process.</p>
                     </div>
                 </div>
@@ -38,10 +38,10 @@ function Footer() {
 
             <div id="icons">
                 <ul class="iconsUl">
-                    <a><li><FaFacebook size='40' color='white' /></li></a>
-                    <a><li><AiFillTwitterCircle size='50' color='white' /></li></a>
-                    <a><li><AiFillGoogleCircle size='50' color='white' /></li></a>
-                    <a><li><AiFillInstagram size='50' color='white' /></li></a>
+                    <a><li><FaFacebook size='34' color='white' /></li></a>
+                    <a><li><AiFillTwitterCircle size='37' color='white' /></li></a>
+                    <a><li><AiFillGoogleCircle size='37' color='white' /></li></a>
+                    <a><li><AiFillInstagram size='37' color='white' /></li></a>
                 </ul>
 
             </div>

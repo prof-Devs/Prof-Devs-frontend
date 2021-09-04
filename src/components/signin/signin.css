@@ -1,13 +1,11 @@
-/* body{
-    background-color: whitesmoke;
-}
 
 .container-in{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 10rem;
+    margin-bottom: 4rem;
 }
 
 .parent-in{
@@ -55,4 +53,18 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
     margin-right: 1rem ;
-} */
+}
+
+.icons .icon{
+    color: rgba(0, 0, 0, 0.705);
+    font-size: 3rem;
+    border: 0.1px solid gainsboro;
+    border-radius: 1.5rem;
+    margin-right: 15px;
+    padding: 6px;
+}
+.icons{
+ display: flex;
+ justify-content: center;
+ margin-bottom: 1.5rem;
+}
