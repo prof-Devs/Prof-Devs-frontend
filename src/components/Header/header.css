@@ -76,3 +76,34 @@ a{
  #logoa{
      padding: 0 0;
  }
+ #signOut{
+    background-color: red;
+    transition:all 0.3s ease-in-out;
+    border-radius: 7px;
+    padding: 13px 23px;
+ }
+ #signOut li{
+    color: white;
+ }
+ /* #signOut:hover {
+    background-color: #33b292d2;
+    font-weight: bold;
+ } */
+ #signOut:hover li{
+    color: rgba(0, 0, 0, 0.575);
+    background-color: #33b292d2;
+ }
+ #signOut:hover button{
+    /* color: rgba(0, 0, 0, 0.575); */
+    background-color: #33b292d2;
+ }
+ #signOut:hover {
+    /* color: rgba(0, 0, 0, 0.575); */
+    background-color: #33b292d2;
+ }
+
+ #signOut button{
+    border: none;
+    background-color: red;
+ }
+

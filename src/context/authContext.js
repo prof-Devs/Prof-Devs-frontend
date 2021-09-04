@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from "react-router-dom";
 import cookie from 'react-cookies';
 import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import base64 from 'base-64';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 const API = 'https://profdev-academy.herokuapp.com';
 export const AuthContext = React.createContext();
@@ -11,6 +13,9 @@ export default function Auth(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [token, setToken] = useState(null);
+  const history = useHistory();
+
+  // const handlerClick = () => history.push(`/`);
 
   useEffect(() => {
     let token = cookie.load('auth');
@@ -67,7 +72,13 @@ export default function Auth(props) {
   };
 
   function signOut() {
+    // <Link to="/" />
     setLoginState(false, null, {});
+    // handlerClick();
+    // history.push("/")
+    // setTimeout(() => {
+    //   history.push('/');
+    // }, 1000);
   };
 
   const state = {
