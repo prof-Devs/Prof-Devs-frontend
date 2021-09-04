@@ -62,15 +62,15 @@ function CoursePage() {
 
                     <div id="titlewrapper">
                         <h1 id="h1Styling">Course name</h1>
-                        <h4 id="pStyling">Course description</h4>
+                        <h5 id="pStyling">Course description</h5>
                     </div>
 
                     <div id="leftRight">
 
                         <div id="buttonsStyle">
-                            <button title="Create new assignment"><MdAssignment size="50" onClick={CourseObject.handleAssignmentShow} /></button>
+                            <button title="Create new assignment"><MdAssignment size="40" onClick={CourseObject.handleAssignmentShow} /></button>
                             <AssignmentModal />
-                            <button title="Create new quiz"><IoIosCreate size="50" onClick={CourseObject.handleShow} /></button>
+                            <button title="Create new quiz"><IoIosCreate size="40" onClick={CourseObject.handleShow} /></button>
                             <QuizModal />
                         </div>
 
