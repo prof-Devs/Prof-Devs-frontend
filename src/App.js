@@ -5,7 +5,8 @@ import {
   Switch,
   Route,
   Redirect,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
 
 import Header from './components/Header/Header';
@@ -21,84 +22,83 @@ import AboutUs from './components/aboutus/AboutUs';
 import Quiz from "./components/Quiz/Quiz";
 import { CourseContextProv } from './context/CourseContext';
 import { AuthContext } from './context/authContext';
+import NotFound from './components/notfound/NotFound';
 // import CourseContext from './context/CourseContext';
 
 export default function App() {
+
   const CourseObject = useContext(CourseContextProv);
   const AuthObject = useContext(AuthContext);
   console.log('log ll show', CourseObject.showWhiteBoard);
   console.log('logIn', AuthObject.loggedIn);
-  // const [log, setlog] = useState(false);
-  // useEffect(() => {
-  //   setlog(AuthObject.loggedIn);
-  // }, [AuthObject.loggedIn]);
+  const [log, setlog] = useState(false);
+  
+  useEffect(() => {
+    setlog(AuthObject.loggedIn);
 
-  // console.log('log', log);
+  }, [AuthObject.loggedIn]);
+
+
+  console.log('AuthObject.loggedIn', AuthObject.loggedIn);
 
   return (
 
     <Router>
 
-      <Header />
-
+      <Header logged={AuthObject.loggedIn}/>
+      <br />
+   
       <Switch>
 
-          {/* {!AuthObject.loggedIn && */}
-        <Route exact path="/">
-            <Home />
-        </Route>
-          {/* } */}
 
-        {!AuthObject.loggedIn &&
-          <>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-            <Route exact path="/signin">
-              <Signin />
-            </Route>
-          </>
-        }
+        <Route exact path="/">
+          <Home />
+        </Route>
+
+
+        <Route exact path="/signup">
+          <Signup logged={AuthObject.loggedIn} />
+        </Route>
+
+
+        <Route exact path="/signin">
+          <Signin logged={AuthObject.loggedIn}/>
+        </Route>
+
 
         <Route exact path="/aboutUs">
           <AboutUs />
         </Route>
 
 
-        <Route exact path="/mycourses" component={AuthObject.loggedIn && MyCourse} >
 
+        <Route path="/mycourses" >
+          <MyCourse logged={AuthObject.loggedIn} />
         </Route>
 
-        <Route path="/coursepage">
-          {AuthObject.loggedIn ? (
-            <CoursePage />
-          )
-            // <Redirect to="/coursepage" render={()=>(<CoursePage />)}/>
-            : 
-            <Link to={{ pathname: '/' }}/>
-            // (
-              // <Home />
-            // )
-            // <Redirect to="/" render={()=>(<Home/>)}/>
-          }
+        <Route path="/coursepage/:courseId">
+          <CoursePage  logged={AuthObject.loggedIn} />
         </Route>
 
 
-        <Route exact path="/assignment/:courseId"> component={AuthObject.loggedIn && <Assignment />}
+        <Route path="/assignment/:courseId/:assignmentId">
+          <Assignment logged={AuthObject.loggedIn} />
         </Route>
 
-        {CourseObject.showWhiteBoard &&
+
           <Route exact path='/board/:courseId'>
-            <Board />
+            <Board logged={AuthObject.loggedIn} />
           </Route>
-        }
-
-        {CourseObject.showQuiz &&
-          <Route exact path="/quiz/:courseId">
-
-            <Quiz />
+        
+       
+          <Route exact path="/quiz/:courseId/:quizId">
+            <Quiz logged={AuthObject.loggedIn} />
           </Route>
-        }
+        
+
+        <Route path='*'>
+          <NotFound />
+        </Route>
 
       </Switch>
       <Footer />

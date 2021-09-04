@@ -20,9 +20,9 @@ function Footer() {
                 <div id="secondDiv">
                     <h1 class="h1Style">Explore</h1>
                     <ul class="ulStyle">
-                        <a href="/signup"><li>Sign Up</li></a>
+                        {/* <a href="/signup"><li>Sign Up</li></a>
                         <a href="/signin"> <li>Sign In</li></a>
-                        <a><li>About Us</li></a>
+                        <a><li>About Us</li></a> */}
                     </ul>
                 </div>
 
@@ -38,10 +38,10 @@ function Footer() {
 
             <div id="icons">
                 <ul class="iconsUl">
-                    <a><li><FaFacebook size='34' color='white' /></li></a>
+                    {/* <a><li><FaFacebook size='34' color='white' /></li></a>
                     <a><li><AiFillTwitterCircle size='37' color='white' /></li></a>
                     <a><li><AiFillGoogleCircle size='37' color='white' /></li></a>
-                    <a><li><AiFillInstagram size='37' color='white' /></li></a>
+                    <a><li><AiFillInstagram size='37' color='white' /></li></a> */}
                 </ul>
 
             </div>

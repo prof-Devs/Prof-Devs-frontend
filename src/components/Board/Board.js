@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import io from 'socket.io-client';
+import { Redirect } from "react-router-dom";
+
 import './board.css';
 
 
-const Board = () => {
+const Board = (props) => {
   const canvasRef = useRef(null);
   const colorsRef = useRef(null);
   const socketRef = useRef();
@@ -44,7 +46,14 @@ const Board = () => {
       context.moveTo(x0, y0);
       context.lineTo(x1, y1);
       context.strokeStyle = color;
-      context.lineWidth = 2;
+      if (context.strokeStyle === '#ffffff') {
+        console.log('inside if');
+        context.lineWidth = 25;
+      }
+      else {
+
+        context.lineWidth = 2;
+      }
       context.stroke();
       context.closePath();
 
@@ -86,7 +95,7 @@ const Board = () => {
 
     const throttle = (callback, delay) => {
       let previousCall = new Date().getTime();
-      return function() {
+      return function () {
         const time = new Date().getTime();
 
         if ((time - previousCall) >= delay) {
@@ -127,32 +136,38 @@ const Board = () => {
     }
 
 
-    socketRef.current = io.connect('https://profdev-academy.herokuapp.com',{transports :['websocket']});
+    socketRef.current = io.connect('https://profdev-academy.herokuapp.com', { transports: ['websocket'] });
     socketRef.current.on('drawing', onDrawingEvent);
   }, []);
 
   // ------------- The Canvas and color elements --------------------------
 
+  if (!props.logged) {
+    return <Redirect to="/" />
+  }
+
   return (
     <>
-    <div id="stylingBoard">
-    <canvas ref={canvasRef} className="whiteboard" />
-      <div ref={colorsRef} className="colors">
-        <div className="color black" />
-        <div className="color red" />
-        <div className="color green" />
-        <div className="color blue" />
-        <div className="color pink" />
-        <div className="color yellow" />
-        <div className="color grey" />
-        <div className="color lightBlue" />
-        <div className="color cyan" />
-        <div className="color purple" />
+      <div id="stylingBoard">
+        <canvas ref={canvasRef} className="whiteboard" />
+        <div ref={colorsRef} className="colors">
+          <div className="color black" />
+          <div className="color red" />
+          <div className="color green" />
+          <div className="color blue" />
+          <div className="color pink" />
+          <div className="color yellow" />
+          <div className="color grey" />
+          <div className="color lightBlue" />
+          <div className="color cyan" />
+          <div className="color purple" />
+          <div className="color white" />
+
+        </div>
+
       </div>
 
-    </div>
-     
-      </>
+    </>
   );
 };
 

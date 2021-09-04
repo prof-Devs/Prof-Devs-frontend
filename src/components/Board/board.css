@@ -10,10 +10,13 @@
     right: 0;
     bottom: 0;
     top: 5%;
+    background-color: white;
   }
   
   .colors {
     position: fixed;
+    margin-top: 60px;
+
   }
   
   .color {
@@ -27,6 +30,8 @@
   #stylingBoard{
     width:50%;
     height: 400px;
+    background-color: white;
+
   }
   .color.black { background-color: black; }
   .color.red { background-color: red; }
@@ -38,6 +43,9 @@
   .color.cyan { background-color: rgb(9, 109, 96); }
   .color.lightBlue { background-color: rgb(114, 174, 235); }
   .color.purple { background-color: rgb(87, 17, 128); }
+  .color.white { background-color: rgb(255, 255, 255); border: 2px solid black;  height: 48px;
+    width: 100px; border-radius: 5px; background-color: rgb(245, 248, 248);}
+
 
   /* #stylingBoard  div{
     width:100%
