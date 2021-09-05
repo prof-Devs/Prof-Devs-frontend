@@ -49,7 +49,7 @@ const Board = (props) => {
       context.strokeStyle = color;
       if (context.strokeStyle === '#ffffff') {
         console.log('inside if');
-        context.lineWidth = 25;
+        context.lineWidth = 40;
       }
       else {
 
