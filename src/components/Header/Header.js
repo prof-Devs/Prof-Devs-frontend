@@ -6,10 +6,8 @@ export class Header extends Component {
     return (
       <header id='container'>
         <div id='imageWrapper'>
-
          <a id='logoa' href='/'><img height='60px' src={logo} /></a>
         </div>
-        
         <div id='div'>
           <ul >
             <a href='/'><li>Home</li></a>
@@ -18,7 +16,6 @@ export class Header extends Component {
             <a href='/signin' id='signIn'> <li>Sign in</li></a>
           </ul>
         </div>
-
       </header>
     )
   }

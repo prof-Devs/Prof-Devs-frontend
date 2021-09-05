@@ -20,6 +20,7 @@ import AboutUs from './components/aboutus/AboutUs';
 import Quiz from "./components/Quiz/Quiz";
 import { CourseContextProv } from './context/CourseContext';
 // import CourseContext from './context/CourseContext';
+import Course from './components/creating/Course'
 
 export default function App() {
   const CourseObject = useContext(CourseContextProv)
@@ -33,10 +34,12 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+          {/* <MyCourse /> */}
         </Route>
 
         <Route exact path="/signin">
           <Signin />
+          <Course/>
         </Route>
 
         <Route exact path="/signup">

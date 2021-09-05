@@ -4,13 +4,15 @@ import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import base64 from 'base-64';
 import axios from 'axios';
-const API = 'https://profdev-academy.herokuapp.com';
+const API = 'http://localhost:3001';
 export const AuthContext = React.createContext();
 
 export default function Auth(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [token, setToken] = useState(null);
+  const [role, setRole] = useState('');
+
 
   useEffect(() => {
     let token = cookie.load('auth');
@@ -36,16 +38,41 @@ export default function Auth(props) {
   }
 
   async function signIn(email, password) {
-    try {
-      const response = await superagent
-        .post(`${API}/signin/user`)
-        .set('authorization',
-          `Basic ${base64.encode(`${email}:${password}`)}`
-        );
-      validateToken(response.body.token);
-    } catch (error) {
-      console.error('Login Error', error.message);
-      alert('Incorrect Email Or Password');
+    const allData = await axios.get('http://localhost:3001/getUsers');
+    console.log(allData);
+    const user = allData.data.filter((user, idx) => {
+      return (user.email === email);
+    });
+    if (user[0]) {
+      setRole(user[0].role);
+      console.log(role);
+      if (user[0].role === 'user') {
+        try {
+          const response = await superagent
+            .post(`${API}/signin/user`)
+            .set('authorization',
+              `Basic ${base64.encode(`${email}:${password}`)}`
+            );
+          console.log(response.body);
+          validateToken(response.body.token);
+        } catch (error) {
+          console.error('Login Error', error.message);
+          alert('Incorrect Email Or Password');
+        }
+      } else if (user[0].role === 'editor' || user[0].role === 'admin') {
+        try {
+          const response = await superagent
+            .post(`${API}/signin/teacher`)
+            .set('authorization',
+              `Basic ${base64.encode(`${email}:${password}`)}`
+            );
+          console.log(response.body);
+          validateToken(response.body.token);
+        } catch (error) {
+          console.error('Login Error', error.message);
+          alert('Incorrect Email Or Password');
+        }
+      }
     }
   };
 
@@ -78,6 +105,7 @@ export default function Auth(props) {
     signIn,
     signUp,
     signOut,
+    role,
   };
   return (
     <AuthContext.Provider value={state}>
