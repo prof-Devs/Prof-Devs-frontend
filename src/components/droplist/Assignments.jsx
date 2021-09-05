@@ -1,25 +1,48 @@
+import React, { useContext, useState, useEffect } from 'react'
+import { Modal, Button, Table, Form } from "react-bootstrap";
 import React,{useContext} from 'react'
-import { Modal,  Table } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CourseContextProv } from '../../context/CourseContext';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FaRegEdit } from 'react-icons/fa';
+import { AuthContext } from "../../context/authContext";
+import { DropContext } from "../../context/dropListContext";
+import axios from 'axios'
 import './dropList.css'
 
 export default function Assignments() {
   let  tbodyTable=  document.getElementsByClassName('hiddenID');
 
     const CourseObject = useContext(CourseContextProv);
+    const authContext = useContext(AuthContext);
+    const listContext = useContext(DropContext);
+
+    const [showForm, setShowForm] = useState(false);
+    const [showTable, setShowTable] = useState(true);
+    const [updateID, setUpdateID] = useState('');
+
+
+
+    function handleClose() {
+        setShowTable(false);
+    }
+    function handleClose1() {
+        setShowForm(false);
+        setShowTable(false);
+    }
+    function handleForm() {
+        setShowForm(true);
+        setShowTable(false);
+        // setUpdateID(id)
+        // console.log('state',id);
+    }
+
+
     return (
         <>
-            {/* <Button variant="primary" onClick={handleShow}>
-                Assignments
-            </Button> */}
-           
-            {/* showTableDropAss,handleCloseDropAss,handleFormDropAss,handleClose1DropAss */}
-            <Modal size="lg" centered="true" show={CourseObject.showTableDropAss} onHide={CourseObject.handleCloseDropAss} animation={false}>
+            <Modal size="lg" centered="true" show={showTable} onHide={handleClose} animation={false}>
                 <Modal.Body>
-                <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title id="contained-modal-title-vcenter">
                         <h1>* See assignments *</h1>
                     </Modal.Title>
                     <Table responsive>
@@ -32,31 +55,21 @@ export default function Assignments() {
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody class='tbodyTable'>
-                            <tr >
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td class='hiddenID'>019238139182312908</td>
-                                <td onClick={CourseObject.handleFormDropAss}><FaRegEdit /></td>
-                                <td><RiDeleteBin6Line /></td>
+                        {listContext.allAssignments.map(element => {
+                            return (
+                                <tbody>
+                                    <tr>
+                                        <td>{element.title}</td>
+                                        <td>{element.text}</td>
+                                        <td>{element.due_date}</td>
+                                        <td><FaRegEdit onClick={handleForm(element._id)} /></td>
+                                        <td><RiDeleteBin6Line onClick={() => listContext.deleteAssignment(element._id)}/></td>
+                                    </tr>
+                                </tbody>
+                            )
+                        })
+                        }
 
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td onClick={CourseObject.handleFormDropAss}><FaRegEdit /></td>
-                                <td><RiDeleteBin6Line /></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td onClick={CourseObject.handleFormDropAss}><FaRegEdit /></td>
-                                <td><RiDeleteBin6Line /></td>
-                            </tr>
-                        </tbody>
                     </Table>
                 </Modal.Body>
 
@@ -64,16 +77,35 @@ export default function Assignments() {
                     Close
                 </Button> */}
             </Modal>
-            {/* <Modal show={CourseObject.showFormDropAss} onHide={CourseObject.handleClose1DropAss} animation={false}>
-                <Form>
-                    <Form.Label>
-                        helloo
-                    </Form.Label>
-                    <Form.Control>
-                    </Form.Control>
-                    <Button onClick={CourseObject.handleClose1DropAss}>Save Changes</Button>
-                </Form>
-            </Modal> */}
+            <Modal show={showForm} onHide={handleClose1} animation={false}>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    <h1>* Edit The Assignment *</h1>
+                </Modal.Title>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Control className="ass-title" type="text" placeholder="Assignment Title" onChange={listContext.handleChangeAssignment} />
+                        </Form.Group>
+
+                        <Form.Group >
+                            <Form.Control className="ass-text" type="text" placeholder="Assignment Text" onChange={listContext.handleChangeAssignment} />
+                        </Form.Group>
+                        <div className="row-ass">
+                            <div>
+                                <Form.Group>
+                                    <Form.Label>Due Date</Form.Label>
+                                    <Form.Control className="ass-date" type="date" onChange={listContext.handleChangeAssignment} />
+                                </Form.Group>
+                            </div>
+                            <div>
+                                {/* <Button id="ass-button" onClick={() => { listContext.updateAssignmentHandler(updateID); handleClose1(); }}>
+                                    Edit Assignment
+                                </Button> */}
+                            </div>
+                        </div>
+                    </Form>
+                </Modal.Body>
+            </Modal>
         </>
     )
 }

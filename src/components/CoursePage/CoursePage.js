@@ -8,15 +8,20 @@ import Chat from '../chat/Chat';
 import { MdAssignment } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
 import { AuthContext } from '../../context/authContext';
+import { DropContext } from "../../context/dropListContext";
+import axios from 'axios';
 import './CoursePage.css'
 import { CourseContextProv } from '../../context/CourseContext';
 import { useParams, useHistory } from 'react-router-dom';
 
+
 function CoursePage(props) {
+    const listContext = useContext(DropContext);
+    const [courseData, setCourseData] = useState({})
 
-const AuthObject = useContext(AuthContext);
-console.log(AuthObject.user,'hiiiiiiiiiii');
 
+    const AuthObject = useContext(AuthContext);
+    console.log(AuthObject.user, 'hiiiiiiiiiii');
 
 
 
@@ -33,7 +38,6 @@ console.log(AuthObject.user,'hiiiiiiiiiii');
 
     function handleChange(e) {
         setdropList((e.target.value));
-
         CourseObject.setshowTableDropAss(true);
         CourseObject.setshowTableDropMarks(true);
     };
@@ -59,11 +63,16 @@ console.log(AuthObject.user,'hiiiiiiiiiii');
     //     CourseObject.setShowQuiz(true);
     // }
 
-    // useEffect(() => {
-    //     showHandler();
+    useEffect(() => {
+        listContext.getAssignmentsHandler();
+    
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
+    // useEffect(() => {
+    //     listContext.getAssignmentsHandler();
+    
+    // }, [listContext.allAssignments])
 
 
 
