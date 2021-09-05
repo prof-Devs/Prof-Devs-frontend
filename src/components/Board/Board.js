@@ -6,6 +6,7 @@ import './board.css';
 
 
 const Board = (props) => {
+  let canvasWrapper = document.getElementsByClassName('canvasWrapper');
   const canvasRef = useRef(null);
   const colorsRef = useRef(null);
   const socketRef = useRef();
@@ -80,6 +81,7 @@ const Board = (props) => {
 
     const onMouseMove = (e) => {
       if (!drawing) { return; }
+
       drawLine(current.x, current.y, e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY, current.color, true);
       current.x = e.clientX || e.touches[0].clientX;
       current.y = e.clientY || e.touches[0].clientY;
@@ -121,8 +123,11 @@ const Board = (props) => {
     // -------------- make the canvas fill its parent component -----------------
 
     const onResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
     };
 
     window.addEventListener('resize', onResize, false);
@@ -148,24 +153,24 @@ const Board = (props) => {
 
   return (
     <>
-      <div id="stylingBoard">
+      <div className='canvasWrapper' id="stylingBoard">
         <canvas ref={canvasRef} className="whiteboard" />
-        <div ref={colorsRef} className="colors">
-          <div className="color black" />
-          <div className="color red" />
-          <div className="color green" />
-          <div className="color blue" />
-          <div className="color pink" />
-          <div className="color yellow" />
-          <div className="color grey" />
-          <div className="color lightBlue" />
-          <div className="color cyan" />
-          <div className="color purple" />
-          <div className="color white" />
-
-        </div>
+      </div>
+      <div ref={colorsRef} className="colors">
+        <div className="color black" />
+        <div className="color red" />
+        <div className="color green" />
+        <div className="color blue" />
+        <div className="color pink" />
+        <div className="color yellow" />
+        <div className="color grey" />
+        <div className="color lightBlue" />
+        <div className="color cyan" />
+        <div className="color purple" />
+        <div className="color white" />
 
       </div>
+
 
     </>
   );

@@ -1,7 +1,7 @@
 import React, { Component, useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
 import './header.css';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link ,Redirect} from 'react-router-dom';
 import logo from '../Header/logo_academy.PNG';
 
 function Header(props) {
@@ -10,6 +10,9 @@ function Header(props) {
 
   //  const handlerClick = () => history.push(`/`);
 
+  function redirect() {
+    <Redirect to='/'/>
+  } 
   return (
     <header id='container'>
       <div id='imageWrapper'>
@@ -32,7 +35,7 @@ function Header(props) {
           <>
             <ul>
               <Link className='HeaderLink' to='/'>Home</Link>
-              <Link className='HeaderLink' to="/mycourses" > Courses</Link>
+              <Link className='HeaderLink' to="/mycourses/098098678" > Courses</Link>
               <Link className='HeaderLink' to='/aboutUs'>About Us</Link>
               <button id='signOut' onClick={AuthObject.signOut}>Sign Out</button>
             </ul>

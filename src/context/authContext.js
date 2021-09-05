@@ -4,26 +4,20 @@ import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import base64 from 'base-64';
 import axios from 'axios';
-const API = 'http://localhost:3001';
+const API = 'https://profdev-academy.herokuapp.com';
 export const AuthContext = React.createContext();
-
 export default function Auth(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [token, setToken] = useState(null);
   const [role, setRole] = useState('');
-
-
   // const handlerClick = () => history.push(`/`);
-
   useEffect(() => {
     let token = cookie.load('auth');
     validateToken(token);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   function validateToken(token) {
-
     if (token !== 'undefined' && token !== 'null') {
       let user = jwt.decode(token);
       setLoginState(true, token, user);
@@ -32,16 +26,14 @@ export default function Auth(props) {
       console.log('Validation Token Error');
     }
   };
-
   function setLoginState(loggedIn, token, user) {
     cookie.save('auth', token);
     setToken(token);
     setUser({ user });
     setLoggedIn(loggedIn);
   }
-
   async function signIn(email, password) {
-    const allData = await axios.get('http://localhost:3001/getUsers');
+    const allData = await axios.get('https://profdev-academy.herokuapp.com/getUsers');
     console.log(allData);
     const user = allData.data.filter((user, idx) => {
       return (user.email === email);
@@ -78,7 +70,6 @@ export default function Auth(props) {
       }
     }
   };
-
   async function signUp(age, firstName, gender, lastName, password, email) {
     try {
       let response = await axios
@@ -95,12 +86,9 @@ export default function Auth(props) {
       console.error('Sign Up Error', error.message);
     }
   };
-
   function signOut() {
     setLoginState(false, null, {});
-
   }
-
   const state = {
     loggedIn,
     user,
@@ -111,7 +99,6 @@ export default function Auth(props) {
     signOut,
     role,
     token
-    
   };
   return (
     <AuthContext.Provider value={state}>
@@ -119,5 +106,3 @@ export default function Auth(props) {
     </AuthContext.Provider>
   )
 }
-
-
