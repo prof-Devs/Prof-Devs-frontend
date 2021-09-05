@@ -71,7 +71,7 @@ export default function Auth(props) {
 
   function signOut() {
     setLoginState(false, null, {});
-    window.location.reload();
+    window.location.reload()
 
   }
 

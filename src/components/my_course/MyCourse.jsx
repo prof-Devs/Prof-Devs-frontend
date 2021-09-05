@@ -1,12 +1,58 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./MyCourse.scss";
-import { Redirect ,Link,useParams} from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
+// import { useParams } from "react-router";
+// import axios from 'axios';
+import cookie from "react-cookies";
+
+import { Redirect, Link } from "react-router-dom";
+
+const host = "http://localhost:3001";
+const token = cookie.load("auth");
 
 function MyCourse(props) {
-  let {param} = useParams();
-  console.log(param,'params()');
+  const authContext = useContext(AuthContext);
+  const [data, setData] = useState([]);
+
+  useEffect(async () => {
+    
+    console.log(authContext.role);
+
+    if (authContext.role === "user") {
+      await fetch(`${host}/course/student`, {
+        method: "get",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-origin": host,
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(async (c) => {
+        let result = await c.json();
+        setData([...data, result]);
+        console.log(data);
+      });
+    } else if (authContext.role === "editor" || authContext.role === "admin") {
+      console.log("hellooo");
+
+      await fetch(`${host}/course/teacher`, {
+        method: "get",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-origin": host,
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(async (c) => {
+        let result = await c.json();
+        setData([...data, result]);
+        console.log(data);
+      });
+    }
+  }, [authContext.role]);
+
   if (!props.logged) {
-      return <Redirect to="/" />
+    return <Redirect to="/" />;
   }
 
   return (
@@ -54,7 +100,8 @@ function MyCourse(props) {
             />
           </svg>
         </span>
-      </Link> <Link to="/coursepage/0928130128" class="data-card">
+      </Link>{" "}
+      <Link to="/coursepage/0928130128" class="data-card">
         <h3>Music</h3>
         <h4>Ibrahim Abuawad</h4>
         <p>Music is my favorate subject</p>
@@ -75,7 +122,8 @@ function MyCourse(props) {
             />
           </svg>
         </span>
-      </Link> <Link to="/coursepage/0928130128" class="data-card">
+      </Link>{" "}
+      <Link to="/coursepage/0928130128" class="data-card">
         <h3>Music</h3>
         <h4>Ibrahim Abuawad</h4>
         <p>Music is my favorate subject</p>
@@ -96,7 +144,8 @@ function MyCourse(props) {
             />
           </svg>
         </span>
-      </Link> <Link to="/coursepage/0928130128" class="data-card">
+      </Link>{" "}
+      <Link to="/coursepage/0928130128" class="data-card">
         <h3>Music</h3>
         <h4>Ibrahim Abuawad</h4>
         <p>Music is my favorate subject</p>
@@ -117,7 +166,8 @@ function MyCourse(props) {
             />
           </svg>
         </span>
-      </Link> <Link to="/coursepage/0928130128" class="data-card">
+      </Link>{" "}
+      <Link to="/coursepage/0928130128" class="data-card">
         <h3>Music</h3>
         <h4>Ibrahim Abuawad</h4>
         <p>Music is my favorate subject</p>
@@ -138,7 +188,8 @@ function MyCourse(props) {
             />
           </svg>
         </span>
-      </Link> <Link to="/coursepage/0928130128" class="data-card">
+      </Link>{" "}
+      <Link to="/coursepage/0928130128" class="data-card">
         <h3>Music</h3>
         <h4>Ibrahim Abuawad</h4>
         <p>Music is my favorate subject</p>
@@ -159,7 +210,7 @@ function MyCourse(props) {
             />
           </svg>
         </span>
-      </Link> 
+      </Link>
       <Link to="/coursepage/0928130128" class="data-card">
         <h3>Music</h3>
         <h4>Ibrahim Abuawad</h4>
@@ -184,7 +235,6 @@ function MyCourse(props) {
       </Link>
     </section>
   );
-
 }
 
 export default MyCourse;

@@ -20,6 +20,7 @@ const [courseData, setCourseData] = useState({})
 
 const AuthObject = useContext(AuthContext);
 console.log(AuthObject.user,'hiiiiiiiiiii');
+
 function get() {
     
 }
