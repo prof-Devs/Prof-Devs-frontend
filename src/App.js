@@ -24,6 +24,7 @@ import { CourseContextProv } from './context/CourseContext';
 import { AuthContext } from './context/authContext';
 import NotFound from './components/notfound/NotFound';
 // import CourseContext from './context/CourseContext';
+import Course from './components/creating/Course'
 
 export default function App() {
 
@@ -53,6 +54,7 @@ export default function App() {
 
         <Route exact path="/">
           <Home />
+          {/* <MyCourse /> */}
         </Route>
 
 
