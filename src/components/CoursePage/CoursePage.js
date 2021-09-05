@@ -8,13 +8,23 @@ import Chat from '../chat/Chat';
 import { MdAssignment } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
 import { Redirect } from "react-router-dom";
-
+import { AuthContext } from '../../context/authContext';
+import axios from 'axios';
 import './CoursePage.css'
 import { CourseContextProv } from '../../context/CourseContext';
 import { useParams, useHistory } from 'react-router-dom';
-//<button onclick="location.href='page'">
+import Board from '../Board/Board';
 
 function CoursePage(props) {
+const [courseData, setCourseData] = useState({})
+
+const AuthObject = useContext(AuthContext);
+console.log(AuthObject.user,'hiiiiiiiiiii');
+function get() {
+    
+}
+
+
     let { courseId } = useParams();
 
     console.log('aaaaaaaaaaaaaaaaaaaa', courseId);
@@ -22,7 +32,7 @@ function CoursePage(props) {
     const CourseObject = useContext(CourseContextProv);
 
 
-// popup
+    // popup
 
     const [dropList, setdropList] = useState('');
 
@@ -33,17 +43,17 @@ function CoursePage(props) {
         CourseObject.setshowTableDropMarks(true);
     };
 
-// ....................................................................
+    // ....................................................................
 
 
 
-    // const history = useHistory();
-    // let boardHandleClick;
+    const history = useHistory();
+    let boardHandleClick;
     // let assignmentHandleClick;
     // let quizHandleClick;
 
     // // if (courseId) {
-    // boardHandleClick = () => history.push(`/board/${courseId}`);
+    boardHandleClick = () => history.push(`/board/${courseId}`);
     // assignmentHandleClick = () => history.push(`/assignment/${courseId}`);
     // quizHandleClick = () => history.push(`/quiz/${courseId}`);
     // // }
@@ -86,6 +96,7 @@ function CoursePage(props) {
                             <QuizModal />
                         </div>
 
+                        {/* <Board /> */}
                         <div id="dropList">
                             <label id="lableStyle" >Choose action:</label>
                             <select name="action" id="action" onChange={handleChange} value={dropList}>
@@ -98,8 +109,7 @@ function CoursePage(props) {
 
                     </div>
                     <div id='buttonCsswrapper'>
-
-                        <button type="button" id='buttonCss' >Go to Whiteboard!</button>
+                        <button type="button" onClick={boardHandleClick} id='buttonCss' >Go to Whiteboard!</button>
                     </div>
                 </div>
 
@@ -116,7 +126,7 @@ function CoursePage(props) {
             {dropList === 'See Quizes' &&
                 <SeeQuiz />
             }
-            
+
             {dropList === 'Students Marks' &&
                 <SeeMarks />
             }

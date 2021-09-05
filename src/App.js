@@ -72,7 +72,7 @@ export default function App() {
 
 
 
-        <Route path="/mycourses" >
+        <Route path="/mycourses/:id" >
           <MyCourse logged={AuthObject.loggedIn} />
         </Route>
 

@@ -1,8 +1,10 @@
 import React from "react";
 import "./MyCourse.scss";
-import { Redirect ,Link} from "react-router-dom";
+import { Redirect ,Link,useParams} from "react-router-dom";
 
 function MyCourse(props) {
+  let {param} = useParams();
+  console.log(param,'params()');
   if (!props.logged) {
       return <Redirect to="/" />
   }
