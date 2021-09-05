@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthContext from './context/authContext';
 import CourseContext from './context/CourseContext';
+import DropContext from "./context/dropListContext";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,9 +20,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <AuthContext>
-        <CourseContext>
-          <App />
-        </CourseContext>
+        <DropContext>
+          <CourseContext>
+            <App />
+          </CourseContext>
+        </DropContext>
       </AuthContext>
     </Router>
   </React.StrictMode>,

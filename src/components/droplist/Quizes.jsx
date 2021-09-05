@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FaRegEdit } from 'react-icons/fa';
-import FormRange from 'react-bootstrap/esm/FormRange';
 import CourseObject from '../../context/CourseContext';
 import { CourseContextProv } from '../../context/CourseContext';
 
@@ -29,15 +28,14 @@ export default function Assignments() {
 
     function handleClose1() {
         setShowForm(false);
-        setShowTable(true);
+        setShowTable(false);
     }
 
     return (
         <>
-
             <Modal size="lg" centered="true" show={showTable} onHide={handleClose} animation={false}>
                 <Modal.Body>
-                <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title id="contained-modal-title-vcenter">
                         <h1>* See quizes *</h1>
                     </Modal.Title>
                     <Table responsive>
@@ -53,38 +51,60 @@ export default function Assignments() {
                             <tr>
                                 <td>1</td>
                                 <td>3</td>
-                                <td><RiDeleteBin6Line /></td>
                                 <td onClick={handleForm}><FaRegEdit /></td>
+                                <td><RiDeleteBin6Line /></td>
 
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>3</td>
-                                <td><RiDeleteBin6Line /></td>
                                 <td onClick={handleForm}><FaRegEdit /></td>
+                                <td><RiDeleteBin6Line /></td>
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>3</td>
-                                <td><RiDeleteBin6Line /></td>
                                 <td onClick={handleForm}><FaRegEdit /></td>
+                                <td><RiDeleteBin6Line /></td>
                             </tr>
                         </tbody>
                     </Table>
                 </Modal.Body>
-
-                {/* <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button> */}
             </Modal>
             <Modal show={showForm} onHide={handleClose1} animation={false}>
                 <Form>
-                    <Form.Label>
-                    helloo
-                    </Form.Label>
-                    <Form.Control>
-                    </Form.Control>
-                    <Button onClick={handleClose1}>Save Changes</Button>
+                    <Form.Group>
+                        <Form.Control className="ass-title" type="email" placeholder="Quiz Title" />
+                    </Form.Group>
+                    <Form.Text className="counter"> You Added (x) Questions</Form.Text>
+
+                    <Form.Group >
+                        <Form.Control className="q-text" type="text" placeholder="Question" />
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Control className="ass-title" type="text" placeholder="The correct answer" />
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Control className="options" type="text" placeholder="Option-1" />
+                        <Form.Control className="options" type="text" placeholder="Option-2" />
+                        <Form.Control className="options" type="text" placeholder="Option-3" />
+                        <Button id="add-button">Add Question</Button>
+                    </Form.Group>
+
+
+                    <div className="row-ass">
+                        <div>
+                            <Form.Group>
+                                <Form.Label></Form.Label>
+                                <Form.Control className="q-date" type="number" placeholder="Duration (in minutes)" />
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Button id="ass-button" onClick={handleClose1}>
+                                Edit Quiz
+                            </Button>
+                        </div>
+                    </div>
                 </Form>
             </Modal>
         </>
