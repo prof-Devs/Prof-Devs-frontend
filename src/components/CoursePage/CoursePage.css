@@ -7,7 +7,7 @@
 }
 #CourseContainer {
   display: flex;
-  margin: 200px auto;
+  margin: 150px auto ;
   justify-content: space-between;
   width: 90%;
   border: 1px solid rgba(14, 2, 2, 0.096);

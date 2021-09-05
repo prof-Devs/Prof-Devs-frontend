@@ -14,9 +14,12 @@ export default function Auth(props) {
   const [role, setRole] = useState('');
 
 
+  // const handlerClick = () => history.push(`/`);
+
   useEffect(() => {
     let token = cookie.load('auth');
     validateToken(token);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function validateToken(token) {
@@ -95,7 +98,8 @@ export default function Auth(props) {
 
   function signOut() {
     setLoginState(false, null, {});
-  };
+
+  }
 
   const state = {
     loggedIn,
@@ -106,6 +110,8 @@ export default function Auth(props) {
     signUp,
     signOut,
     role,
+    token
+    
   };
   return (
     <AuthContext.Provider value={state}>

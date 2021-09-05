@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  Link,
+  useHistory
 } from "react-router-dom";
 
 import Header from './components/Header/Header';
@@ -19,64 +21,87 @@ import Board from "./components/Board/Board";
 import AboutUs from './components/aboutus/AboutUs';
 import Quiz from "./components/Quiz/Quiz";
 import { CourseContextProv } from './context/CourseContext';
+import { AuthContext } from './context/authContext';
+import NotFound from './components/notfound/NotFound';
 // import CourseContext from './context/CourseContext';
 import Course from './components/creating/Course'
 
 export default function App() {
-  const CourseObject = useContext(CourseContextProv)
-  console.log('log ll show',CourseObject.showWhiteBoard); 
+
+  const CourseObject = useContext(CourseContextProv);
+  const AuthObject = useContext(AuthContext);
+  console.log('log ll show', CourseObject.showWhiteBoard);
+  console.log('logIn', AuthObject.loggedIn);
+  const [log, setlog] = useState(false);
+  
+  useEffect(() => {
+    setlog(AuthObject.loggedIn);
+
+  }, [AuthObject.loggedIn]);
+
+
+  console.log('AuthObject.loggedIn', AuthObject.loggedIn);
 
   return (
 
     <Router>
-      <Header />
 
+      <Header logged={AuthObject.loggedIn}/>
+      <br />
+   
       <Switch>
+
+
         <Route exact path="/">
           <Home />
           {/* <MyCourse /> */}
         </Route>
 
-        <Route exact path="/signin">
-          <Signin />
-          <Course/>
-        </Route>
 
         <Route exact path="/signup">
-          <Signup />
+          <Signup logged={AuthObject.loggedIn} />
         </Route>
-        {/* <CourseContext> */}
+
+
+        <Route exact path="/signin">
+          <Signin logged={AuthObject.loggedIn}/>
+        </Route>
+
 
         <Route exact path="/aboutUs">
           <AboutUs />
         </Route>
 
-          <Route exact path="/mycourses">
-            <MyCourse />
-          </Route>
 
-          <Route exact path="/coursepage">
-            <CoursePage />
+
+        <Route path="/mycourses" >
+          <MyCourse logged={AuthObject.loggedIn} />
+        </Route>
+
+        <Route path="/coursepage/:courseId">
+          <CoursePage  logged={AuthObject.loggedIn} />
+        </Route>
+
+
+        <Route path="/assignment/:courseId/:assignmentId">
+          <Assignment logged={AuthObject.loggedIn} />
+        </Route>
+
+
+          <Route exact path='/board/:courseId'>
+            <Board logged={AuthObject.loggedIn} />
           </Route>
-          {/* {CourseObject.showAssignment && */}
-            <Route exact path="/assignment/:courseId">
-              <Assignment />
-            </Route>
-          {/* } */}
-          
-          {CourseObject.showWhiteBoard &&
-            <Route exact path='/board/:courseId'>
-              <Board />
-            </Route>
-          }
         
-           {CourseObject.showQuiz &&
-            <Route exact path="/quiz/:courseId">
-          
-              <Quiz />
-            </Route>
-          }
-        {/* </CourseContext> */}
+       
+          <Route exact path="/quiz/:courseId/:quizId">
+            <Quiz logged={AuthObject.loggedIn} />
+          </Route>
+        
+
+        <Route path='*'>
+          <NotFound />
+        </Route>
+
       </Switch>
       <Footer />
 

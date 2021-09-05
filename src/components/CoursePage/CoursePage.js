@@ -7,43 +7,22 @@ import SeeMarks from '../droplist/Marks';
 import Chat from '../chat/Chat';
 import { MdAssignment } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
-import Header from '../Header/Header'
+import { Redirect } from "react-router-dom";
+
 import './CoursePage.css'
 import { CourseContextProv } from '../../context/CourseContext';
 import { useParams, useHistory } from 'react-router-dom';
 //<button onclick="location.href='page'">
-import { Link } from "react-router-dom";
 
-function CoursePage() {
+function CoursePage(props) {
     let { courseId } = useParams();
 
     console.log('aaaaaaaaaaaaaaaaaaaa', courseId);
 
     const CourseObject = useContext(CourseContextProv);
 
-    const history = useHistory();
-    let boardHandleClick;
-    let assignmentHandleClick;
-    let quizHandleClick;
 
-    // if (courseId) {
-    boardHandleClick = () => history.push(`/board/${courseId}`);
-    assignmentHandleClick = () => history.push(`/assignment/${courseId}`);
-    quizHandleClick = () => history.push(`/quiz/${courseId}`);
-    // }
-
-    function showHandler() {
-        CourseObject.setShowWhiteBoard(true);
-        CourseObject.setShowAssignment(true);
-        CourseObject.setShowQuiz(true);
-    }
-
-    useEffect(() => {
-        showHandler();
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
+// popup
 
     const [dropList, setdropList] = useState('');
 
@@ -53,6 +32,39 @@ function CoursePage() {
         CourseObject.setshowTableDropAss(true);
         CourseObject.setshowTableDropMarks(true);
     };
+
+// ....................................................................
+
+
+
+    // const history = useHistory();
+    // let boardHandleClick;
+    // let assignmentHandleClick;
+    // let quizHandleClick;
+
+    // // if (courseId) {
+    // boardHandleClick = () => history.push(`/board/${courseId}`);
+    // assignmentHandleClick = () => history.push(`/assignment/${courseId}`);
+    // quizHandleClick = () => history.push(`/quiz/${courseId}`);
+    // // }
+
+    // function showHandler() {
+    //     CourseObject.setShowWhiteBoard(true);
+    //     CourseObject.setShowAssignment(true);
+    //     CourseObject.setShowQuiz(true);
+    // }
+
+    // useEffect(() => {
+    //     showHandler();
+
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
+
+
+
+    if (!props.logged) {
+        return <Redirect to="/" />
+    }
 
     return (
 
@@ -87,7 +99,7 @@ function CoursePage() {
                     </div>
                     <div id='buttonCsswrapper'>
 
-                        <button type="button" id='buttonCss' onClick={boardHandleClick} >Go to Whiteboard!</button>
+                        <button type="button" id='buttonCss' >Go to Whiteboard!</button>
                     </div>
                 </div>
 
