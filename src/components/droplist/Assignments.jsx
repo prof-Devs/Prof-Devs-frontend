@@ -1,16 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Modal, Button, Table, Form } from "react-bootstrap";
+import React,{useContext} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CourseObject from '../../context/CourseContext';
 import { CourseContextProv } from '../../context/CourseContext';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FaRegEdit } from 'react-icons/fa';
 import { AuthContext } from "../../context/authContext";
 import { DropContext } from "../../context/dropListContext";
 import axios from 'axios'
-
+import './dropList.css'
 
 export default function Assignments() {
+  let  tbodyTable=  document.getElementsByClassName('hiddenID');
+
     const CourseObject = useContext(CourseContextProv);
     const authContext = useContext(AuthContext);
     const listContext = useContext(DropContext);
@@ -45,11 +47,11 @@ export default function Assignments() {
                     </Modal.Title>
                     <Table responsive>
                         <thead>
-                            <tr>
+                            <tr >
                                 <th>Assignment Title</th>
                                 <th>Assignment Text</th>
                                 <th>Due Date</th>
-                                <th></th>
+                                <th class='hiddenID'>id</th>
                                 <th></th>
                             </tr>
                         </thead>
