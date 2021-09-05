@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext,  useState } from 'react'
 import AssignmentModal from '../creating/Assignment';
 import QuizModal from '../creating/Quiz';
 import SeeAssignment from '../droplist/Assignments';
@@ -7,23 +7,17 @@ import SeeMarks from '../droplist/Marks';
 import Chat from '../chat/Chat';
 import { MdAssignment } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
-import { Redirect } from "react-router-dom";
 import { AuthContext } from '../../context/authContext';
-import axios from 'axios';
 import './CoursePage.css'
 import { CourseContextProv } from '../../context/CourseContext';
 import { useParams, useHistory } from 'react-router-dom';
-import Board from '../Board/Board';
 
 function CoursePage(props) {
-const [courseData, setCourseData] = useState({})
 
 const AuthObject = useContext(AuthContext);
 console.log(AuthObject.user,'hiiiiiiiiiii');
 
-function get() {
-    
-}
+
 
 
     let { courseId } = useParams();

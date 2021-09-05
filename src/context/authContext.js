@@ -30,7 +30,7 @@ export default function Auth(props) {
 
     const token = cookie.load('auth');
     console.log(pathname, 111)
-    if (arr.includes(pathname)) return
+    if (arr.includes(pathname)) return 
 
 
     if (!token || token == 'null') {
@@ -51,10 +51,12 @@ export default function Auth(props) {
     }
   };
   function setLoginState(loggedIn, token, user) {
+
     cookie.save('auth', token, { path: '/' });
     setToken(token);
     setUser({ user });
     setLoggedIn(loggedIn);
+
   }
   async function signIn(email, password) {
     const allData = await axios.get('https://profdev-academy.herokuapp.com/getUsers');

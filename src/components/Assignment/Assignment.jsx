@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./assignment.css";
-import { Redirect } from "react-router-dom";
 
 
 function Assignment(props) {
