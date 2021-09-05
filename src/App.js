@@ -32,12 +32,7 @@ export default function App() {
   const AuthObject = useContext(AuthContext);
   console.log('log ll show', CourseObject.showWhiteBoard);
   console.log('logIn', AuthObject.loggedIn);
-  const [log, setlog] = useState(false);
-  
-  useEffect(() => {
-    setlog(AuthObject.loggedIn);
 
-  }, [AuthObject.loggedIn]);
 
 
   console.log('AuthObject.loggedIn', AuthObject.loggedIn);
