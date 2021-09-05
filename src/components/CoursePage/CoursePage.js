@@ -73,9 +73,9 @@ function get() {
 
 
 
-    if (!props.logged) {
-        return <Redirect to="/" />
-    }
+    // if (!props.logged) {
+    //     return <Redirect to="/" />
+    // }
 
     return (
 

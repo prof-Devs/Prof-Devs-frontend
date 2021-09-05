@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import base64 from 'base-64';
 import axios from 'axios';
+import { Redirect, Link, useHistory, useLocation } from "react-router-dom";
+
 const API = 'https://profdev-academy.herokuapp.com';
 export const AuthContext = React.createContext();
 export default function Auth(props) {
@@ -11,12 +13,34 @@ export default function Auth(props) {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(null);
   const [role, setRole] = useState('');
+  let history = useHistory();
+
+  const { pathname } = useLocation();
   // const handlerClick = () => history.push(`/`);
   useEffect(() => {
     let token = cookie.load('auth');
     validateToken(token);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const arr =['/','/signup','/signin','/aboutUs']
+  useEffect(() => {
+
+
+    const token = cookie.load('auth');
+    console.log(pathname, 111)
+    if (arr.includes(pathname)) return
+
+
+    if (!token || token == 'null') {
+      console.log('here')
+      history.push('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
+
+
   function validateToken(token) {
     if (token !== 'undefined' && token !== 'null') {
       let user = jwt.decode(token);
@@ -27,7 +51,7 @@ export default function Auth(props) {
     }
   };
   function setLoginState(loggedIn, token, user) {
-    cookie.save('auth', token);
+    cookie.save('auth', token, { path: '/' });
     setToken(token);
     setUser({ user });
     setLoggedIn(loggedIn);
@@ -88,6 +112,7 @@ export default function Auth(props) {
   };
   function signOut() {
     setLoginState(false, null, {});
+    history.push('/');
   }
   const state = {
     loggedIn,

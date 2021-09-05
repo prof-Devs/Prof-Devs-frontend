@@ -5,14 +5,24 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthContext from './context/authContext';
 import CourseContext from './context/CourseContext';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link,
+  useHistory
+} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContext>
-      <CourseContext>
-        <App />
-      </CourseContext>
-    </AuthContext>
+    <Router>
+      <AuthContext>
+        <CourseContext>
+          <App />
+        </CourseContext>
+      </AuthContext>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

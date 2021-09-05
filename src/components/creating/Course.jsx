@@ -8,7 +8,7 @@ import MyCourse from '../my_course/MyCourse';
 import cookie from 'react-cookies';
 
 
-const host = "http://localhost:3001"
+const host = "https://profdev-academy.herokuapp.com"
 const token = cookie.load('auth');
 
 export default function Course() {

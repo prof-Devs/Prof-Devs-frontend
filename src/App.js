@@ -44,7 +44,7 @@ export default function App() {
 
   return (
 
-    <Router>
+    <>
 
       <Header logged={AuthObject.loggedIn}/>
       <br />
@@ -105,7 +105,7 @@ export default function App() {
       </Switch>
       <Footer />
 
-    </Router>
+    </>
   )
 }
 
