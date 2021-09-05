@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 
 import "./quiz.css";
 function Quiz(props) {
-  if (props.logged) {
+
 
     console.log("inside iffffffffff", props.logged);
     return (
@@ -37,9 +37,8 @@ function Quiz(props) {
       </div>
     );
   }
-  console.log("inside elseeeeeeeeeeeee", props.logged);
   
-  return <Redirect to="/" />;
-}
+  // return <Redirect to="/" />;
+
 
 export default Quiz;

@@ -6,9 +6,7 @@ import { Redirect } from "react-router-dom";
 function Assignment(props) {
   const [show, setShow] = useState(false);
   
-  if (!props.logged) {
-    return <Redirect to="/" />
-}
+
 
   return (
     <>

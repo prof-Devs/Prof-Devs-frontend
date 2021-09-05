@@ -147,9 +147,9 @@ const Board = (props) => {
 
   // ------------- The Canvas and color elements --------------------------
 
-  if (!props.logged) {
-    return <Redirect to="/" />
-  }
+  // if (!props.logged) {
+  //   return <Redirect to="/" />
+  // }
 
   return (
     <>

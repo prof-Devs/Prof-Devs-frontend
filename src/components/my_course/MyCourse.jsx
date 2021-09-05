@@ -5,55 +5,69 @@ import { AuthContext } from "../../context/authContext";
 // import axios from 'axios';
 import cookie from "react-cookies";
 
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, useHistory } from "react-router-dom";
 
-const host = "http://localhost:3001";
+const host = "https://profdev-academy.herokuapp.com";
 const token = cookie.load("auth");
 
 function MyCourse(props) {
   const authContext = useContext(AuthContext);
   const [data, setData] = useState([]);
+  let history = useHistory();
 
-  useEffect(async () => {
-    
+  useEffect(() => {
+    console.log('props.logged',props.logged);
+    // if (!props.logged) {
+    //   history.push("/");
+    // }
+
     console.log(authContext.role);
 
-    if (authContext.role === "user") {
-      await fetch(`${host}/course/student`, {
-        method: "get",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-origin": host,
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(async (c) => {
-        let result = await c.json();
-        setData([...data, result]);
-        console.log(data);
-      });
-    } else if (authContext.role === "editor" || authContext.role === "admin") {
-      console.log("hellooo");
+    (async () => {
+      if (authContext.role === "user") {
+        await fetch(`${host}/course/student`, {
+          method: "get",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-origin": host,
+            Authorization: `Bearer ${token}`,
+          },
+        }).then(async (c) => {
+          let result = await c.json();
+          console.log(result, "cccccccc");
 
-      await fetch(`${host}/course/teacher`, {
-        method: "get",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-origin": host,
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(async (c) => {
-        let result = await c.json();
-        setData([...data, result]);
-        console.log(data);
-      });
-    }
-  }, [authContext.role]);
+          setData(result);
+          console.log(data);
+        });
+      } else if (
+        authContext.role === "editor" ||
+        authContext.role === "admin"
+      ) {
+        console.log("hellooo");
 
-  if (!props.logged) {
-    return <Redirect to="/" />;
-  }
+        await fetch(`${host}/course/teacher`, {
+          method: "get",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-origin": host,
+            Authorization: `Bearer ${token}`,
+          },
+        }).then(async (c) => {
+          let result = await c.json();
+          setData(result);
+          console.log(data);
+        });
+      }
+    })();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // if (!props.logged) {
+  //   return <Redirect to="/" />;
+  // }
 
   return (
     <section class="page-contain">
