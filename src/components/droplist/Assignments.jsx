@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Modal, Button, Table, Form } from "react-bootstrap";
-import React,{useContext} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CourseContextProv } from '../../context/CourseContext';
 import { RiDeleteBin6Line } from 'react-icons/ri';
