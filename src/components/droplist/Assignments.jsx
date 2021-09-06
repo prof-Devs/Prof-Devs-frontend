@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Modal, Button, Table, Form } from "react-bootstrap";
-import React,{useContext} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CourseContextProv } from '../../context/CourseContext';
 import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -19,7 +18,6 @@ export default function Assignments() {
 
     const [showForm, setShowForm] = useState(false);
     const [showTable, setShowTable] = useState(true);
-    const [updateID, setUpdateID] = useState('');
 
 
 
@@ -62,7 +60,7 @@ export default function Assignments() {
                                         <td>{element.title}</td>
                                         <td>{element.text}</td>
                                         <td>{element.due_date}</td>
-                                        <td><FaRegEdit onClick={handleForm(element._id)} /></td>
+                                        <td><FaRegEdit onClick={handleForm} /></td>
                                         <td><RiDeleteBin6Line onClick={() => listContext.deleteAssignment(element._id)}/></td>
                                     </tr>
                                 </tbody>
