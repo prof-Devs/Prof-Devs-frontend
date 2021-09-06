@@ -22,8 +22,7 @@ const Board = (props) => {
     // ----------------------- Colors --------------------------------------------------
 
     const colors = document.getElementsByClassName('color');
-    console.log(colors, 'the colors');
-    console.log(test);
+ 
     // set the current color
     const current = {
       color: 'black',
@@ -48,7 +47,6 @@ const Board = (props) => {
       context.lineTo(x1, y1);
       context.strokeStyle = color;
       if (context.strokeStyle === '#ffffff') {
-        console.log('inside if');
         context.lineWidth = 40;
       }
       else {

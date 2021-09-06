@@ -87,16 +87,8 @@ const [questCount, setQuestCount] = useState(0);
     // });
     setQuestCount(questCount+1)
     e.target.reset();
-    console.log("questions array", questions);
   }
-  console.log(
-    quizInfo,
-    "timer",
-    staticValues.timer,
-    "title",
-    staticValues.title,
-    "hiii quizInfo"
-  );
+ 
 
   async function postQuiz() {
     const obj = {
@@ -104,9 +96,7 @@ const [questCount, setQuestCount] = useState(0);
       timer: staticValues.timer,
       title: staticValues.title,
     };
-    console.log("inside func", token, quizInfo);
-    let test = await axios.post(`${host}/quiz`, obj, config);
-    console.log("the final data", test.data);
+    await axios.post(`${host}/quiz`, obj, config);
   }
 
   useEffect(() => {

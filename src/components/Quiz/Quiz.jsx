@@ -6,7 +6,6 @@ import "./quiz.css";
 function Quiz(props) {
 
 
-    console.log("inside iffffffffff", props.logged);
     return (
       <div className="quiz_container">
         <div class="quiz_header">

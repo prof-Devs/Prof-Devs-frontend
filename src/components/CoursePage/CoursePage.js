@@ -17,9 +17,8 @@ import { useParams, useHistory } from 'react-router-dom';
 
 
 function CoursePage(props) {
-    console.log(props, 'props');
     const listContext = useContext(DropContext);
-  
+
 
 
 
@@ -36,7 +35,6 @@ function CoursePage(props) {
 
     let { courseId } = useParams();
 
-    console.log('aaaaaaaaaaaaaaaaaaaa', courseId);
 
     const CourseObject = useContext(CourseContextProv);
 
@@ -53,6 +51,53 @@ function CoursePage(props) {
 
     // ....................................................................
 
+    useEffect(() => {
+        (async () => {
+
+
+            if (AuthObject.role === 'user') {
+
+                try {
+                    const data = await axios.get(`${host}/course/student/${courseId}`, config);
+                    console.log(data.data, "inside getCourseInfo");
+
+                    CourseObject.setCourseDataById([data.data]);
+                    listContext.setCourseInfo(data.data)
+                    listContext.setAllCourseAssignment(data.data.courseAssignments)
+
+                } catch (error) {
+                    console.log(error.message);
+                }
+            }
+            else {
+                try {
+                    const data = await axios.get(`${host}/course/teacher/${courseId}`, config);
+                    console.log(data.data, "inside getCourseInfo");
+
+                    CourseObject.setCourseDataById([data.data]);
+                    listContext.setCourseInfo(data.data)
+                    listContext.setAllCourseAssignment(data.data.courseAssignments)
+                } catch (error) {
+                    console.log(error.message);
+                }
+
+            }
+        }
+        )()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+
+    useEffect(() => {
+
+
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [CourseObject.courseDataById])
+
+
+
 
 
     const history = useHistory();
@@ -61,34 +106,31 @@ function CoursePage(props) {
     boardHandleClick = () => history.push(`/board/${courseId}`);
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        (async () => {
-            try {
+    //     (async () => {
+    //         try {
 
 
-                if (AuthObject.role === 'user') {
+    //             if (AuthObject.role === 'user') {
 
-                    let data = await axios.get(`${host}/course/student/${courseId}`, config)
-                    CourseObject.setCourseDataById([data.data]);
-                }
-                else {
-                    let data = await axios.get(`${host}/course/teacher/${courseId}`, config)
-                    CourseObject.setCourseDataById([data.data]);
-                }
-            }
-            catch {
-                console.error();
-            }
-        }
-        )()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [courseId])
+    //                 let data = await axios.get(`${host}/course/student/${courseId}`, config)
+    //             }
+    //             else {
+    //                 let data = await axios.get(`${host}/course/teacher/${courseId}`, config)
+    //             }
+    //         }
+    //         catch {
+    //             console.error();
+    //         }
+    //     }
+    //     )()
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [courseId])
 
 
 
-    console.log(CourseObject.courseDataById, 'hello data');
-    
+
     return (
         <>
             {CourseObject.courseDataById.map(item => {

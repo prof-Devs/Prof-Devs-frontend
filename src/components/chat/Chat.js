@@ -6,7 +6,6 @@ import './chat.css'
 const heroku = process.env.HEROKU;
 // const socket = io('https://localhost:3001',{transports :['websocket']})
 function Chat(props) {
-	console.log('Chat Props', props.NickName);
 	const [state, setState] = useState({ message: "", name: props.NickName })
 	const [chat, setChat] = useState([])
 

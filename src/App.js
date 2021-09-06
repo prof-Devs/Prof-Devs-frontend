@@ -26,17 +26,13 @@ import NotFound from './components/notfound/NotFound';
 export default function App() {
   
   const { pathname } = useLocation();
-  console.log(pathname)
 
   
   const CourseObject = useContext(CourseContextProv);
   const AuthObject = useContext(AuthContext);
-  console.log('log ll show', CourseObject.showWhiteBoard);
-  console.log('logIn', AuthObject.loggedIn);
   
 
 
-  console.log('AuthObject.loggedIn', AuthObject.loggedIn);
 
   return (
 
