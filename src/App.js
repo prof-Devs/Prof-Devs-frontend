@@ -67,7 +67,7 @@ export default function App() {
         </Route>
 
 
-        <Route path="/mycourses/:id" >
+        <Route path="/mycourses" >
           <MyCourse/>
         </Route>
 

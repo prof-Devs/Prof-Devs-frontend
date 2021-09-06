@@ -1,4 +1,4 @@
-import React, { useContext,  useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import AssignmentModal from '../creating/Assignment';
 import QuizModal from '../creating/Quiz';
 import SeeAssignment from '../droplist/Assignments';
@@ -15,15 +15,24 @@ import { CourseContextProv } from '../../context/CourseContext';
 import { useParams, useHistory } from 'react-router-dom';
 
 
+
 function CoursePage(props) {
+    console.log(props, 'props');
     const listContext = useContext(DropContext);
-    const [courseData, setCourseData] = useState({})
+  
+
+
 
 
     const AuthObject = useContext(AuthContext);
-    console.log(AuthObject.user, 'hiiiiiiiiiii');
 
 
+    const token = AuthObject.token;
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    const host = "https://profdev-academy.herokuapp.com";
 
     let { courseId } = useParams();
 
@@ -48,96 +57,101 @@ function CoursePage(props) {
 
     const history = useHistory();
     let boardHandleClick;
-    // let assignmentHandleClick;
-    // let quizHandleClick;
 
-    // // if (courseId) {
     boardHandleClick = () => history.push(`/board/${courseId}`);
-    // assignmentHandleClick = () => history.push(`/assignment/${courseId}`);
-    // quizHandleClick = () => history.push(`/quiz/${courseId}`);
-    // // }
 
-    // function showHandler() {
-    //     CourseObject.setShowWhiteBoard(true);
-    //     CourseObject.setShowAssignment(true);
-    //     CourseObject.setShowQuiz(true);
-    // }
 
     useEffect(() => {
-        listContext.getAssignmentsHandler();
-    
+
+        (async () => {
+            try {
+
+
+                if (AuthObject.role === 'user') {
+
+                    let data = await axios.get(`${host}/course/student/${courseId}`, config)
+                    CourseObject.setCourseDataById([data.data]);
+                }
+                else {
+                    let data = await axios.get(`${host}/course/teacher/${courseId}`, config)
+                    CourseObject.setCourseDataById([data.data]);
+                }
+            }
+            catch {
+                console.error();
+            }
+        }
+        )()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [courseId])
 
-    // useEffect(() => {
-    //     listContext.getAssignmentsHandler();
+
+
+    console.log(CourseObject.courseDataById, 'hello data');
     
-    // }, [listContext.allAssignments])
-
-
-
-    // if (!props.logged) {
-    //     return <Redirect to="/" />
-    // }
-
     return (
+        <>
+            {CourseObject.courseDataById.map(item => {
+                return (
 
-        <div id="CourseContainer">
-            <div id="leftSection">
-                <div id="mainCourse">
+                    <div id="CourseContainer">
+                        <div id="leftSection">
+                            <div id="mainCourse">
 
-                    <div id="titlewrapper">
-                        <h1 id="h1Styling">Course name</h1>
-                        <h5 id="pStyling">Course description</h5>
-                    </div>
+                                <div id="titlewrapper">
+                                    <h1 id="h1Styling">{item.courseName}</h1>
+                                    <h5 id="pStyling">{item.courseDisc}</h5>
+                                </div>
 
-                    <div id="leftRight">
+                                <div id="leftRight">
 
-                        <div id="buttonsStyle">
-                            <button title="Create new assignment"><MdAssignment size="40" onClick={CourseObject.handleAssignmentShow} /></button>
-                            <AssignmentModal />
-                            <button title="Create new quiz"><IoIosCreate size="40" onClick={CourseObject.handleShow} /></button>
-                            <QuizModal />
+                                    <div id="buttonsStyle">
+                                        <button title="Create new assignment"><MdAssignment size="40" onClick={CourseObject.handleAssignmentShow} /></button>
+                                        <AssignmentModal />
+                                        <button title="Create new quiz"><IoIosCreate size="40" onClick={CourseObject.handleShow} /></button>
+                                        <QuizModal />
+                                    </div>
+
+                                    {/* <Board /> */}
+                                    <div id="dropList">
+                                        <label id="lableStyle" >Choose action:</label>
+                                        <select name="action" id="action" onChange={handleChange} value={dropList}>
+                                            <option >select operation..</option>
+                                            <option value="See Assignments">See Assignments</option>
+                                            <option value="See Quizes">See Quizes</option>
+                                            <option value="Students Marks">Students Marks</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div id='buttonCsswrapper'>
+                                    <button type="button" onClick={boardHandleClick} id='buttonCss' >Go to Whiteboard!</button>
+                                </div>
+                            </div>
+
                         </div>
 
-                        {/* <Board /> */}
-                        <div id="dropList">
-                            <label id="lableStyle" >Choose action:</label>
-                            <select name="action" id="action" onChange={handleChange} value={dropList}>
-                                <option >select operation..</option>
-                                <option value="See Assignments">See Assignments</option>
-                                <option value="See Quizes">See Quizes</option>
-                                <option value="Students Marks">Students Marks</option>
-                            </select>
+                        <div id="chatWrapper">
+                            <Chat />
                         </div>
 
+                        {dropList === 'See Assignments' &&
+                            <SeeAssignment />
+                        }
+
+                        {dropList === 'See Quizes' &&
+                            <SeeQuiz />
+                        }
+
+                        {dropList === 'Students Marks' &&
+                            <SeeMarks />
+                        }
+
                     </div>
-                    <div id='buttonCsswrapper'>
-                        <button type="button" onClick={boardHandleClick} id='buttonCss' >Go to Whiteboard!</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="chatWrapper">
-                <Chat />
-            </div>
-
-            {dropList === 'See Assignments' &&
-                <SeeAssignment />
+                )
+            })
             }
-
-            {dropList === 'See Quizes' &&
-                <SeeQuiz />
-            }
-
-            {dropList === 'Students Marks' &&
-                <SeeMarks />
-            }
-
-        </div>
-
-
+        </>
     )
 }
 
