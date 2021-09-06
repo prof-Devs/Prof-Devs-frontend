@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
@@ -7,7 +7,12 @@ import "./creating.css";
 
 const host = "https://profdev-academy.herokuapp.com";
 
+
+
 export default function Course() {
+  const [firstTeacherName, setfirstTeacherName] = useState('')
+  const [lastTeacherName, setlastTeacherName] = useState('')
+
   const [showForm, setShowForm] = useState(false);
   const authContext = useContext(AuthContext);
   let token = authContext.token;
@@ -20,6 +25,21 @@ export default function Course() {
     courseStudents: [],
     courseTeacher: "",
   });
+
+
+
+useEffect(() => {
+
+
+  let pageUser = authContext.allUser.filter((item, idx) => {
+    return item.email === authContext.user.user.email;
+  });
+  console.log(pageUser[0],pageUser);
+
+  setfirstTeacherName(pageUser[0].firstName)
+  setlastTeacherName(pageUser[0].lastName);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [])
 
   //fnctions
   function handleShow() {
@@ -57,8 +77,11 @@ export default function Course() {
         courseName: courseInfo.courseName,
         courseDisc: courseInfo.courseDescreption,
         courseStudents: courseInfo.courseStudents,
-        courseTeacher: courseInfo.courseTeacher,
+        courseTeacher: authContext.user.user.email,
+        firstTeacherName:firstTeacherName,
+        lastTeacherName:lastTeacherName
       };
+      console.log(obj,'obj');
       const data = await axios.post(`${host}/course`, obj,config);
       console.log(data.data, "inside create");
     } catch (error) {
@@ -66,6 +89,7 @@ export default function Course() {
     }
     handleClose();
   }
+
 
   return (
     <>
@@ -83,6 +107,7 @@ export default function Course() {
                   type="text"
                   placeholder="Course Name"
                   name="courseName"
+                 
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -95,15 +120,41 @@ export default function Course() {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group>
+              {/* <Form.Group>
                 <Form.Control
                   className="ass-title"
                   type="text"
                   placeholder="Course Teacher"
                   name="courseTeacher"
+                  value={authContext.user.user.email}
+                  disabled={true}
                   onChange={handleChange}
                 />
-              </Form.Group>
+              </Form.Group> */}
+              <Form.Group>
+              <Form.Control
+                className="ass-title"
+                type="text"
+                placeholder="tFirstName"
+                name="firstTeacherName"
+                value={firstTeacherName}
+                disabled={true}
+                onChange={handleChange}
+              />
+              
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                className="ass-title"
+                type="text"
+                placeholder="tLastName"
+                name="lastTeacherName"
+                value={lastTeacherName}
+                disabled={true}
+                onChange={handleChange}
+              />
+              
+            </Form.Group>
               <Form.Group>
                 <Form.Control
                   className="ass-text"
