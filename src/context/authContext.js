@@ -30,12 +30,10 @@ export default function Auth(props) {
 
 
     const token = cookie.load('auth');
-    console.log(pathname, 111)
     if (arr.includes(pathname)) return 
 
 
     if (!token || token == 'null') {
-      console.log('here')
       history.push('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,7 +46,6 @@ export default function Auth(props) {
       setLoginState(true, token, user);
     } else {
       setLoginState(false, null, user);
-      console.log('Validation Token Error');
     }
   };
   function setLoginState(loggedIn, token, user) {
@@ -61,15 +58,12 @@ export default function Auth(props) {
   }
   async function signIn(email, password) {
     const allData = await axios.get('https://profdev-academy.herokuapp.com/getUsers');
-    console.log(allData);
     setAllUser(allData.data);
-    console.log(allUser,'allUser');
     const user = allData.data.filter((user, idx) => {
       return (user.email === email);
     });
     if (user[0]) {
       setRole(user[0].role);
-      console.log(role);
       if (user[0].role === 'user') {
         try {
           const response = await superagent
@@ -77,7 +71,6 @@ export default function Auth(props) {
             .set('authorization',
               `Basic ${base64.encode(`${email}:${password}`)}`
             );
-          console.log(response.body);
           validateToken(response.body.token);
         } catch (error) {
           console.error('Login Error', error.message);
@@ -90,7 +83,6 @@ export default function Auth(props) {
             .set('authorization',
               `Basic ${base64.encode(`${email}:${password}`)}`
             );
-          console.log(response.body);
           validateToken(response.body.token);
         } catch (error) {
           console.error('Login Error', error.message);

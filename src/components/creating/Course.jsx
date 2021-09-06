@@ -34,7 +34,6 @@ useEffect(() => {
   let pageUser = authContext.allUser.filter((item, idx) => {
     return item.email === authContext.user.user.email;
   });
-  console.log(pageUser[0],pageUser);
 
   setfirstTeacherName(pageUser[0].firstName)
   setlastTeacherName(pageUser[0].lastName);
@@ -81,11 +80,8 @@ useEffect(() => {
         firstTeacherName:firstTeacherName,
         lastTeacherName:lastTeacherName
       };
-      console.log(obj,'obj');
-      const data = await axios.post(`${host}/course`, obj,config);
-      console.log(data.data, "inside create");
+      await axios.post(`${host}/course`, obj,config);
     } catch (error) {
-      console.log(error.message);
     }
     handleClose();
   }
