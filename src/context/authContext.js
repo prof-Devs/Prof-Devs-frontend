@@ -11,6 +11,7 @@ export const AuthContext = React.createContext();
 export default function Auth(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [allUser, setAllUser] = useState([]);
   const [token, setToken] = useState(null);
   const [role, setRole] = useState('');
   let history = useHistory();
@@ -61,6 +62,8 @@ export default function Auth(props) {
   async function signIn(email, password) {
     const allData = await axios.get('https://profdev-academy.herokuapp.com/getUsers');
     console.log(allData);
+    setAllUser(allData.data);
+    console.log(allUser,'allUser');
     const user = allData.data.filter((user, idx) => {
       return (user.email === email);
     });
@@ -110,6 +113,7 @@ export default function Auth(props) {
       validateToken(response.data.token);
     } catch (error) {
       console.error('Sign Up Error', error.message);
+      
     }
   };
   function signOut() {
@@ -124,6 +128,7 @@ export default function Auth(props) {
     signIn,
     signUp,
     signOut,
+    allUser,
     role,
     token
   };
