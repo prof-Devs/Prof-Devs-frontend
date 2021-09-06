@@ -1,5 +1,5 @@
-import React,{useContext} from 'react'
-import { Modal, Button, Table, Form } from "react-bootstrap";
+import React, { useContext } from 'react'
+import { Modal, Col, Row, Table, Form, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { FaRegEdit } from 'react-icons/fa';
@@ -29,10 +29,10 @@ export default function Assignments() {
 
     function handleClose1() {
         setShowForm(false);
-        CourseObject.setshowTableDropMarks(true);
+        CourseObject.setshowTableDropMarks(false);
 
     }
-    
+
 
     return (
         <>
@@ -42,7 +42,7 @@ export default function Assignments() {
 
             <Modal size="lg" centered="true" show={CourseObject.showTableDropMarks} onHide={handleClose} animation={false}>
                 <Modal.Body>
-                <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title id="contained-modal-title-vcenter">
                         <h1>* See marks *</h1>
                     </Modal.Title>
                     <Table responsive>
@@ -75,19 +75,22 @@ export default function Assignments() {
                     </Table>
                 </Modal.Body>
 
-                {/* <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button> */}
+
             </Modal>
             <Modal show={showForm} onHide={handleClose1} animation={false}>
                 <Form>
-                    <Form.Label>
-                        helloo
-                    </Form.Label>
-                    <Form.Control>
-                    </Form.Control>
-                    <Button onClick={handleClose1}>Save Changes</Button>
+                    <Row>
+                        <Col>
+                            <Form.Label> Student name </Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Control placeholder="mark" />
+                        </Col>
+                    </Row>
                 </Form>
+                <Button variant="secondary" onClick={handleClose1}>
+                    Edit Mark
+                </Button>
             </Modal>
         </>
     )

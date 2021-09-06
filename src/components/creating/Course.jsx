@@ -43,7 +43,7 @@ export default function Course() {
     let value = e.target.value;
     let name = e.target.name;
 
-    let names = value.split(",");
+    let names = value.split(",");// dina@,ibrahim,asdkas   [dina@,ibrahim,sdkasl;]
     setCourseInfo({
       ...courseInfo,
       [name]: names,

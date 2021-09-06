@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext,  useState } from 'react'
 import AssignmentModal from '../creating/Assignment';
 import QuizModal from '../creating/Quiz';
 import SeeAssignment from '../droplist/Assignments';
@@ -7,23 +7,22 @@ import SeeMarks from '../droplist/Marks';
 import Chat from '../chat/Chat';
 import { MdAssignment } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
-import { Redirect } from "react-router-dom";
 import { AuthContext } from '../../context/authContext';
+import { DropContext } from "../../context/dropListContext";
 import axios from 'axios';
 import './CoursePage.css'
 import { CourseContextProv } from '../../context/CourseContext';
 import { useParams, useHistory } from 'react-router-dom';
-import Board from '../Board/Board';
+
 
 function CoursePage(props) {
-const [courseData, setCourseData] = useState({})
+    const listContext = useContext(DropContext);
+    const [courseData, setCourseData] = useState({})
 
-const AuthObject = useContext(AuthContext);
-console.log(AuthObject.user,'hiiiiiiiiiii');
 
-function get() {
-    
-}
+    const AuthObject = useContext(AuthContext);
+    console.log(AuthObject.user, 'hiiiiiiiiiii');
+
 
 
     let { courseId } = useParams();
@@ -39,7 +38,6 @@ function get() {
 
     function handleChange(e) {
         setdropList((e.target.value));
-
         CourseObject.setshowTableDropAss(true);
         CourseObject.setshowTableDropMarks(true);
     };
@@ -65,11 +63,16 @@ function get() {
     //     CourseObject.setShowQuiz(true);
     // }
 
-    // useEffect(() => {
-    //     showHandler();
+    useEffect(() => {
+        listContext.getAssignmentsHandler();
+    
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
+    // useEffect(() => {
+    //     listContext.getAssignmentsHandler();
+    
+    // }, [listContext.allAssignments])
 
 
 
