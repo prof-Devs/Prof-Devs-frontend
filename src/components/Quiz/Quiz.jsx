@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect,Component } from "react";
+import React, { Component } from "react";
 import { BsSearch } from "react-icons/bs";
 // import { Redirect } from "react-router-dom";
-import { AuthContext } from "../../context/authContext";
-import { useParams, useHistory } from "react-router-dom";
+// import { AuthContext } from "../../context/authContext";
+// import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
+// import { Card, Button } from "react-bootstrap";
 
 import "./quiz.css";
 // const AuthObject = useContext(AuthContext);
