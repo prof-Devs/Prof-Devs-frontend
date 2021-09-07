@@ -34,8 +34,10 @@ export default function Assignments() {
         // setUpdateID(id)
         // console.log('state',id);
     }
+   
 
 
+    console.log(listContext.allCourseAssignment,'bekafeeeeeeeeeeeeee');
     return (
         <>
             <Modal size="lg" centered="true" show={showTable} onHide={handleClose} animation={false}>
@@ -53,14 +55,15 @@ export default function Assignments() {
                                 <th></th>
                             </tr>
                         </thead>
-                        {listContext.allAssignments.map(element => {
+                        
+                        {listContext.allCourseAssignment.map(element => {
                             return (
                                 <tbody>
                                     <tr>
                                         <td>{element.title}</td>
                                         <td>{element.text}</td>
                                         <td>{element.due_date}</td>
-                                        <td><FaRegEdit onClick={handleForm} /></td>
+                                        {/* <td><FaRegEdit onClick={handleForm(element._id)} /></td> */}
                                         <td><RiDeleteBin6Line onClick={() => listContext.deleteAssignment(element._id)}/></td>
                                     </tr>
                                 </tbody>

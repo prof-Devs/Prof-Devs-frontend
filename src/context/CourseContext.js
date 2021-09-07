@@ -55,7 +55,6 @@ function CourseContext(props) {
     }
 
     function handleFormDropAss(e) {
-        console.log(e.target, 'llll');
         setshowTableDropAss(false);
         setshowFormDropAss(true);
     }
