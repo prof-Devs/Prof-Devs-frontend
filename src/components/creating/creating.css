@@ -81,3 +81,18 @@ width: 16rem;
     background-color: whitesmoke;
     color: #33B292;
 }
+
+#create-course{
+    width: 10rem;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    background-color: #33B292;
+    border: hidden;
+    margin-left: 40rem;
+    margin-bottom: 1rem;
+}
+#create-course:hover{
+    background-color: whitesmoke;
+    color: #33B292;
+
+}

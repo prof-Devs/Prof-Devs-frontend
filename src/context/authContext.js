@@ -25,12 +25,12 @@ export default function Auth(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const arr =['/','/signup','/signin','/aboutUs']
+  const arr = ['/', '/signup', '/signin', '/aboutUs']
   useEffect(() => {
 
 
     const token = cookie.load('auth');
-    if (arr.includes(pathname)) return 
+    if (arr.includes(pathname)) return
 
 
     if (!token || token == 'null') {
@@ -38,6 +38,10 @@ export default function Auth(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
+
+  useEffect(() => {
+ 
+  }, [user])
 
 
   function validateToken(token) {
@@ -48,13 +52,23 @@ export default function Auth(props) {
       setLoginState(false, null, user);
     }
   };
-  function setLoginState(loggedIn, token, user) {
+  async function setLoginState(loggedIn, token, user) {
 
     cookie.save('auth', token, { path: '/' });
     setToken(token);
     setUser({ user });
     setLoggedIn(loggedIn);
+    if(token){
 
+      const allData = await axios.get('https://profdev-academy.herokuapp.com/getUsers');
+      const user1 = allData.data.filter((user2, idx) => {
+        return (user2.email === user.email);
+      });
+      console.log(123,user1)
+      if (user1[0]) {
+        setRole(user1[0].role);
+      }
+    }
   }
   async function signIn(email, password) {
     const allData = await axios.get('https://profdev-academy.herokuapp.com/getUsers');
@@ -105,7 +119,7 @@ export default function Auth(props) {
       validateToken(response.data.token);
     } catch (error) {
       console.error('Sign Up Error', error.message);
-      
+
     }
   };
   function signOut() {

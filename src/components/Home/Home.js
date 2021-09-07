@@ -8,6 +8,8 @@ import {
     Link,
     useHistory
 } from "react-router-dom";
+import logo from '../Header/logo_academy.PNG';
+
 
 
 
@@ -27,8 +29,7 @@ function Home() {
                 <div class='firstWrapper'>
                     <div class='paragraph'>
                         <div id='icon'>
-                            <img src='https://icon-library.com/images/icon-education/icon-education-0.jpg' width='40' height='40' />
-                            <h1>Prof Academy</h1>
+                        <img height='80px' src={logo} alt='a' style={{marginLeft: '-30px'}}/>
                         </div>
                         <p>Educational process is taking a critical path and become online according to current circumentences (COVID-19),So it was a good idea to create an online academic website that facilitates the educational process,serves students with multiple courses,provides private rooms for chatting between students and teacher and recognizes a seperated access for each teacher and student.</p>
                         <h5>For more information about us ... </h5>

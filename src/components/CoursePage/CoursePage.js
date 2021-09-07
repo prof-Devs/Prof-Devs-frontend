@@ -26,11 +26,7 @@ function CoursePage(props) {
     const AuthObject = useContext(AuthContext);
 
 
-    const token = AuthObject.token;
 
-    const config = {
-        headers: { Authorization: `Bearer ${token}` },
-    };
     const host = "https://profdev-academy.herokuapp.com";
 
     let { courseId } = useParams();
@@ -52,9 +48,15 @@ function CoursePage(props) {
     // ....................................................................
 
     useEffect(() => {
+        if(AuthObject.token?.length>0){
+
         (async () => {
+            const token = AuthObject.token;
+            const config = {
+                headers: { Authorization: `Bearer ${token}` },
+            };
 
-
+            console.log(AuthObject)
             if (AuthObject.role === 'user') {
 
                 try {
@@ -84,9 +86,10 @@ function CoursePage(props) {
             }
         }
         )()
+    }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [AuthObject])
 
 
     useEffect(() => {

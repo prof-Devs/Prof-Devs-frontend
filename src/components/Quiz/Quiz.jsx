@@ -155,7 +155,7 @@ class  Quiz extends Component{
               <div class="quiz_data"></div>
   
               <div class="quiz_footer">
-                <button onClick={() => this.handleNext()}>Next</button>
+                <button className= "quiz_next" onClick={() => this.handleNext()}>Next</button>
               </div>
             </div>
            }

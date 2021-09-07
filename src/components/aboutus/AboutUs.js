@@ -10,7 +10,7 @@ function AboutUs() {
       
             <div id="cardsWrapper">
                 {/* <div id="firstListCard"> */}
-                <h1 id="h1Card">Our team</h1>
+                <h1 id="h1Card">Our Team</h1>
                 <ul class="cards">
 
                     <li>
@@ -63,7 +63,7 @@ function AboutUs() {
                     </li>
                     <li>
                         <a href="" class="card">
-                            <img src={sukina} class="card__image" alt="" id="fff" />
+                            <img src={sukina} class="card__image" alt="" id="fff" style={{height: '200px'}} />
                             <div class="card__overlay">
                                 <div class="card__header">
                                     <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
@@ -81,7 +81,7 @@ function AboutUs() {
                 </ul>
             </div>
             <div id="visionWrapper">
-            <h1 id="h1Vision">Our vision</h1>
+            <h1 id="h1Vision">Our Vision</h1>
             <p id="stylingPar">Educational process is taking a critical path and become online according to current circumentences (COVID-19),So it was a good idea to create an online academic website that facilitates the educational process,serves students with multiple courses,provides private rooms for chatting between students and teacher and recognizes a seperated access for each teacher and student.</p>
             </div>
            
