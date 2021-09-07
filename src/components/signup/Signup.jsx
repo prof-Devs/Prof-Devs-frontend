@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { AuthContext } from "../../context/authContext";
 import Card from "react-bootstrap/Card";
 import { Redirect } from "react-router-dom";
-import signup from './signup.jpg'
+import signup from './signup-new.jpg'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./signup.css";
