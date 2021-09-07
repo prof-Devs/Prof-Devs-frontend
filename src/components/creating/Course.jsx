@@ -32,12 +32,11 @@ export default function Course() {
 useEffect(() => {
 
 
-  let pageUser = authContext.allUser.filter((item, idx) => {
-    return item.email === authContext.user.user.email;
-  });
+if(authContext.pageUser[0]){
 
-  setfirstTeacherName(pageUser[0].firstName)
-  setlastTeacherName(pageUser[0].lastName);
+  setfirstTeacherName(authContext.pageUser[0].firstName)
+  setlastTeacherName(authContext.pageUser[0].lastName);
+}
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 
@@ -92,9 +91,11 @@ useEffect(() => {
     <>
       <div className="ass-container">
         <h1>اللي بدك اياه</h1>
+        <div class='createWrapper'>
         <Button id="create-course" onClick={handleShow}>
           <VscNewFolder style ={{fontSize:"20px"}}/> New Course
         </Button>
+        </div>
         <Modal show={showForm} onHide={handleClose} animation={false}>
           <Modal.Body>
             <Form>
