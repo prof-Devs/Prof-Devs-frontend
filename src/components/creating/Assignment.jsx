@@ -4,10 +4,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { CourseContextProv } from "../../context/CourseContext";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
+import { useParams, useHistory } from "react-router-dom";
+import { DropContext } from "../../context/dropListContext";
 
 import "./creating.css";
 
 export default function Assignment() {
+  const listContext = useContext(DropContext);
+
+  let { courseId } = useParams();
   const [assignInfo, setAssignInfo] = useState({
     title: "",
     text: "",
@@ -29,15 +34,35 @@ export default function Assignment() {
   function handleChange(e) {
     let value = e.target.value;
     let name = e.target.name;
-    setAssignInfo({
-      ...assignInfo,
-      [name]: value,
-    });
+    if (name === "due_date") {
+      setAssignInfo({
+        ...assignInfo,
+        [name]: Date(value),
+      });
+    } else {
+      setAssignInfo({
+        ...assignInfo,
+        [name]: value,
+      });
+    }
   }
   async function postAssignment() {
-    console.log("inside func",token,assignInfo);
-    let test = await axios.post(`${host}/assignment`, assignInfo, config);
-    console.log(test.data);
+    console.log(assignInfo);
+
+    console.log(listContext.allCourseAssignment,'hiiiiiiiiiii console');
+    const assigndata = await axios.post(`${host}/assignment`,assignInfo, config);
+
+
+    console.log(assigndata);
+    const obj = {
+      "courseAssignments": [
+        ...listContext.allCourseAssignment,
+        assigndata.data
+      ],
+    };
+    console.log(obj,'new Obj');
+
+    await axios.put(`${host}/course/${courseId}`, obj, config);
   }
 
   return (
@@ -89,8 +114,8 @@ export default function Assignment() {
                 <Button
                   id="ass-button"
                   onClick={() => {
-                    CourseObject.handleAssignmentClose();
                     postAssignment();
+                    CourseObject.handleAssignmentClose();
                   }}
                 >
                   Create Assignment

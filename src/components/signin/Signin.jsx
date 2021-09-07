@@ -33,7 +33,6 @@ export default function SignIn(props) {
         event.preventDefault();
         authContext.signIn (userInfo.email,userInfo.password);
     }
-    console.log(props.logged,'aaaaaasdsa;ldksa;ldkas;lkd');
 
     if (!props.logged) {
     return (
