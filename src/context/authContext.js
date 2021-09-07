@@ -14,6 +14,7 @@ export default function Auth(props) {
   const [allUser, setAllUser] = useState([]);
   const [token, setToken] = useState(null);
   const [role, setRole] = useState('');
+  const [pageUser, setPageUser] = useState([])
   let history = useHistory();
 
   const { pathname } = useLocation();
@@ -59,6 +60,7 @@ export default function Auth(props) {
     setUser({ user });
     setLoggedIn(loggedIn);
     if(token){
+     
 
       const allData = await axios.get('https://profdev-academy.herokuapp.com/getUsers');
       const user1 = allData.data.filter((user2, idx) => {
@@ -68,6 +70,11 @@ export default function Auth(props) {
       if (user1[0]) {
         setRole(user1[0].role);
       }
+      let page = allUser.filter((item, idx) => {
+        return item.email === user.user.email;
+      });
+
+      setPageUser(page)
     }
   }
   async function signIn(email, password) {
@@ -136,7 +143,8 @@ export default function Auth(props) {
     signOut,
     allUser,
     role,
-    token
+    token,
+    pageUser
   };
   return (
     <AuthContext.Provider value={state}>
