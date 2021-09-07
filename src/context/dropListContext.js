@@ -20,6 +20,7 @@ function DropListContext(props) {
     const [courseInfo, setCourseInfo] = useState([])
     const [assignmentNeeded, setAssignmentNeeded] = useState([])
     const [allCourseAssignment, setAllCourseAssignment] = useState([])
+    // const [allCoursequiz, setAllCoursequiz] = useState([])
     let token = authContext.token;
     const config = {
         headers: { Authorization: `Bearer ${token}` }

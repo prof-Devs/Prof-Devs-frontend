@@ -19,21 +19,13 @@ import { useParams, useHistory } from 'react-router-dom';
 function CoursePage(props) {
     const listContext = useContext(DropContext);
 
-
-
-
-
     const AuthObject = useContext(AuthContext);
-
-
 
     const host = "https://profdev-academy.herokuapp.com";
 
     let { courseId } = useParams();
 
-
     const CourseObject = useContext(CourseContextProv);
-
 
     // popup
 
@@ -48,45 +40,49 @@ function CoursePage(props) {
     // ....................................................................
 
     useEffect(() => {
-        if(AuthObject.token?.length>0){
+        if (AuthObject.token?.length > 0) {
 
-        (async () => {
-            const token = AuthObject.token;
-            const config = {
-                headers: { Authorization: `Bearer ${token}` },
-            };
+            (async () => {
+                const token = AuthObject.token;
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` },
+                };
 
-            console.log(AuthObject)
-            if (AuthObject.role === 'user') {
+                console.log(AuthObject)
+                if (AuthObject.role === 'user') {
 
-                try {
-                    const data = await axios.get(`${host}/course/student/${courseId}`, config);
-                    console.log(data.data, "inside getCourseInfo");
+                    try {
+                        const data = await axios.get(`${host}/course/student/${courseId}`, config);
+                        // console.log(data.data.assignments, "inside getCourseInfoffffffffff");
 
-                    CourseObject.setCourseDataById([data.data]);
-                    listContext.setCourseInfo(data.data)
-                    listContext.setAllCourseAssignment(data.data.courseAssignments)
+                        CourseObject.setCourseDataById([data.data]);
+                        listContext.setCourseInfo(data.data)
+                        // listContext.setAllCourseAssignment(data.data.courseAssignments)
+                        listContext.setAllCourseAssignment(data.data.assignments);
+                        console.log('yesssssss', data.data.assignments);
+                        console.log('ttttttt', listContext.allCourseAssignment);
 
-                } catch (error) {
-                    console.log(error.message);
+                    } catch (error) {
+                        console.log(error.message);
+                    }
+                }
+                else {
+                    try {
+                        const data = await axios.get(`${host}/course/teacher/${courseId}`, config);
+                        // console.log(data.data.course, "inside getCourseInfo");
+
+                        CourseObject.setCourseDataById([data.data]);
+                        listContext.setCourseInfo(data.data)
+                        listContext.setAllCourseAssignment(data.data.courseAssignments)
+
+                    } catch (error) {
+                        console.log(error.message);
+                    }
+
                 }
             }
-            else {
-                try {
-                    const data = await axios.get(`${host}/course/teacher/${courseId}`, config);
-                    console.log(data.data, "inside getCourseInfo");
-
-                    CourseObject.setCourseDataById([data.data]);
-                    listContext.setCourseInfo(data.data)
-                    listContext.setAllCourseAssignment(data.data.courseAssignments)
-                } catch (error) {
-                    console.log(error.message);
-                }
-
-            }
+            )()
         }
-        )()
-    }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [AuthObject])

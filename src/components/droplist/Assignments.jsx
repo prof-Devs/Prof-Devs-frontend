@@ -6,11 +6,12 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FaRegEdit } from 'react-icons/fa';
 import { AuthContext } from "../../context/authContext";
 import { DropContext } from "../../context/dropListContext";
+import {If,Then,Else} from 'react-if';
 import axios from 'axios'
 import './dropList.css'
 
 export default function Assignments() {
-  let  tbodyTable=  document.getElementsByClassName('hiddenID');
+    let tbodyTable = document.getElementsByClassName('hiddenID');
 
     const CourseObject = useContext(CourseContextProv);
     const authContext = useContext(AuthContext);
@@ -34,10 +35,12 @@ export default function Assignments() {
         // setUpdateID(id)
         // console.log('state',id);
     }
-   
 
 
-    console.log(listContext.allCourseAssignment,'bekafeeeeeeeeeeeeee');
+    // console.log('eeeeeee',listContext.allCourseAssignment);
+    console.log(listContext.allCourseAssignment, 'bekafeeeeeeeeeeeeee');
+    // console.log(listContext.allCourseAssignment.length, 'length');
+
     return (
         <>
             <Modal size="lg" centered="true" show={showTable} onHide={handleClose} animation={false}>
@@ -55,22 +58,30 @@ export default function Assignments() {
                                 <th></th>
                             </tr>
                         </thead>
-                        
-                        {listContext.allCourseAssignment.map(element => {
-                            return (
-                                <tbody>
-                                    <tr>
-                                        <td>{element.title}</td>
-                                        <td>{element.text}</td>
-                                        <td>{element.due_date}</td>
-                                        {/* <td><FaRegEdit onClick={handleForm(element._id)} /></td> */}
-                                        <td><RiDeleteBin6Line onClick={() => listContext.deleteAssignment(element._id)}/></td>
-                                    </tr>
-                                </tbody>
-                            )
-                        })
-                        }
 
+                        
+                        {/* <If condition={listContext.allCourseAssignment !== undefined}>
+                            <Then>
+                               <h1>fffffffffffffffffff</h1>
+                            </Then>
+                            <Else> */}
+                                {listContext.allCourseAssignment.map(element => {
+                                    return (
+                                        <tbody>
+                                            <tr>
+                                                <td>{element.title}</td>
+                                                <td>{element.text}</td>
+                                                <td>{element.due_date}</td>
+                                                {/* <td><FaRegEdit onClick={handleForm(element._id)} /></td> */}
+                                                <td><RiDeleteBin6Line onClick={() => listContext.deleteAssignment(element._id)} /></td>
+                                            </tr>
+                                        </tbody>
+                                    )
+                                })
+                                }
+                            {/* </Else>
+
+                        </If> */}
                     </Table>
                 </Modal.Body>
 
