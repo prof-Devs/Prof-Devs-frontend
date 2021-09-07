@@ -13,7 +13,7 @@ function CourseRender(props) {
         </h4>
         <p>{props.courseDisc}</p>
         <span class="link-text">
-          View All Providers
+          Go To Course
           <svg
             width="25"
             height="16"

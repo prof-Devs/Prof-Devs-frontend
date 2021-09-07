@@ -1,6 +1,7 @@
 import React, { useState, useContext,useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { AuthContext } from "../../context/authContext";
+import { VscNewFolder } from 'react-icons/vsc';
 import axios from "axios";
 
 import "./creating.css";
@@ -91,8 +92,8 @@ useEffect(() => {
     <>
       <div className="ass-container">
         <h1>اللي بدك اياه</h1>
-        <Button variant="primary" onClick={handleShow}>
-          Create New Course
+        <Button id="create-course" onClick={handleShow}>
+          <VscNewFolder style ={{fontSize:"20px"}}/> New Course
         </Button>
         <Modal show={showForm} onHide={handleClose} animation={false}>
           <Modal.Body>

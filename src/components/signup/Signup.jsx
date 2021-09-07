@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { AuthContext } from "../../context/authContext";
 import Card from "react-bootstrap/Card";
 import { Redirect } from "react-router-dom";
+import signup from './signup.jpg'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./signup.css";
@@ -123,7 +124,7 @@ export default function SignUp(props) {
           <div>
             <img
               className="image"
-              src="https://color-hex.org/colors/33b292.png"
+              src={signup}
               alt=""
             />
           </div>

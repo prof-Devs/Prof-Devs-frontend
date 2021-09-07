@@ -1,7 +1,20 @@
-#h1Chat{
-  padding-left: 0px;
-}
 #buttonCss:hover{
 background-color: #ffffffa8;
 color: #32ad8e;
+}
+.textField{
+  height: 3rem;
+  width: 15rem;
+  border-radius: 1rem;
+  margin-right: 0.5rem;
+  margin-top: 0.4rem;
+}
+#typing{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 280px;
+}
+#chat-container{
+  max-width: 60%;
 }

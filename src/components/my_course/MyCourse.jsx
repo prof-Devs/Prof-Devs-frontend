@@ -45,11 +45,14 @@ function MyCourse() {
 
   useEffect(() => {
     if (authContext.role === "user") {
-      let newData = data.filter((e) => {
-        return e.courseStudents.filter((e2) => {
-          return e2 === `${authContext.user.user.email}`;
+      let newData = []
+      data.forEach((e) => {
+         e.courseStudents.forEach((e2) => {
+          //  e2 === `${authContext.user.user.email}`
+           if(e2==authContext.user.user.email) newData.push(e)
         });
       });
+      console.log(11111,newData)
       setFilterdData(newData);
     } else {
       let newData = data.filter((e) => {

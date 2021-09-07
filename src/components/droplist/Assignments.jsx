@@ -18,7 +18,6 @@ export default function Assignments() {
 
     const [showForm, setShowForm] = useState(false);
     const [showTable, setShowTable] = useState(true);
-    const [updateID, setUpdateID] = useState('');
 
 
 
