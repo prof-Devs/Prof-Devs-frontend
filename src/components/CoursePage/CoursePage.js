@@ -36,7 +36,7 @@ function CoursePage(props) {
         CourseObject.setshowTableDropAss(true);
         CourseObject.setshowTableDropMarks(true);
     };
-
+    // console.log('teest',listContext.allCourseAssignment);
     // ....................................................................
     useEffect(() => {
         if (AuthObject.token?.length > 0) {
@@ -52,14 +52,14 @@ function CoursePage(props) {
 
                     try {
                         const data = await axios.get(`${host}/course/student/${courseId}`, config);
-                        // console.log(data.data.assignments, "inside getCourseInfoffffffffff");
-
                         CourseObject.setCourseDataById([data.data]);
                         listContext.setCourseInfo(data.data)
-                        // listContext.setAllCourseAssignment(data.data.courseAssignments)
                         listContext.setAllCourseAssignment(data.data.assignments);
-                        console.log('yesssssss', data.data.assignments);
-                        console.log('ttttttt', listContext.allCourseAssignment);
+                        listContext.setAllCoursequiz(data.data.quizes);
+
+                     
+                        console.log('teest dataaa', data.data);
+
 
                     } catch (error) {
                         console.log(error.message);
@@ -72,7 +72,10 @@ function CoursePage(props) {
 
                         CourseObject.setCourseDataById([data.data]);
                         listContext.setCourseInfo(data.data)
-                        listContext.setAllCourseAssignment(data.data.courseAssignments)
+                        listContext.setAllCourseAssignment(data.data.courseAssignments);
+                        listContext.setAllCoursequiz(data.data.quizes);
+                        console.log('teest dataaa', data.data);
+                        console.log('teest rrrrrrr',listContext.allCoursequiz);
 
                     } catch (error) {
                         console.log(error.message);
@@ -84,8 +87,19 @@ function CoursePage(props) {
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
+    // useEffect(() => {
+    //     (async () =>{
+    //         const token = AuthObject.token;
+    //         const config = {
+    //             headers: { Authorization: `Bearer ${token}` },
+    //         };
+
+    //         const data = await axios.get(`${host}/course/teacher/${courseId}`, config);
+    //         listContext.setAllCourseAssignment(data.data.courseAssignments);
+    //     })()
+    // }, [listContext.allCourseAssignment])
 
     const history = useHistory();
     let boardHandleClick;
