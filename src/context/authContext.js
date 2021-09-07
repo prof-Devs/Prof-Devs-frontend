@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import base64 from 'base-64';
 import axios from 'axios';
-import { Redirect, Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const API = 'https://profdev-academy.herokuapp.com';
 export const AuthContext = React.createContext();
