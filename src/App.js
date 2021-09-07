@@ -29,8 +29,8 @@ export default function App() {
 
   const CourseObject = useContext(CourseContextProv);
   const AuthObject = useContext(AuthContext);
-  console.log('log ll show', CourseObject.showWhiteBoard);
-  console.log('logIn', AuthObject.loggedIn);
+  // console.log('log ll show', CourseObject.showWhiteBoard);
+  // console.log('logIn', AuthObject.loggedIn);
   const [log, setlog] = useState(false);
   
   useEffect(() => {

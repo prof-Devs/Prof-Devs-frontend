@@ -1,13 +1,20 @@
 import React from "react";
 import "./MyCourse.scss";
 import { Redirect ,Link} from "react-router-dom";
+import Home from '../Home/Home'
+
+
 
 function MyCourse(props) {
-  if (!props.logged) {
-      return <Redirect to="/" />
-  }
 
+  if (!props.logged) {
+    return <Redirect to="/" />
+    // return <Redirect  from="/" to="/mycourses" component={Home} />
+  }
+  
   return (
+    <>
+    {/* <Redirect to=""/> */}
     <section class="page-contain">
       <Link to="/coursepage/0928130128" class="data-card">
         <h3>Music</h3>
@@ -181,6 +188,7 @@ function MyCourse(props) {
         </span>
       </Link>
     </section>
+    </>
   );
 
 }
