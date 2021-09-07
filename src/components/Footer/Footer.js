@@ -20,28 +20,28 @@ function Footer() {
                 <div id="secondDiv">
                     <h1 class="h1Style">Explore</h1>
                     <ul class="ulStyle">
-                        {/* <a href="/signup"><li>Sign Up</li></a>
+                        <a href="/signup"><li>Sign Up</li></a>
                         <a href="/signin"> <li>Sign In</li></a>
-                        <a><li>About Us</li></a> */}
+                        <a><li>About Us</li></a>
                     </ul>
                 </div>
 
                 <div id="thirdDiv">
-                    <h1 class="h1Style">Visit</h1>
+                    <h1 class="h1Style">Contact us</h1>
                     <ul class="ulStyle">
-                        <li>78 Bhulabhai Desai Road</li>
-                        <li>Mumbai 400 026</li>
-                        <li>Phone: (22) 2363-3611</li>
+                        <li>Jordan</li>
+                        <li>Amman-Macca street</li>
+                        <li>Phone: (962) 2363-3611</li>
                     </ul>
                 </div>
             </div>
 
             <div id="icons">
                 <ul class="iconsUl">
-                    {/* <a><li><FaFacebook size='34' color='white' /></li></a>
+                    <a><li><FaFacebook size='34' color='white' /></li></a>
                     <a><li><AiFillTwitterCircle size='37' color='white' /></li></a>
                     <a><li><AiFillGoogleCircle size='37' color='white' /></li></a>
-                    <a><li><AiFillInstagram size='37' color='white' /></li></a> */}
+                    <a><li><AiFillInstagram size='37' color='white' /></li></a>
                 </ul>
 
             </div>

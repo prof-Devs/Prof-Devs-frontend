@@ -2,6 +2,7 @@ import React, { useContext, useState }  from "react";
 import { AuthContext } from "../../context/authContext";
 import { Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import signin from "./signin.jpg"
 
 import Card from "react-bootstrap/Card";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -33,7 +34,6 @@ export default function SignIn(props) {
         event.preventDefault();
         authContext.signIn (userInfo.email,userInfo.password);
     }
-    console.log(props.logged,'aaaaaasdsa;ldksa;ldkas;lkd');
 
     if (!props.logged) {
     return (
@@ -41,7 +41,7 @@ export default function SignIn(props) {
            
             <Card className='parent-in'>
                 <div>
-                    <img className='image-in' src='https://color-hex.org/colors/33b292.png' alt ='' />
+                    <img className='image-in' src={signin} alt ='' />
                 </div>
                 <div >
                     <h2 className='title-in'>Sign In To Prof Academy</h2>
