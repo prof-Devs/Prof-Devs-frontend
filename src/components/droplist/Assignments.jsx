@@ -10,7 +10,7 @@ import axios from 'axios'
 import './dropList.css'
 
 export default function Assignments() {
-  let  tbodyTable=  document.getElementsByClassName('hiddenID');
+    let tbodyTable = document.getElementsByClassName('hiddenID');
 
     const CourseObject = useContext(CourseContextProv);
     const authContext = useContext(AuthContext);
@@ -18,8 +18,6 @@ export default function Assignments() {
 
     const [showForm, setShowForm] = useState(false);
     const [showTable, setShowTable] = useState(true);
-
-
 
     function handleClose() {
         setShowTable(false);
@@ -34,10 +32,13 @@ export default function Assignments() {
         // setUpdateID(id)
         // console.log('state',id);
     }
-   
 
 
-    console.log(listContext.allCourseAssignment,'bekafeeeeeeeeeeeeee');
+    console.log('eeeeeee', listContext.allCourseAssignment);
+    console.log('quizzz', listContext.allCoursequiz);
+    console.log(listContext.allCourseAssignment, 'bekafeeeeeeeeeeeeee');
+    // console.log(listContext.allCourseAssignment.length, 'length');
+
     return (
         <>
             <Modal size="lg" centered="true" show={showTable} onHide={handleClose} animation={false}>
@@ -55,8 +56,15 @@ export default function Assignments() {
                                 <th></th>
                             </tr>
                         </thead>
-                        
-                        {listContext.allCourseAssignment.map(element => {
+                        <tr>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td>09/08/2021</td>
+                            {/* <td><FaRegEdit onClick={handleForm(element._id)} /></td> */}
+                            <td><RiDeleteBin6Line /></td>
+                        </tr>
+
+                        {listContext?.allCourseAssignment?.map(element => {
                             return (
                                 <tbody>
                                     <tr>
@@ -64,13 +72,12 @@ export default function Assignments() {
                                         <td>{element.text}</td>
                                         <td>{element.due_date}</td>
                                         {/* <td><FaRegEdit onClick={handleForm(element._id)} /></td> */}
-                                        <td><RiDeleteBin6Line onClick={() => listContext.deleteAssignment(element._id)}/></td>
+                                        <td><RiDeleteBin6Line onClick={() => listContext.deleteAssignment(element._id)} /></td>
                                     </tr>
                                 </tbody>
                             )
                         })
                         }
-
                     </Table>
                 </Modal.Body>
 

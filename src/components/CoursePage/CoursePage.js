@@ -19,20 +19,13 @@ import { useParams, useHistory } from 'react-router-dom';
 function CoursePage(props) {
     const listContext = useContext(DropContext);
 
-
-
-
     const AuthObject = useContext(AuthContext);
-
-
 
     const host = "https://profdev-academy.herokuapp.com";
 
     let { courseId } = useParams();
 
-
     const CourseObject = useContext(CourseContextProv);
-
 
     // popup
 
@@ -43,50 +36,70 @@ function CoursePage(props) {
         CourseObject.setshowTableDropAss(true);
         CourseObject.setshowTableDropMarks(true);
     };
-
+    // console.log('teest',listContext.allCourseAssignment);
     // ....................................................................
     useEffect(() => {
+        if (AuthObject.token?.length > 0) {
 
-        console.log('hi');
-        (async () => {
-            const token = AuthObject.token;
-            const config = {
-                headers: { Authorization: `Bearer ${token}` },
-            };
+            (async () => {
+                const token = AuthObject.token;
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` },
+                };
 
-            console.log(AuthObject)
-            if (AuthObject.role === 'user') {
+                console.log(AuthObject)
+                if (AuthObject.role === 'user') {
 
-                try {
-                    const data = await axios.get(`${host}/course/student/${courseId}`, config);
-                    console.log(data.data, "inside getCourseInfo");
+                    try {
+                        const data = await axios.get(`${host}/course/student/${courseId}`, config);
+                        CourseObject.setCourseDataById([data.data]);
+                        listContext.setCourseInfo(data.data)
+                        listContext.setAllCourseAssignment(data.data.assignments);
+                        listContext.setAllCoursequiz(data.data.quizes);
 
-                    listContext.setCourseInfo(data.data)
-                    listContext.setAllCourseAssignment(data.data.courseAssignments)
+                     
+                        console.log('teest dataaa', data.data);
 
-                } catch (error) {
-                    console.log(error.message);
+
+                    } catch (error) {
+                        console.log(error.message);
+                    }
+                }
+                else {
+                    try {
+                        const data = await axios.get(`${host}/course/teacher/${courseId}`, config);
+                        // console.log(data.data.course, "inside getCourseInfo");
+
+                        CourseObject.setCourseDataById([data.data]);
+                        listContext.setCourseInfo(data.data)
+                        listContext.setAllCourseAssignment(data.data.courseAssignments);
+                        listContext.setAllCoursequiz(data.data.quizes);
+                        console.log('teest dataaa', data.data);
+                        console.log('teest rrrrrrr',listContext.allCoursequiz);
+
+                    } catch (error) {
+                        console.log(error.message);
+                    }
+
                 }
             }
-            else {
-                try {
-                    const data = await axios.get(`${host}/course/teacher/${courseId}`, config);
-                    console.log(data.data, "inside getCourseInfo");
-
-                    listContext.setCourseInfo(data.data)
-                    listContext.setAllCourseAssignment(data.data.courseAssignments)
-                } catch (error) {
-                    console.log(error.message);
-                }
-
-            }
+            )()
         }
-        )()
-
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
+    // useEffect(() => {
+    //     (async () =>{
+    //         const token = AuthObject.token;
+    //         const config = {
+    //             headers: { Authorization: `Bearer ${token}` },
+    //         };
+
+    //         const data = await axios.get(`${host}/course/teacher/${courseId}`, config);
+    //         listContext.setAllCourseAssignment(data.data.courseAssignments);
+    //     })()
+    // }, [listContext.allCourseAssignment])
 
     const history = useHistory();
     let boardHandleClick;
