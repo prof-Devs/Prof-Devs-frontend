@@ -66,6 +66,8 @@ function MyCourse() {
 
   useEffect(() => {
     setUserCourses(filterdData);
+    courseContextProv.setCourseDataById(filterdData)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterdData]);
 
   useEffect(() => {
@@ -85,6 +87,7 @@ function MyCourse() {
               firstTeacherName={item.firstTeacherName}
               lastTeacherName={item.lastTeacherName}
               courseDisc={item.courseDisc}
+              
             />
           );
         })}

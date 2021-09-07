@@ -3,11 +3,14 @@ import { Modal, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CourseContextProv } from "../../context/CourseContext";
 import { AuthContext } from "../../context/authContext";
+import { useParams } from "react-router-dom";
+
 import axios from "axios";
 
 import "./creating.css";
 
 export default function Quiz() {
+  let { courseId } = useParams();
   const CourseObject = useContext(CourseContextProv);
 
   const host = "https://profdev-academy.herokuapp.com";
@@ -28,7 +31,7 @@ export default function Quiz() {
     option3: "",
     option4: "",
   });
-const [questCount, setQuestCount] = useState(0);
+  const [questCount, setQuestCount] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [staticValues, setStaticValues] = useState({
     timer: 1,
@@ -58,9 +61,14 @@ const [questCount, setQuestCount] = useState(0);
     if (questions.length <= 0) {
       setQuestions([
         {
-          question: quizInfo.question,
-          options: [quizInfo.option1, quizInfo.option2, quizInfo.option3,quizInfo.option4],
-          correct_answer: quizInfo.correct_answer,
+          "question": quizInfo.question,
+          "options": [
+            quizInfo.option1,
+            quizInfo.option2,
+            quizInfo.option3,
+            quizInfo.option4,
+          ],
+          "correct_answer": quizInfo.correct_answer,
         },
       ]);
     } else {
@@ -68,9 +76,9 @@ const [questCount, setQuestCount] = useState(0);
         ...questions,
 
         {
-          question: quizInfo.question,
-          options: [quizInfo.option1, quizInfo.option2, quizInfo.option3],
-          correct_answer: quizInfo.correct_answer,
+          "question": quizInfo.question,
+          "options": [quizInfo.option1, quizInfo.option2, quizInfo.option3],
+          "correct_answer": quizInfo.correct_answer,
         },
       ]);
     }
@@ -85,18 +93,22 @@ const [questCount, setQuestCount] = useState(0);
     //   option3: "",
     //   option4: "",
     // });
-    setQuestCount(questCount+1)
+    CourseObject.setQuestCount(CourseObject.questCount + 1);
     e.target.reset();
   }
- 
 
-  async function postQuiz() {
+  async function postQuiz(e) {
+    e.preventDefault();
+    if (CourseObject.questCount === 0) return;
     const obj = {
-      questions: questions,
-      timer: staticValues.timer,
-      title: staticValues.title,
+      "questions": questions,
+      "timer": staticValues.timer,
+      "title": staticValues.title,
+      "courseId": courseId,
     };
+    console.log(obj,'no content');
     await axios.post(`${host}/quiz`, obj, config);
+    CourseObject.handleClose();
   }
 
   useEffect(() => {
@@ -117,17 +129,10 @@ const [questCount, setQuestCount] = useState(0);
             <h1>* Create quiz *</h1>
           </Modal.Title>
           <Form onSubmit={addQuiz}>
-            <Form.Group>
-              <Form.Control
-                className="ass-title"
-                name="title"
-                type="text"
-                placeholder="Quiz Title"
-                required={true}
-                onChange={handleChange2}
-              />
-            </Form.Group>
-            <Form.Text className="counter"> You Added ({questCount}) Questions</Form.Text>
+            <Form.Text className="counter">
+              {" "}
+              You Added ({CourseObject.questCount}) Questions
+            </Form.Text>
 
             <Form.Group>
               <Form.Control
@@ -186,7 +191,18 @@ const [questCount, setQuestCount] = useState(0);
                 Add Question
               </Button>
             </Form.Group>
-
+          </Form>
+          <Form onSubmit={postQuiz} className="ass-container">
+            <Form.Group>
+              <Form.Control
+                className="ass-title"
+                name="title"
+                type="text"
+                placeholder="Quiz Title"
+                required={true}
+                onChange={handleChange2}
+              />
+            </Form.Group>
             <div className="row-ass">
               <div>
                 <Form.Group>
@@ -204,13 +220,7 @@ const [questCount, setQuestCount] = useState(0);
                 </Form.Group>
               </div>
               <div>
-                <Button
-                  id="ass-button"
-                  onClick={() => {
-                    postQuiz();
-                    CourseObject.handleClose();
-                  }}
-                >
+                <Button id="ass-button" type="submit">
                   Create Quiz
                 </Button>
               </div>
