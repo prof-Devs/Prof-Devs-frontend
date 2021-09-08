@@ -57,7 +57,7 @@ function CoursePage(props) {
                         listContext.setAllCourseAssignment(data.data.assignments);
                         listContext.setAllCoursequiz(data.data.quizes);
 
-                     
+
                         console.log('teest dataaa', data.data);
 
 
@@ -72,10 +72,11 @@ function CoursePage(props) {
 
                         CourseObject.setCourseDataById([data.data]);
                         listContext.setCourseInfo(data.data)
-                        listContext.setAllCourseAssignment(data.data.courseAssignments);
+                        listContext.setAllCourseAssignment(data.data.assignments);
                         listContext.setAllCoursequiz(data.data.quizes);
+                        // console.log('teest rrrrrrr', listContext.allCoursequiz);
                         console.log('teest dataaa', data.data);
-                        console.log('teest rrrrrrr',listContext.allCoursequiz);
+                        console.log('[[[[[[[[[[[[', data.data.assignments);
 
                     } catch (error) {
                         console.log(error.message);
@@ -87,25 +88,19 @@ function CoursePage(props) {
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [AuthObject]);
 
-    // useEffect(() => {
-    //     (async () =>{
-    //         const token = AuthObject.token;
-    //         const config = {
-    //             headers: { Authorization: `Bearer ${token}` },
-    //         };
-
-    //         const data = await axios.get(`${host}/course/teacher/${courseId}`, config);
-    //         listContext.setAllCourseAssignment(data.data.courseAssignments);
-    //     })()
-    // }, [listContext.allCourseAssignment])
+    useEffect(() => {
+        // listContext.setAllCourseAssignment(data.data.assignments);
+        console.log('ggggggg');
+    }, [listContext.allCourseAssignment])
 
     const history = useHistory();
     let boardHandleClick;
 
     boardHandleClick = () => history.push(`/board/${courseId}`);
     console.log('hi');
+
 
 
     return (
@@ -124,13 +119,16 @@ function CoursePage(props) {
                         </div>
 
                         <div id="leftRight">
+                            {AuthObject.role === 'editor' &&
 
-                            <div id="buttonsStyle">
-                                <button title="Create new assignment"><MdAssignment size="40" onClick={CourseObject.handleAssignmentShow} /></button>
-                                <AssignmentModal />
-                                <button title="Create new quiz"><IoIosCreate size="40" onClick={CourseObject.handleShow} /></button>
-                                <QuizModal />
-                            </div>
+
+                                <div id="buttonsStyle">
+                                    <button title="Create new assignment"><MdAssignment size="40" onClick={CourseObject.handleAssignmentShow} /></button>
+                                    <AssignmentModal />
+                                    <button title="Create new quiz"><IoIosCreate size="40" onClick={CourseObject.handleShow} /></button>
+                                    <QuizModal />
+                                </div>
+                            }
 
                             {/* <Board /> */}
                             <div id="dropList">
@@ -139,36 +137,38 @@ function CoursePage(props) {
                                     <option >select operation..</option>
                                     <option value="See Assignments">See Assignments</option>
                                     <option value="See Quizes">See Quizes</option>
-                                    <option value="Students Marks">Students Marks</option>
-                                </select>
-                            </div>
+                                    {AuthObject.role === 'editor' &&
+                                        < option value="Students Marks">Students Marks</option> 
+                                    }
+                            </select>
+                        </div>
 
-                        </div>
-                        <div id='buttonCsswrapper'>
-                            <button type="button" onClick={boardHandleClick} id='buttonCss' >Go to Whiteboard!</button>
-                        </div>
                     </div>
-
+                    <div id='buttonCsswrapper'>
+                        <button type="button" onClick={boardHandleClick} id='buttonCss' >Go to Whiteboard!</button>
+                    </div>
                 </div>
-
-                <div id="chatWrapper">
-                    <Chat />
-                </div>
-
-                {dropList === 'See Assignments' &&
-                    <SeeAssignment />
-                }
-
-                {dropList === 'See Quizes' &&
-                    <SeeQuiz />
-                }
-
-                {dropList === 'Students Marks' &&
-                    <SeeMarks />
-                }
 
             </div>
-            )
+
+            <div id="chatWrapper">
+                <Chat />
+            </div>
+
+            {dropList === 'See Assignments' &&
+                <SeeAssignment />
+            }
+
+            {dropList === 'See Quizes' &&
+                <SeeQuiz />
+            }
+
+            {dropList === 'Students Marks' &&
+                <SeeMarks />
+            }
+
+        </div>
+    )
 
         </>
     )

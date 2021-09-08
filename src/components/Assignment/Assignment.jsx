@@ -1,20 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./assignment.css";
-
+import { DropContext } from "../../context/dropListContext";
+import { useParams, Link } from 'react-router-dom';
+import axios from "axios";
+import { AuthContext } from "../../context/authContext";
 
 function Assignment(props) {
+
   const [show, setShow] = useState(false);
-  
+  const listContext = useContext(DropContext);
+  let { assignmentId } = useParams();
+  const AuthObject = useContext(AuthContext);
 
+  useEffect(() => {
+    // (async ()=>{
+     let thing = listContext.allCourseAssignment.filter(ele => ele._id === assignmentId);
 
+    listContext.setFilteredAss(thing[0]);
+    // filteredAss, setFilteredAss
+    // })()
+  }, [AuthObject]);
+  console.log('jjjjjj', listContext.allCourseAssignment);
   return (
     <>
       <div class="courses-container_Assignment">
         <div class="course_Assignment">
           <div class="course-preview_Assignment">
             <h6>Course</h6>
-            <h2>Music And Art</h2>
-            <button onClick={()=>setShow(!show)} id="view_student_solution">
+            <h2>{listContext?.allCourseAssignment?.title}</h2>
+            <button onClick={() => setShow(!show)} id="view_student_solution">
               View students solution <i class=" fas fa-chevron-right"></i>
             </button>
           </div>
@@ -42,6 +56,7 @@ function Assignment(props) {
           </div>
         </div>
       </div>
+
       {show && (
         <>
           <div class="table-container">

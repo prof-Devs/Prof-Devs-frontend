@@ -6,15 +6,18 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FaRegEdit } from 'react-icons/fa';
 import { AuthContext } from "../../context/authContext";
 import { DropContext } from "../../context/dropListContext";
+import { useParams, Link } from 'react-router-dom';
+
 import axios from 'axios'
 import './dropList.css'
 
 export default function Assignments() {
     let tbodyTable = document.getElementsByClassName('hiddenID');
-
+    let { courseId } = useParams();
     const CourseObject = useContext(CourseContextProv);
     const authContext = useContext(AuthContext);
     const listContext = useContext(DropContext);
+    const host = "https://profdev-academy.herokuapp.com";
 
     const [showForm, setShowForm] = useState(false);
     const [showTable, setShowTable] = useState(true);
@@ -29,15 +32,27 @@ export default function Assignments() {
     function handleForm() {
         setShowForm(true);
         setShowTable(false);
-        // setUpdateID(id)
-        // console.log('state',id);
     }
 
+    const token = authContext.token;
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
 
-    console.log('eeeeeee', listContext.allCourseAssignment);
-    console.log('quizzz', listContext.allCoursequiz);
-    console.log(listContext.allCourseAssignment, 'bekafeeeeeeeeeeeeee');
-    // console.log(listContext.allCourseAssignment.length, 'length');
+    async function deleteAssignment(id) {
+        listContext.allCourseAssignment?.map(async element => {
+
+            if (element._id === id) {
+
+                await axios.delete(`${host}/assignment/${id}`, config);
+
+                if (courseId) {
+                    const dataGet = await axios.get(`${host}/course/teacher/${courseId}`, config);
+                    listContext.setAllCourseAssignment(dataGet.data.assignments);
+                };
+            }
+        })
+    }
 
     return (
         <>
@@ -56,23 +71,17 @@ export default function Assignments() {
                                 <th></th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>09/08/2021</td>
-                            {/* <td><FaRegEdit onClick={handleForm(element._id)} /></td> */}
-                            <td><RiDeleteBin6Line /></td>
-                        </tr>
 
                         {listContext?.allCourseAssignment?.map(element => {
+
                             return (
                                 <tbody>
                                     <tr>
-                                        <td>{element.title}</td>
+                                        <td><Link to={`/assignment/${courseId}/${element._id}`}>{element.title}</Link></td>
                                         <td>{element.text}</td>
                                         <td>{element.due_date}</td>
-                                        {/* <td><FaRegEdit onClick={handleForm(element._id)} /></td> */}
-                                        <td><RiDeleteBin6Line onClick={() => listContext.deleteAssignment(element._id)} /></td>
+                                        <td><FaRegEdit onClick={handleForm} /></td>
+                                        <td><RiDeleteBin6Line onClick={() => deleteAssignment(element._id)} /></td>
                                     </tr>
                                 </tbody>
                             )
@@ -106,7 +115,7 @@ export default function Assignments() {
                                 </Form.Group>
                             </div>
                             <div>
-                                {/* <Button id="ass-button" onClick={() => { listContext.updateAssignmentHandler(updateID); handleClose1(); }}>
+                                {/* <Button id="ass-button" onClick={() => {updateAssignmentHandler(updateID,); handleClose1(); }}>
                                     Edit Assignment
                                 </Button> */}
                             </div>

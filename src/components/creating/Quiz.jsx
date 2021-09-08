@@ -3,6 +3,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CourseContextProv } from "../../context/CourseContext";
 import { AuthContext } from "../../context/authContext";
+import { DropContext } from "../../context/dropListContext";
 import { useParams } from "react-router-dom";
 
 import axios from "axios";
@@ -12,6 +13,7 @@ import "./creating.css";
 export default function Quiz() {
   let { courseId } = useParams();
   const CourseObject = useContext(CourseContextProv);
+  const listContext = useContext(DropContext);
 
   const host = "https://profdev-academy.herokuapp.com";
 
@@ -54,21 +56,22 @@ export default function Quiz() {
       ...quizInfo,
       [name]: value,
     });
+
   }
 
   function addQuiz(e) {
     e.preventDefault();
-    if (questions.length <= 0) {
+    if (questions.length === 0) {
       setQuestions([
         {
-          "question": quizInfo.question,
-          "options": [
+          question: quizInfo.question,
+          options: [
             quizInfo.option1,
             quizInfo.option2,
             quizInfo.option3,
             quizInfo.option4,
           ],
-          "correct_answer": quizInfo.correct_answer,
+          correct_answer: quizInfo.correct_answer,
         },
       ]);
     } else {
@@ -76,14 +79,17 @@ export default function Quiz() {
         ...questions,
 
         {
-          "question": quizInfo.question,
-          "options": [quizInfo.option1, quizInfo.option2, quizInfo.option3],
-          "correct_answer": quizInfo.correct_answer,
+          question: quizInfo.question,
+          options: [quizInfo.option1, quizInfo.option2, quizInfo.option3, quizInfo.option4],
+          correct_answer: quizInfo.correct_answer,
         },
       ]);
     }
+    console.log('questions!!!!!', questions);
 
     setQuizInfo({ ...quizInfo });
+    console.log('questions afteeeer!!!!!', quizInfo);
+
     // setStaticValues({
     //   ...staticValues,
     //   question: "",
@@ -106,8 +112,13 @@ export default function Quiz() {
       "title": staticValues.title,
       "courseId": courseId,
     };
-    console.log(obj,'no content');
+    console.log(obj, 'no content');
     await axios.post(`${host}/quiz`, obj, config);
+
+    const dataGet = await axios.get(`${host}/course/teacher/${courseId}`, config);
+
+    listContext.setAllCoursequiz(dataGet.data.quizes)
+
     CourseObject.handleClose();
   }
 

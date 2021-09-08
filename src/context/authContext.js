@@ -71,7 +71,7 @@ export default function Auth(props) {
         setRole(user1[0].role);
       }
       let page = allUser.filter((item, idx) => {
-        return item.email === user.user.email;
+        return item?.email === user.user?.email;
       });
 
       setPageUser(page)

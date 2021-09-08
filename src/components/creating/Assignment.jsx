@@ -5,19 +5,19 @@ import { CourseContextProv } from "../../context/CourseContext";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-// import { DropContext } from "../../context/dropListContext";
+import { DropContext } from "../../context/dropListContext";
 
 import "./creating.css";
 
 export default function Assignment() {
-  // const listContext = useContext(DropContext);
+  const listContext = useContext(DropContext);
 
   let { courseId } = useParams();
   const [assignInfo, setAssignInfo] = useState({
     title: "",
     text: "",
     due_date: "",
-    courseId:courseId
+    courseId: courseId
   });
 
   const host = "https://profdev-academy.herokuapp.com";
@@ -50,8 +50,11 @@ export default function Assignment() {
   async function postAssignment() {
     console.log(assignInfo);
 
-    await axios.post(`${host}/assignment`,assignInfo, config);
-    
+    await axios.post(`${host}/assignment`, assignInfo, config);
+  
+    const dataGet = await axios.get(`${host}/course/teacher/${courseId}`, config);
+
+    listContext.setAllCourseAssignment(dataGet.data.assignments)
   }
 
   return (

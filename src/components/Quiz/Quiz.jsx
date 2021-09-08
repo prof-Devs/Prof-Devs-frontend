@@ -19,7 +19,7 @@ function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [counter, setCounter] = useState();
+  const [counter, setCounter] = useState(60);
   const [showQuiz, setShowQuiz] = useState(false);
   const [title, setTitle] = useState("");
 
@@ -41,7 +41,7 @@ function Quiz() {
           console.log(data.data, "get data");
 
           setQuizObject(data.data);
-          setCounter(data.data.timer * 1000);
+          // setCounter(data.data.timer * 60);
           setTitle(data.data.title);
           await setQuestions(data.data.questions);
           setShowQuiz(true);
@@ -73,7 +73,7 @@ function Quiz() {
           
         }
       },
-        10000
+        1000
       );
     return () => clearInterval(timer);
     }
