@@ -11,7 +11,10 @@ function CourseContext(props) {
     const [showAssignmentForm, setshowAssignmentForm] = useState(false);
     const [questCount, setQuestCount] = useState(0)
     const [courseDataById, setCourseDataById] = useState({})
-
+    const [firstTeacherName, setfirstTeacherName] = useState('')
+    const [lastTeacherName, setlastTeacherName] = useState('')
+    const [userCourses, setUserCourses] = useState([]);
+    const [questions, setQuestions] = useState([]);
 
     function handleShow() {
         setShowForm(true);
@@ -72,7 +75,8 @@ function CourseContext(props) {
     return (
         <CourseContextProv.Provider value={{
             whiteBoardHandler, showWhiteBoard, setShowWhiteBoard, assignmentHandler, showAssignment, setShowAssignment, quizHandler, showQuiz, setShowQuiz, setShowForm, handleShow, handleClose, showForm, handleAssignmentClose, handleAssignmentShow, showAssignmentForm, setshowAssignmentForm, showTableDropAss, handleCloseDropAss, handleFormDropAss, handleClose1DropAss, showFormDropAss, handleShowDropAss, setshowTableDropAss, setshowTableDropMarks, showTableDropMarks,
-            courseDataById, setCourseDataById, questCount, setQuestCount
+            courseDataById, setCourseDataById, questCount, setQuestCount,firstTeacherName, setfirstTeacherName,lastTeacherName, setlastTeacherName,
+            userCourses, setUserCourses,questions, setQuestions
         }}>{props.children}</CourseContextProv.Provider>
     )
 }

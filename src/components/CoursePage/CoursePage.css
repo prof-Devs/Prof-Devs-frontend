@@ -17,21 +17,21 @@
 }
 #leftSection {
   display: flex;
-  flex-grow: 3;
+  flex-grow: 1;
   border: 1px solid rgba(148, 146, 146, 0.199);
   padding-top: 20px;
   flex-direction: column;
   height: 450px;
 }
-#mainCourse {
+/* #mainCourse {
   flex-grow: 1;
-}
+} */
 
 #chatWrapper {
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  max-width: '100%';
   padding-top: 20px;
   max-height: 450px;
-  overflow: auto;
   height: 450px;
   border-left: 7px solid rgba(0, 0, 0, 0.096);
   display: flex;

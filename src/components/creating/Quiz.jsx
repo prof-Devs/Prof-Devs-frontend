@@ -18,7 +18,7 @@ export default function Quiz() {
   const host = "https://profdev-academy.herokuapp.com";
 
   const authContext = useContext(AuthContext);
-
+  let questionsArray = [];
   const token = authContext.token;
 
   const config = {
@@ -34,7 +34,6 @@ export default function Quiz() {
     option4: "",
   });
   const [questCount, setQuestCount] = useState(0);
-  const [questions, setQuestions] = useState([]);
   const [staticValues, setStaticValues] = useState({
     timer: 1,
     title: "",
@@ -56,13 +55,39 @@ export default function Quiz() {
       ...quizInfo,
       [name]: value,
     });
-
   }
 
   function addQuiz(e) {
     e.preventDefault();
-    if (questions.length === 0) {
-      setQuestions([
+    if (CourseObject.questions?.length === 0) {
+
+      // questionsArray.push({
+      //   question: quizInfo.question,
+      //   options: [
+      //     quizInfo.option1,
+      //     quizInfo.option2,
+      //     quizInfo.option3,
+      //     quizInfo.option4,
+      //   ],
+      //   correct_answer: quizInfo.correct_answer,
+      // });
+
+      CourseObject.setQuestions(
+        [{
+          question: quizInfo.question,
+          options: [
+            quizInfo.option1,
+            quizInfo.option2,
+            quizInfo.option3,
+            quizInfo.option4,
+          ],
+          correct_answer: quizInfo.correct_answer,
+        }],
+      );
+    } else {
+      CourseObject.setQuestions([
+        ...CourseObject.questions,
+
         {
           question: quizInfo.question,
           options: [
@@ -72,23 +97,13 @@ export default function Quiz() {
             quizInfo.option4,
           ],
           correct_answer: quizInfo.correct_answer,
-        },
-      ]);
-    } else {
-      setQuestions([
-        ...questions,
-
-        {
-          question: quizInfo.question,
-          options: [quizInfo.option1, quizInfo.option2, quizInfo.option3, quizInfo.option4],
-          correct_answer: quizInfo.correct_answer,
-        },
+        }
       ]);
     }
-    console.log('questions!!!!!', questions);
+    console.log("questions!!!!!", CourseObject.questions);
 
-    setQuizInfo({ ...quizInfo });
-    console.log('questions afteeeer!!!!!', quizInfo);
+    // setQuizInfo({ ...quizInfo });
+    console.log("questions afteeeer!!!!!", quizInfo);
 
     // setStaticValues({
     //   ...staticValues,
@@ -107,24 +122,23 @@ export default function Quiz() {
     e.preventDefault();
     if (CourseObject.questCount === 0) return;
     const obj = {
-      "questions": questions,
-      "timer": staticValues.timer,
-      "title": staticValues.title,
-      "courseId": courseId,
+      questions: CourseObject.questions,
+      timer: staticValues.timer,
+      title: staticValues.title,
+      courseId: courseId
     };
-    console.log(obj, 'no content');
+    console.log(obj, "no content");
     await axios.post(`${host}/quiz`, obj, config);
 
-    const dataGet = await axios.get(`${host}/course/teacher/${courseId}`, config);
+    const dataGet = await axios.get(
+      `${host}/course/teacher/${courseId}`,
+      config
+    );
 
-    listContext.setAllCoursequiz(dataGet.data.quizes)
-
+    listContext.setAllCoursequiz(dataGet.data.quizes);
+    CourseObject.setQuestions([])
     CourseObject.handleClose();
   }
-
-  useEffect(() => {
-    setQuestions([]);
-  }, [CourseObject.handleClose]);
 
   return (
     <div className="ass-container">

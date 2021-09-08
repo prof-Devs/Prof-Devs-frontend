@@ -69,17 +69,15 @@ export default function Auth(props) {
       console.log(123,user1)
       if (user1[0]) {
         setRole(user1[0].role);
+        setPageUser(user1[0]);
       }
-      let page = allUser.filter((item, idx) => {
-        return item?.email === user.user?.email;
-      });
 
-      setPageUser(page)
+     
     }
   }
   async function signIn(email, password) {
     const allData = await axios.get('https://profdev-academy.herokuapp.com/getUsers');
-    setAllUser(allData.data);
+   
     const user = allData.data.filter((user, idx) => {
       return (user.email === email);
     });
