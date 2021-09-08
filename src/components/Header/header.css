@@ -75,14 +75,18 @@ a {
   padding: 0 0;
 }
 #signOut {
-  background-color: rgb(221, 37, 37);
+  background-color: white ;
+  border: 1px solid rgba(201, 10, 10, 0.856) ;
   transition: all 0.2s ease-in-out;
   border-radius: 7px;
   padding: 13px 23px;
-  border: none;
-  color: white;
+  /* border: none; */
+  color: rgba(201, 10, 10, 0.932);
 }
 
 #signOut:hover {
-  background-color: rgba(221, 37, 37, 0.87);
+  background-color: rgba(192, 6, 6, 0.685);
+  color: white;
+  border: none;
+
 }
