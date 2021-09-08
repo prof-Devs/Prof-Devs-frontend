@@ -9,6 +9,12 @@ import {
     useHistory
 } from "react-router-dom";
 import logo from '../Header/logo_academy.PNG';
+import one from './Online test-pana.png'
+import two from './Conversation-pana.png'
+import three from './Graduation-amico.png'
+import { HiOutlineLightBulb } from 'react-icons/hi';
+
+
 
 
 
@@ -29,11 +35,11 @@ function Home() {
                 <div class='firstWrapper'>
                     <div class='paragraph'>
                         <div id='icon'>
-                        <img height='80px' src={logo} alt='a' style={{marginLeft: '-30px'}}/>
+                            <img height='80px' src={logo} alt='a' style={{ marginLeft: '-30px' }} />
                         </div>
                         <p>Educational process is taking a critical path and become online according to current circumentences (COVID-19),So it was a good idea to create an online academic website that facilitates the educational process,serves students with multiple courses,provides private rooms for chatting between students and teacher and recognizes a seperated access for each teacher and student.</p>
                         <h5>For more information about us ... </h5>
-                        <button class='btn'>About Us ..</button>
+                        <a href='/aboutUs'><button class='btn'>About Us ..</button></a>
                     </div>
                     <div>
                         <img id='firstImage' src='https://cdni.iconscout.com/illustration/premium/thumb/distance-education-2710073-2265251.png' />
@@ -46,7 +52,7 @@ function Home() {
                     <p class='paragraph2'>Education is the passport to the future, for tomorrow belongs to those who prepare for it today.</p>
                 </div>
                 <div id='button'>
-                    <button class='btn2'>Sign Up</button>
+                    <a href='/signup'><button class='btn2'>Sign Up</button></a>
                 </div>
             </div>
 
@@ -64,6 +70,37 @@ function Home() {
                         <h5>Let's start you succsess journey ... </h5>
                     </div>
 
+                </div>
+            </div>
+            <div id='thirdrdWrapper'>
+                <div id='parag'>
+                    <p class='paragraph3'> <HiOutlineLightBulb style={{fontSize:'70px'}}/> The only time success comes before work is in the dictionary.</p>
+                </div>
+            </div>
+            <div>
+                <h1 style={{textAlign:'center', marginBottom:'-40px'}}>Services</h1>
+            </div>
+            <div class="home-cards">
+                <div class="hc-container">
+                    <a href="products.html"><img src={one} alt="card1"></img>
+                        <div class="overlay">
+                            <div class="text">Student can take any available assignment or quiz online.</div>
+                        </div></a>
+
+                </div>
+                <div class="hc-container">
+                    <a href="aboutus.html">
+                        <img src={two} alt="card2"></img>
+                        <div class="overlay">
+                            <div class="text">Student will have the ability to chat with his colleagues as will as his teachers.</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="hc-container">
+                    <a href="form.html"><img src={three} alt="card3"></img>
+                        <div class="overlay">
+                            <div class="text">First filling in gaps in their understanding and then accelerating their learning.</div>
+                        </div></a>
                 </div>
             </div>
         </>
