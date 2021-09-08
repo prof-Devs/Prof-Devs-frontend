@@ -88,11 +88,13 @@ width: 16rem;
     border-radius: 0.5rem;
     background-color: #33B292;
     border: hidden;
-    margin-left: 40rem;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
 }
 #create-course:hover{
     background-color: whitesmoke;
     color: #33B292;
 
+}
+.createWrapper{
+    text-align: center;
 }

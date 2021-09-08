@@ -20,6 +20,7 @@ function DropListContext(props) {
     const [courseInfo, setCourseInfo] = useState([])
     const [assignmentNeeded, setAssignmentNeeded] = useState([])
     const [allCourseAssignment, setAllCourseAssignment] = useState([])
+    const [allCoursequiz, setAllCoursequiz] = useState([])
     let token = authContext.token;
     const config = {
         headers: { Authorization: `Bearer ${token}` }
@@ -73,12 +74,12 @@ function DropListContext(props) {
     
     async function deleteAssignment(id) {
         console.log('before',allCourseAssignment);
-        allCourseAssignment.map(async element => {
+        allCourseAssignment?.map(async element => {
             if (element._id === id) {
                 console.log('id', id);
                 await axios.delete(`${host}/assignment/${id}`, config);
-               let updating = await axios.get(`${host}/course/teacher/${courseId}`, config);
-               setAllCourseAssignment(updating.data.courseAssignments)
+            //    let updating = await axios.get(`${host}/course/teacher/${courseId}`, config);
+            //    setAllCourseAssignment(updating.data.courseAssignments)
             }
         })
     }
@@ -131,7 +132,9 @@ function DropListContext(props) {
          assignmentNeeded,
          setAssignmentNeeded,
          setAllCourseAssignment,
-         allCourseAssignment
+         allCourseAssignment,
+         setAllCoursequiz,
+         allCoursequiz
     }
 
 
