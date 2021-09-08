@@ -15,7 +15,7 @@ function MyCourse() {
   const courseContextProv = useContext(CourseContextProv);
 
   const [data, setData] = useState([]);
-  const [userCourses, setUserCourses] = useState([]);
+ 
   const [filterdData, setFilterdData] = useState([]);
 
   const token = authContext.token;
@@ -25,9 +25,22 @@ function MyCourse() {
     headers: { Authorization: `Bearer ${token}` },
   };
 
+
+  // useEffect(() => {
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, [authContext])
+
+
   useEffect(() => {
 
+
     (async () => {
+  
+    
+      courseContextProv.setfirstTeacherName(authContext.pageUser.firstName)
+      courseContextProv.setlastTeacherName(authContext.pageUser.lastName);
+
       if (authContext.role === "user") {
         let result = await axios.get(`${host}/course/student`, config);
 
@@ -41,7 +54,7 @@ function MyCourse() {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [authContext]);
 
   useEffect(() => {
     if (authContext.role === "user") {
@@ -49,10 +62,9 @@ function MyCourse() {
       data.forEach((e) => {
          e.courseStudents.forEach((e2) => {
           //  e2 === `${authContext.user.user.email}`
-           if(e2==authContext.user.user.email) newData.push(e)
+           if(e2===authContext.user.user.email) newData.push(e)
         });
       });
-      console.log(11111,newData)
       setFilterdData(newData);
     } else {
       let newData = data.filter((e) => {
@@ -62,24 +74,24 @@ function MyCourse() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data,authContext]);
 
   useEffect(() => {
-    setUserCourses(filterdData);
+    courseContextProv.setUserCourses(filterdData);
     courseContextProv.setCourseDataById(filterdData)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterdData]);
 
   useEffect(() => {
-    courseContextProv.setCourseDataById(userCourses);
+    courseContextProv.setCourseDataById(courseContextProv.userCourses);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userCourses]);
+  }, [courseContextProv.userCourses]);
 
   return (
     <>
       {authContext.role === "editor" && <Course />}
       <CardGroup>
-        {userCourses.map((item) => {
+        {courseContextProv.userCourses.map((item) => {
           return (
             <CourseRender
               _id={item._id}

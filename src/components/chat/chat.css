@@ -13,8 +13,13 @@ color: #32ad8e;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 280px;
+  margin-top: 50px;
 }
 #chat-container{
-  max-width: 60%;
+   overflow: auto;
+   /* flex-wrap: wrap; */
+  /* max-width: 60%; */
+}
+.chatInfo{
+  font-size: 17px;
 }

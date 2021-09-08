@@ -34,49 +34,63 @@ function Quiz() {
         console.log(AuthObject);
 
         try {
-          const data = await axios.get(
-            `${host}/quiz/student/${quizId}`,
-            config
-          );
-          console.log(data.data, "get data");
+          if(AuthObject?.role==='user'){
 
-          setQuizObject(data.data);
-          // setCounter(data.data.timer * 60);
-          setTitle(data.data.title);
-          await setQuestions(data.data.questions);
-          setShowQuiz(true);
+            const data = await axios.get(
+              `${host}/quiz/student/${quizId}`,
+              config
+            );
+  
+            setQuizObject(data.data);
+            // setCounter(data.data.timer * 60);
+            setTitle(data.data.title);
+            await setQuestions(data.data.questions);
+            setShowQuiz(true);
+          }
+          else{
+            const data = await axios.get(
+              `${host}/quiz/teacher/${quizId}`,
+              config
+            );
+  
+            setQuizObject(data.data);
+            // setCounter(data.data.timer * 60);
+            setTitle(data.data.title);
+            await setQuestions(data.data.questions);
+            setShowQuiz(true);
+          }
         } catch (error) {
           console.log(error.message);
         }
       
-        
+        // timeCount()
       //  
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [AuthObject]);
   
-  useEffect(() => {
-     timeCount();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [counter]);
-    const timeCount =()=>{
-      const timer =
-      counter > 0 && 
-      setInterval(
-        () => {setCounter (counter - 1) ;
-        if (counter <=0){
-          clearInterval(timer);
+  // useEffect(() => {
+  //    timeCount();
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, [counter]);
+    // const timeCount =()=>{
+    //   const timer =
+    //   counter > 0 && 
+    //   setInterval(
+    //     () => {setCounter (counter - 1) ;
+    //     if (counter <=0){
+    //       clearInterval(timer);
         
-            setCurrentQuestionIndex(questions.length);
-            setShowQuiz(false);
+    //         setCurrentQuestionIndex(questions.length);
+    //         setShowQuiz(false);
           
-        }
-      },
-        1000
-      );
-    return () => clearInterval(timer);
-    }
+    //     }
+    //   },
+    //     1000
+    //   );
+    // return () => clearInterval(timer);
+    // }
     
     const handleNext=() =>{
       let incrementCurrentQuestionIndex = currentQuestionIndex + 1;
@@ -104,7 +118,7 @@ function Quiz() {
       console.log("the final data", test.data);
     }
     
-    console.log('hi',questions);
+    // console.log('hi',questions);
   if (!questions.length) {
       
     return (

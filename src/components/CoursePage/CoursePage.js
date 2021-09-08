@@ -137,9 +137,9 @@ function CoursePage(props) {
                                     <option >select operation..</option>
                                     <option value="See Assignments">See Assignments</option>
                                     <option value="See Quizes">See Quizes</option>
-                                    {AuthObject.role === 'editor' &&
+                                    {/* {AuthObject.role === 'editor' &&
                                         < option value="Students Marks">Students Marks</option> 
-                                    }
+                                    } */}
                             </select>
                         </div>
 

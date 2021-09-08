@@ -91,20 +91,20 @@ function DropListContext(props) {
 //         })
 //     }
 
-    const [assignmentInfo, setAssignmentInfo] = useState({
-        title: "",
-        text: "",
-        due_date: "",
-    });
+    // const [assignmentInfo, setAssignmentInfo] = useState({
+    //     title: "",
+    //     text: "",
+    //     due_date: "",
+    // });
 
-    function handleChangeAssignment(e) {
-        let value = e.target.value;
-        let name = e.target.name;
-        setAssignmentInfo({
-            ...assignmentInfo,
-            [name]: value,
-        });
-    }
+    // function handleChangeAssignment(e) {
+    //     let value = e.target.value;
+    //     let name = e.target.name;
+    //     setAssignmentInfo({
+    //         ...assignmentInfo,
+    //         [name]: value,
+    //     });
+    // }
 
     // async function updateAssignmentHandler(id, e) {
     //     e.preventDefault();
@@ -129,9 +129,9 @@ function DropListContext(props) {
         allAssignments,
         getAssignmentsHandler,
         // deleteAssignment,
-        handleChangeAssignment,
+        // handleChangeAssignment,
         // updateAssignmentHandler,
-        assignmentInfo,
+        // assignmentInfo,
         courseInfo,
         setCourseInfo,
         getCourseInfoForTeacher,

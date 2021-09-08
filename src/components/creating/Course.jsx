@@ -1,6 +1,7 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { AuthContext } from "../../context/authContext";
+import { CourseContextProv } from "../../context/CourseContext";
 import { VscNewFolder } from 'react-icons/vsc';
 import axios from "axios";
 
@@ -11,11 +12,12 @@ const host = "https://profdev-academy.herokuapp.com";
 
 
 export default function Course() {
-  const [firstTeacherName, setfirstTeacherName] = useState('')
-  const [lastTeacherName, setlastTeacherName] = useState('')
+
 
   const [showForm, setShowForm] = useState(false);
   const authContext = useContext(AuthContext);
+  const courseContext = useContext(CourseContextProv);
+
   let token = authContext.token;
   const config = {
     headers: { Authorization: `Bearer ${token}` }
@@ -29,16 +31,8 @@ export default function Course() {
 
 
 
-useEffect(() => {
 
 
-if(authContext.pageUser[0]){
-
-  setfirstTeacherName(authContext.pageUser[0].firstName)
-  setlastTeacherName(authContext.pageUser[0].lastName);
-}
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, [])
 
   //fnctions
   function handleShow() {
@@ -77,10 +71,38 @@ if(authContext.pageUser[0]){
         courseDisc: courseInfo.courseDescreption,
         courseStudents: courseInfo.courseStudents,
         courseTeacher: authContext.user.user.email,
-        firstTeacherName:firstTeacherName,
-        lastTeacherName:lastTeacherName
+        firstTeacherName:courseContext.firstTeacherName,
+        lastTeacherName:courseContext.lastTeacherName
       };
       await axios.post(`${host}/course`, obj,config);
+
+      if (authContext.role === "user") {
+        
+        let result = await axios.get(`${host}/course/student`, config);
+        
+        let newData = []
+        result.forEach((e) => {
+          e.courseStudents.forEach((e2) => {
+            if(e2===authContext.user.user.email) newData.push(e)
+          });
+        });
+        console.log(newData,'iam here user');
+        
+          courseContext.setUserCourses(newData);
+  
+
+        } else {
+          let result = await axios.get(`${host}/course/teacher`, config);
+
+        let newData = result.data.filter((e) => {
+          return `${e.courseTeacher}` === authContext.user.user.email;
+        });
+        console.log(newData,'iam here');
+
+        courseContext.setUserCourses(newData);
+      }
+
+
     } catch (error) {
     }
     handleClose();
@@ -118,24 +140,14 @@ if(authContext.pageUser[0]){
                   onChange={handleChange}
                 />
               </Form.Group>
-              {/* <Form.Group>
-                <Form.Control
-                  className="ass-title"
-                  type="text"
-                  placeholder="Course Teacher"
-                  name="courseTeacher"
-                  value={authContext.user.user.email}
-                  disabled={true}
-                  onChange={handleChange}
-                />
-              </Form.Group> */}
+         
               <Form.Group>
               <Form.Control
                 className="ass-title"
                 type="text"
                 placeholder="tFirstName"
                 name="firstTeacherName"
-                value={firstTeacherName}
+                value={courseContext.firstTeacherName}
                 disabled={true}
                 onChange={handleChange}
               />
@@ -147,7 +159,7 @@ if(authContext.pageUser[0]){
                 type="text"
                 placeholder="tLastName"
                 name="lastTeacherName"
-                value={lastTeacherName}
+                value={courseContext.lastTeacherName}
                 disabled={true}
                 onChange={handleChange}
               />
