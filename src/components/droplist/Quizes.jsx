@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import { Modal, Button, Table, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
@@ -7,12 +7,27 @@ import { FaRegEdit } from 'react-icons/fa';
 import CourseObject from '../../context/CourseContext';
 import { CourseContextProv } from '../../context/CourseContext';
 import { DropContext } from "../../context/dropListContext";
+import { useParams,Link } from 'react-router-dom';
+import axios from 'axios'
+import { AuthContext } from "../../context/authContext";
+import './dropList.css'
+// import "../creating/creating.css";
 
 export default function Assignments() {
     const [showTable, setShowTable] = useState(true);
     const [showForm, setShowForm] = useState(false);
+    const [quizId, setQuizId] = useState(0)
+
+    const [staticValues, setStaticValues] = useState({
+        timer: 1,
+        title: "",
+    });
+
+    let { courseId } = useParams();
+    const host = "https://profdev-academy.herokuapp.com";
 
     const listContext = useContext(DropContext);
+    const authContext = useContext(AuthContext);
 
 
     function handleShow() {
@@ -23,16 +38,78 @@ export default function Assignments() {
         setShowTable(false);
     }
 
-    function handleForm() {
+    function handleForm(id) {
         setShowForm(true);
         setShowTable(false);
+        setQuizId(id)
+
     }
 
     function handleClose1() {
         setShowForm(false);
-        setShowTable(false);
+        setShowTable(true);
+
+        // setShowTable(false);
     }
-console.log('iiiii',listContext.allCoursequiz);
+
+    const token = authContext.token;
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+
+    async function deleteQuiz(id) {
+
+        listContext.allCoursequiz?.map(async element => {
+
+            if (element._id === id) {
+
+                await axios.delete(`${host}/quiz/${id}`, config);
+
+                if (courseId) {
+
+                    const dataGet = await axios.get(`${host}/course/teacher/${courseId}`, config);
+
+                    listContext.setAllCoursequiz(dataGet.data.quizes);
+                };
+            }
+        })
+    };
+
+    function handleChange(e) {
+        let value = e.target.value;
+        let name = e.target.name;
+        setStaticValues({
+            ...staticValues,
+            [name]: value,
+        });
+    }
+
+    async function updateQuiz(id, e) {
+        e.preventDefault();
+
+        const obj = {
+            "timer": staticValues.timer,
+            "title": staticValues.title
+        };
+        console.log(obj, 'no content');
+        listContext.allCoursequiz?.map(async element => {
+
+            if (element._id === id) {
+                console.log('id', id);
+                await axios.put(`${host}/quiz/${id}`, obj, config);
+
+                if (courseId) {
+
+                    const dataGet = await axios.get(`${host}/course/teacher/${courseId}`, config);
+
+                    listContext.setAllCoursequiz(dataGet.data.quizes);
+                };
+            }
+        })
+        handleClose1();
+    }
+
+
     return (
         <>
             <Modal size="lg" centered="true" show={showTable} onHide={handleClose} animation={false}>
@@ -50,61 +127,62 @@ console.log('iiiii',listContext.allCoursequiz);
                                 <th></th>
                             </tr>
                         </thead>
-                        <tr>
-                                    <td>Quiz</td>
-                                    <td>2</td>
-                                    <th><FaRegEdit /></th>
-                                    <th><RiDeleteBin6Line /></th>
-                                </tr>
 
-                        {listContext?.allCoursequiz?.map(ele => {
+                        {listContext?.allCoursequiz?.map(ele => (
+
                             <tbody>
                                 <tr>
-                                    <td>{ele.title}</td>
+                                <td><Link to={`/quiz/${courseId}/${ele._id}`}>{ele.title}</Link></td>
                                     <td>{ele.timer}</td>
-                                    <td onClick={handleForm}><FaRegEdit /></td>
-                                    <td><RiDeleteBin6Line /></td>
+                                    <td onClick={() => handleForm(ele._id)}><FaRegEdit /></td>
+                                    <td><RiDeleteBin6Line onClick={() => deleteQuiz(ele._id)} /></td>
+
                                 </tr>
                             </tbody>
-                        })}
+                        ))}
                     </Table>
                 </Modal.Body>
             </Modal>
-            <Modal show={showForm} onHide={handleClose1} animation={false}>
-                <Form>
+
+            <Modal centered="true" show={showForm} onHide={handleClose1} animation={false}>
+
+                <Form onSubmit={(e) => updateQuiz(quizId, e)} className="quiz-edit">
                     <Form.Group>
-                        <Form.Control className="ass-title" type="email" placeholder="Quiz Title" />
+                        <Form.Control
+                            className="ass-title"
+                            name="title"
+                            type="text"
+                            placeholder="Quiz Title"
+                            required={true}
+                            onChange={handleChange}
+                        />
                     </Form.Group>
-                    <Form.Text className="counter"> You Added (x) Questions</Form.Text>
-
-                    <Form.Group >
-                        <Form.Control className="q-text" type="text" placeholder="Question" />
-                    </Form.Group>
-                    <Form.Group >
-                        <Form.Control className="ass-title" type="text" placeholder="The correct answer" />
-                    </Form.Group>
-                    <Form.Group >
-                        <Form.Control className="options" type="text" placeholder="Option-1" />
-                        <Form.Control className="options" type="text" placeholder="Option-2" />
-                        <Form.Control className="options" type="text" placeholder="Option-3" />
-                        <Button id="add-button">Add Question</Button>
-                    </Form.Group>
-
-
                     <div className="row-ass">
                         <div>
                             <Form.Group>
                                 <Form.Label></Form.Label>
-                                <Form.Control className="q-date" type="number" placeholder="Duration (in minutes)" />
+                                <Form.Control
+                                    className="q-date"
+                                    type="number"
+                                    placeholder="Duration (in minutes)"
+                                    name="timer"
+                                    required={true}
+                                    min="1"
+                                    defaultValue="1"
+                                    onChange={handleChange}
+                                />
                             </Form.Group>
                         </div>
-                        <div>
-                            <Button id="ass-button" onClick={handleClose1}>
+
+                        <Form.Group>
+                            <Button id="ass-button1" type="submit">
                                 Edit Quiz
                             </Button>
-                        </div>
+                        </Form.Group>
+
                     </div>
                 </Form>
+
             </Modal>
         </>
     )
